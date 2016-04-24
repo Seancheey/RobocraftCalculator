@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -17,7 +18,7 @@ import javax.swing.JTextField;
 import com.seancheey.GuiController;
 import com.seancheey.data.RCComponent;
 
-public class ItemSlot extends JPanel implements KeyListener, ActionListener {
+public class ItemSlot extends JPanel {
 	private static final long serialVersionUID = 3181988613907725289L;
 	private RCComponent component;
 	private JButton deleteButton = new JButton("x");
@@ -27,26 +28,62 @@ public class ItemSlot extends JPanel implements KeyListener, ActionListener {
 	{
 		deleteButton.setBorderPainted(false);
 		deleteButton.setBackground(Color.ORANGE);
-		deleteButton.addActionListener(this);
+		deleteButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GuiController.controller.removeComponent(component);
+			}
+		});
 	}
 
 	public ItemSlot(RCComponent component) {
 		this.component = component;
-		setMinimumSize(new Dimension(100, 50));
 		label = new JLabel(component.name);
 		field = new JTextField("1", 3);
 		{
-			field.addKeyListener(this);
+			field.addKeyListener(new KeyListener() {
+
+				@Override
+				public void keyTyped(KeyEvent e) {
+
+				}
+
+				@Override
+				public void keyReleased(KeyEvent e) {
+					if (getNumber() > 2000) {
+						String reduced = field.getText().substring(0, 4);
+						field.setText(reduced);
+						GuiController.controller.setComponentNumber(component, Integer.valueOf(reduced));
+					}
+					if (e.getKeyChar() == '%') {
+						int cpuSum = 0;
+						HashMap<RCComponent, Integer> info = GuiController.controller.getComponentsInfo();
+						for (RCComponent c : info.keySet()) {
+							if (c != component) {
+								int number = info.get(c);
+								cpuSum += c.cpu * number;
+							}
+						}
+						int remain = 1750 - cpuSum;
+						double percent = getNumber() / 100.0;
+						int componentCount = (int) Math.floor(remain * percent / component.cpu);
+						GuiController.controller.setComponentNumber(component, componentCount);
+					}
+					GuiController.controller.setComponentNumber(component, getNumber());
+				}
+
+				@Override
+				public void keyPressed(KeyEvent e) {
+
+				}
+			});
 		}
 		add(label);
 		add(field);
 		add(deleteButton);
+		setMinimumSize(new Dimension(100, 50));
 		setBagLayout();
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		GuiController.controller.removeComponent(component);
 	}
 
 	public RCComponent getComponent() {
@@ -54,28 +91,17 @@ public class ItemSlot extends JPanel implements KeyListener, ActionListener {
 	}
 
 	public int getNumber() {
+		String text = field.getText();
+		if (text.endsWith("%")) {
+			text = text.substring(0, text.length() - 1);
+		}
 		int num;
 		try {
-			num = Integer.parseInt(field.getText());
+			num = Integer.parseInt(text);
 		} catch (NumberFormatException e) {
 			return 0;
 		}
 		return num;
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		if (field.getText().length() > 4) {
-			GuiController.controller.setComponentNumber(component, Integer.valueOf(field.getText().substring(0, 4)));
-		}
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
 	}
 
 	private void setBagLayout() {
