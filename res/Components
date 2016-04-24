@@ -1,36 +1,36 @@
-Cube				1	1		1119	0	15		2
-Edge				1	1		1008	0	7.5		1.8
-Corner				1	1		855		0	2.5		1.53
-Inner				1	1		1089	0	12.5	1.95
-Edge Round			1	1		1079	0	11.8	1.93
-Corner Round		1	1		1015	0	7.9		1.81
-Inner Round			1	1		1110	0	14.2	1.98
-Edge Slope			1	1		888		0	3.2		1.59
-Corner Slope		1	1		716		0	0.8		1.28
-Inner Slope			1	1		1002	0	7.2		1.79
-Cone				1	1		915		0	3.9		1.64
-Pyramid				1	1		949		0	5		1.7
-Rod Short			3	3		3357	0	3		2
-Rod Shaped			3	3		3357	0	3		2
-Rod Long			5	5		5595	0	5		2
-Helium				6	234		606		0	2.5		1
-Electroplate A		24	24		497		
-Electroplate B		28	70		609		
-Electroplate C		32	80		609		
-Electroplate D		36	225		745		
-Electroplate E		40	250		745		
-Electroplate F		44	688		913		
-Electroplate G		48	750		913		
-Electroplate H		52	2031	1119	
-Electrosheild		22	859		1119	
-Electrosheild A		24	938		1119	
-Electrosheild B		28	1094	1119	
-Electrosheild C		32	1250	1119	
-Electrosheild D		36	1406	1119	
-Electrosheild E		40	1563	1119	
-Electrosheild F		44	1719	1119	
-Electrosheild G		48	1875	1119	
-Electrosheild H		52	2031	1119	
-Electrosheild I		56	2188	1119	
-Electrosheild J		130	7813	1567	
-Electrosheild K		130	7813	1567	
+Cube				1	1		1119	0		15		2
+Edge				1	1		1008	0		7.5		1.8
+Corner				1	1		855		0		2.5		1.53
+Inner				1	1		1089	0		12.5	1.95
+Edge Round			1	1		1079	0		11.8	1.93
+Corner Round		1	1		1015	0		7.9		1.81
+Inner Round			1	1		1110	0		14.2	1.98
+Edge Slope			1	1		888		0		3.2		1.59
+Corner Slope		1	1		716		0		0.8		1.28
+Inner Slope			1	1		1002	0		7.2		1.79
+Cone				1	1		915		0		3.9		1.64
+Pyramid				1	1		949		0		5		1.7
+Rod Short			3	3		3357	0		3		2
+Rod Shaped			3	3		3357	0		3		2
+Rod Long			5	5		5595	0		5		2
+Helium				6	234		606		0		2.5		1
+Electroplate A		24	24		497		7628	9		0.35
+Electroplate B		28	70		609		10972	11		0.35
+Electroplate C		32	80		609		12597	14		0.35
+Electroplate D		36	225		745		17413	22		0.35
+Electroplate E		40	250		745		19403	30		0.35
+Electroplate F		44	688		913		26211	32		0.35
+Electroplate G		48	750		913		28649	42		0.35
+Electroplate H		52	2031	1119	38097	50		0.35
+Electrosheild		22	859		1119	34284	17.5	0.35
+Electrosheild A		24	938		1119	34925	19.3	0.35
+Electrosheild B		28	1094	1119	25590	20.6	0.35
+Electrosheild C		32	1250	1119	36280	23.3	0.35
+Electrosheild D		36	1406	1119	36998	33		0.35
+Electrosheild E		40	1563	1119	37745	40.9	0.35
+Electrosheild F		44	1719	1119	38523	43.6	0.35
+Electrosheild G		48	1875	1119	39334	48.5	0.35
+Electrosheild H		52	2031	1119	40179	53.6	0.35
+Electrosheild I		56	2188	1119	41062	83		0.35
+Electrosheild J		130	7813	1567	73996	135		0.35
+Electrosheild K		130	7813	1567	73996	169		0.35
