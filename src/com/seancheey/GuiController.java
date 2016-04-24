@@ -11,12 +11,14 @@ import com.seancheey.gui.MainWindow;
 
 public class GuiController implements Controller {
 	public static GuiController controller;
+
 	public static GuiController getInstance(MainWindow window) {
 		if (controller == null) {
 			controller = new GuiController(window);
 		}
 		return controller;
 	}
+
 	private HashMap<RCComponent, Integer> components;
 	private FunctionPanel funcPanel;
 	private ComponentSlotPanel weaponPanel, movementPanel, componentPanel;
@@ -85,20 +87,25 @@ public class GuiController implements Controller {
 	}
 
 	private void updateInfo() {
-		int cpu = 0, hp = 0, sheild = 0;
-		double mass = 0;
+		int cpu = 0, hp = 0, sheild = 0, rr = 0;
+		float mass = 0, healRate, healSum = 0;
 		for (RCComponent c : components.keySet()) {
 			int number = components.get(c);
 			cpu += c.cpu * number;
 			mass += c.mass * number;
 			hp += c.hp * number;
 			sheild += c.shield * number;
+			healSum += c.hp / c.healRate * number;
+			rr += c.rr * number;
 		}
+		healRate = hp / healSum;
 		StringBuffer text = new StringBuffer();
-		text.append("cpu:" + cpu + "\n");
-		text.append("hp:" + hp + "\n");
-		text.append("mass:" + mass + "kg" + "\n");
-		text.append("sheild:" + sheild + "\n");
+		text.append("CPU:\t" + cpu + "\n");
+		text.append("HP:\t" + hp + "\n");
+		text.append("Mass:\t" + mass + "\n");
+		text.append("Sheild:\t" + sheild + "\n");
+		text.append("HealRate:\t" + healRate + "\n");
+		text.append("RR:\t" + rr + "\n");
 		funcPanel.setDisplayText(text.toString());
 	}
 }
