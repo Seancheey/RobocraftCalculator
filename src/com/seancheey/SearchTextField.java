@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -15,7 +17,7 @@ import javax.swing.event.DocumentListener;
 
 import com.seancheey.data.RCComponent;
 
-class SearchPopupMenu extends JPopupMenu {
+class SearchPopupMenu extends JPopupMenu implements MouseListener {
 	private static final long serialVersionUID = 7217175080222631763L;
 	private ArrayList<RCComponent> components = new ArrayList<RCComponent>();
 	private JList<String> list = new JList<String>();
@@ -54,6 +56,14 @@ class SearchPopupMenu extends JPopupMenu {
 		list.ensureIndexIsVisible(next);
 	}
 
+	private JList<String> newComponnetList(ArrayList<String> strings) {
+		String strs[] = new String[strings.size()];
+		strings.toArray(strs);
+		JList<String> jlist = new JList<String>(strs);
+		jlist.addMouseListener(this);
+		return jlist;
+	}
+
 	public void updateOptions(ArrayList<RCComponent> components) {
 		this.components = components;
 		setVisible(false);
@@ -61,15 +71,38 @@ class SearchPopupMenu extends JPopupMenu {
 			return;
 		}
 		removeAll();
-		ArrayList<String> ss = new ArrayList<String>();
+		ArrayList<String> namelist = new ArrayList<String>();
 		for (RCComponent c : components) {
-			ss.add(c.name);
+			namelist.add(c.name);
 		}
-		String[] strings = new String[ss.size()];
-		ss.toArray(strings);
-		list = new JList<String>(strings);
+		list = newComponnetList(namelist);
 		add(list);
 		this.show(searchField, searchField.getX(), searchField.getY() + searchField.getHeight());
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		searchField.selectComponent();
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
 	}
 }
 
@@ -120,14 +153,17 @@ public class SearchTextField extends JTextField implements DocumentListener, Key
 				popmenu.selectPreviousItem();
 			}
 		} else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (popmenu.isVisible()) {
-				// TODO get selected item and add it to the panel
-				slotPanel.addSlot(popmenu.getSelectedComponent());
-				slotPanel.repaint();
-				setText("search");
-				setForeground(Color.GRAY);
-				popmenu.restoreStatus();
-			}
+			selectComponent();
+		}
+	}
+
+	public void selectComponent() {
+		if (popmenu.isVisible()) {
+			slotPanel.addSlot(popmenu.getSelectedComponent());
+			slotPanel.repaint();
+			setText("search");
+			setForeground(Color.GRAY);
+			popmenu.restoreStatus();
 		}
 	}
 
