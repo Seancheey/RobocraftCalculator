@@ -18,10 +18,22 @@ public class ComponentSlotPanel extends JPanel {
 	public ComponentSlotPanel(ArrayList<RCComponent> components, InfoModifier mod) {
 		super(new GridBagLayout());
 		this.mod = mod;
-		searchfield = new SearchTextField(this, components);
+		searchfield = new SearchTextField(this, components, mod);
 		setLayout(new GridLayout(8, 0));
 		add(searchfield);
 		setBackground(new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255)));
+	}
+
+	public void removeSlot(RCComponent component) {
+		all: for (ItemSlot s : slots) {
+			if (s.getComponent() == component) {
+				slots.remove(s);
+				remove(s);
+				setVisible(false);
+				setVisible(true);
+				break all;
+			}
+		}
 	}
 
 	public void addSlot(RCComponent component) {

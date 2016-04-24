@@ -111,12 +111,13 @@ public class SearchTextField extends JTextField implements DocumentListener, Key
 	private ArrayList<RCComponent> components;
 	private SearchPopupMenu popmenu;
 	private final ComponentSlotPanel slotPanel;
+	private InfoModifier mod;
 
-	public SearchTextField(ComponentSlotPanel slotPanel, ArrayList<RCComponent> components) {
+	public SearchTextField(ComponentSlotPanel slotPanel, ArrayList<RCComponent> components, InfoModifier mod) {
 		super("search", 20);
 		this.slotPanel = slotPanel;
 		this.components = components;
-
+		this.mod = mod;
 		setForeground(Color.GRAY);
 		popmenu = new SearchPopupMenu(this);
 		add(popmenu);
@@ -161,6 +162,7 @@ public class SearchTextField extends JTextField implements DocumentListener, Key
 		if (popmenu.isVisible()) {
 			slotPanel.addSlot(popmenu.getSelectedComponent());
 			slotPanel.repaint();
+			mod.updateInfo();
 			setText("search");
 			setForeground(Color.GRAY);
 			popmenu.restoreStatus();

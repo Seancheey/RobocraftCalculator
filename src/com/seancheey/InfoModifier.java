@@ -10,4 +10,6 @@ public interface InfoModifier {
 	public HashMap<RCComponent, Integer> getSelectedComponentsInfo();
 
 	public void updateInfo();
+
+	public void deleteSlot(ItemSlot slot);
 }

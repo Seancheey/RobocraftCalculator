@@ -12,7 +12,7 @@ import javax.swing.WindowConstants;
 import com.seancheey.data.RCComponent;
 
 public class MainWindow extends JFrame implements InfoModifier {
-	private final static Dimension DEFAULTSIZE = new Dimension(600, 400);
+	private final static Dimension DEFAULTSIZE = new Dimension(700, 400);
 	private static MainWindow self;
 	private static final long serialVersionUID = -7526688286751521433L;
 
@@ -39,6 +39,7 @@ public class MainWindow extends JFrame implements InfoModifier {
 		setSize(DEFAULTSIZE);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setResizable(false);
 		mainPanel.setSize(DEFAULTSIZE);
 		getContentPane().add(mainPanel);
 		mainPanel.setLayout(new GridLayout(1, 4));
@@ -84,4 +85,16 @@ public class MainWindow extends JFrame implements InfoModifier {
 		funcPanel.updateInfo();
 	}
 
+	@Override
+	public void deleteSlot(ItemSlot slot) {
+		if (weaponPanel.getSlots().contains(slot)) {
+			weaponPanel.removeSlot(slot.getComponent());
+		}
+		if (componentPanel.getSlots().contains(slot)) {
+			componentPanel.removeSlot(slot.getComponent());
+		}
+		if (movementPanel.getSlots().contains(slot)) {
+			movementPanel.removeSlot(slot.getComponent());
+		}
+	}
 }
