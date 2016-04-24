@@ -21,35 +21,39 @@ public class FunctionPanel extends JPanel {
 
 	public FunctionPanel() {
 		outputArea = new JTextArea(20, 0);
-		outputArea.setEditable(false);
+		{
+			outputArea.setEditable(false);
 
-		autoCubeButton = new JButton("Cube Number");
-		autoCubeButton.addActionListener(new ActionListener() {
+			autoCubeButton = new JButton("Cube Number");
+			autoCubeButton.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				HashMap<RCComponent, Integer> info = GuiController.controller.getComponentsInfo();
-				RCComponent cube = RCDateReader.COMPONENTS.get(0);
-				int cubeNum = 0;
-				if (info.containsKey(cube))
-					cubeNum = info.get(cube);
-				int remain = 1750 - getCPUSum() + cubeNum;
-				GuiController.controller.setComponentNumber(cube, remain);
-				;
-			}
-		});
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					HashMap<RCComponent, Integer> info = GuiController.controller.getComponentsInfo();
+					RCComponent cube = RCDateReader.COMPONENTS.get(0);
+					int cubeNum = 0;
+					if (info.containsKey(cube))
+						cubeNum = info.get(cube);
+					int remain = 1750 - getCPUSum() + cubeNum;
+					GuiController.controller.setComponentNumber(cube, remain);
+					;
+				}
+			});
+		}
 		GridBagLayout bagLayout = new GridBagLayout();
-		GridBagConstraints c = new GridBagConstraints();
-		c.gridx = 0;
-		c.gridy = 0;
-		c.gridwidth = 1;
-		c.gridheight = 5;
-		c.weightx = 0;
-		c.fill = GridBagConstraints.BOTH;
-		bagLayout.setConstraints(outputArea, c);
-		c.gridheight = 1;
-		c.gridy = 6;
-		bagLayout.setConstraints(autoCubeButton, c);
+		{
+			GridBagConstraints c = new GridBagConstraints();
+			c.gridx = 0;
+			c.gridy = 0;
+			c.gridwidth = 1;
+			c.gridheight = 5;
+			c.weightx = 0;
+			c.fill = GridBagConstraints.BOTH;
+			bagLayout.setConstraints(outputArea, c);
+			c.gridheight = 1;
+			c.gridy = 6;
+			bagLayout.setConstraints(autoCubeButton, c);
+		}
 		setDisplayText("DisplayArea");
 		setLayout(bagLayout);
 		add(outputArea);
