@@ -10,33 +10,32 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import com.seancheey.GuiController;
 import com.seancheey.RCDateReader;
 import com.seancheey.data.RCComponent;
 
 public class FunctionPanel extends JPanel {
 	private static final long serialVersionUID = -2442815361182961114L;
 	private JButton autoCubeButton;
-	private InfoModifier infos;
 	private JTextArea outputArea;
 
-	public FunctionPanel(InfoModifier infos) {
-		this.infos = infos;
+	public FunctionPanel() {
 		outputArea = new JTextArea(20, 0);
 		outputArea.setEditable(false);
-		
+
 		autoCubeButton = new JButton("Cube Number");
 		autoCubeButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				HashMap<RCComponent, Integer> info = infos.getSelectedComponentsInfo();
+				HashMap<RCComponent, Integer> info = GuiController.controller.getComponentsInfo();
 				RCComponent cube = RCDateReader.COMPONENTS.get(0);
 				int cubeNum = 0;
 				if (info.containsKey(cube))
 					cubeNum = info.get(cube);
 				int remain = 1750 - getCPUSum() + cubeNum;
-				infos.addCube(remain);
-				infos.updateInfo();
+				GuiController.controller.setComponentNumber(cube, remain);
+				;
 			}
 		});
 		GridBagLayout bagLayout = new GridBagLayout();
@@ -51,16 +50,15 @@ public class FunctionPanel extends JPanel {
 		c.gridheight = 1;
 		c.gridy = 6;
 		bagLayout.setConstraints(autoCubeButton, c);
-		updateInfo();
-		;
+		setDisplayText("DisplayArea");
 		setLayout(bagLayout);
 		add(outputArea);
 		add(autoCubeButton);
 	}
 
-	public int getCPUSum() {
+	private int getCPUSum() {
 		int cpu = 0;
-		HashMap<RCComponent, Integer> info = infos.getSelectedComponentsInfo();
+		HashMap<RCComponent, Integer> info = GuiController.controller.getComponentsInfo();
 		for (RCComponent c : info.keySet()) {
 			int number = info.get(c);
 			cpu += c.cpu * number;
@@ -68,23 +66,7 @@ public class FunctionPanel extends JPanel {
 		return cpu;
 	}
 
-	public void updateInfo() {
-		int cpu = 0, hp = 0, sheild = 0;
-		double mass = 0;
-		HashMap<RCComponent, Integer> info = infos.getSelectedComponentsInfo();
-		for (RCComponent c : info.keySet()) {
-			int number = info.get(c);
-			cpu += c.cpu * number;
-			mass += c.mass * number;
-			hp += c.hp * number;
-			sheild += c.shield * number;
-		}
-		StringBuffer text = new StringBuffer();
-		text.append("cpu:" + cpu + "\n");
-		text.append("hp:" + hp + "\n");
-		text.append("mass:" + mass + "kg" + "\n");
-		text.append("sheild:" + sheild + "\n");
-		outputArea.setText(text.toString());
+	public void setDisplayText(String s) {
+		outputArea.setText(s);
 	}
-
 }

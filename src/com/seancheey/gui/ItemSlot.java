@@ -14,14 +14,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.seancheey.GuiController;
 import com.seancheey.data.RCComponent;
 
 public class ItemSlot extends JPanel implements KeyListener, ActionListener {
 	private static final long serialVersionUID = 3181988613907725289L;
 	private RCComponent component;
+	private JButton deleteButton = new JButton("x");
 	private JTextField field;
 	private JLabel label;
-	private JButton deleteButton = new JButton("x");
 
 	{
 		deleteButton.setBorderPainted(false);
@@ -29,11 +30,8 @@ public class ItemSlot extends JPanel implements KeyListener, ActionListener {
 		deleteButton.addActionListener(this);
 	}
 
-	private InfoModifier mod;
-
-	public ItemSlot(RCComponent component, InfoModifier mod) {
+	public ItemSlot(RCComponent component) {
 		this.component = component;
-		this.mod = mod;
 		setMinimumSize(new Dimension(100, 50));
 		label = new JLabel(component.name);
 		field = new JTextField("1", 3);
@@ -44,6 +42,40 @@ public class ItemSlot extends JPanel implements KeyListener, ActionListener {
 		add(field);
 		add(deleteButton);
 		setBagLayout();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		GuiController.controller.removeComponent(component);
+	}
+
+	public RCComponent getComponent() {
+		return component;
+	}
+
+	public int getNumber() {
+		int num;
+		try {
+			num = Integer.parseInt(field.getText());
+		} catch (NumberFormatException e) {
+			return 0;
+		}
+		return num;
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if (field.getText().length() > 4) {
+			GuiController.controller.setComponentNumber(component, Integer.valueOf(field.getText().substring(0, 4)));
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
 	}
 
 	private void setBagLayout() {
@@ -69,42 +101,7 @@ public class ItemSlot extends JPanel implements KeyListener, ActionListener {
 		layout.setConstraints(deleteButton, c);
 	}
 
-	public RCComponent getComponent() {
-		return component;
-	}
-
-	public int getNumber() {
-		int num;
-		try {
-			num = Integer.parseInt(field.getText());
-		} catch (NumberFormatException e) {
-			return 0;
-		}
-		return num;
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		if (field.getText().length() > 4) {
-			field.setText(field.getText().substring(0, 4));
-		}
-		mod.updateInfo();
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-	}
-
 	public void setNumber(int a) {
 		field.setText(String.valueOf(a));
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		mod.deleteSlot(this);
 	}
 }

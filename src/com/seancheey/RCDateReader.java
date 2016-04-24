@@ -7,9 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.seancheey.data.RCComponent;
+import com.seancheey.data.RCMovement;
+import com.seancheey.data.RCWeapon;
 
 public class RCDateReader extends BufferedReader {
-	public static ArrayList<RCComponent> COMPONENTS, MOVEMENTS, WEAPONS;
+	public static ArrayList<RCComponent> COMPONENTS;
+	public static ArrayList<RCMovement> MOVEMENTS;
+	public static ArrayList<RCWeapon> WEAPONS;
 
 	static {
 		try {
@@ -17,8 +21,20 @@ public class RCDateReader extends BufferedReader {
 					moveReader = new RCDateReader(new File("res/Movements")),
 					weaponReader = new RCDateReader(new File("res/Weapons"));
 			COMPONENTS = compReader.readAll();
-			WEAPONS = weaponReader.readAll();
-			MOVEMENTS = moveReader.readAll();
+			{
+				ArrayList<RCComponent> weapons = weaponReader.readAll();
+				WEAPONS = new ArrayList<>(weapons.size());
+				for (RCComponent c : weapons) {
+					WEAPONS.add(new RCWeapon(c));
+				}
+			}
+			{
+				ArrayList<RCComponent> movs = moveReader.readAll();
+				MOVEMENTS = new ArrayList<>(movs.size());
+				for (RCComponent c : movs) {
+					MOVEMENTS.add(new RCMovement(c));
+				}
+			}
 			compReader.close();
 			moveReader.close();
 			weaponReader.close();

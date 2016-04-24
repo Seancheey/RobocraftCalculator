@@ -15,11 +15,12 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import com.seancheey.GuiController;
 import com.seancheey.data.RCComponent;
 
 class SearchPopupMenu extends JPopupMenu implements MouseListener {
 	private static final long serialVersionUID = 7217175080222631763L;
-	private ArrayList<RCComponent> components = new ArrayList<RCComponent>();
+	private ArrayList<? extends RCComponent> components = new ArrayList<>();
 	private JList<String> list = new JList<String>();
 	private SearchTextField searchField;
 
@@ -35,6 +36,39 @@ class SearchPopupMenu extends JPopupMenu implements MouseListener {
 		if (index == -1)
 			selectNextItem();
 		return components.get(list.getSelectedIndex());
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		searchField.selectComponent();
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	private JList<String> newComponnetList(ArrayList<String> strings) {
+		String strs[] = new String[strings.size()];
+		strings.toArray(strs);
+		JList<String> jlist = new JList<String>(strs);
+		jlist.addMouseListener(this);
+		return jlist;
 	}
 
 	public void restoreStatus() {
@@ -56,14 +90,6 @@ class SearchPopupMenu extends JPopupMenu implements MouseListener {
 		list.ensureIndexIsVisible(next);
 	}
 
-	private JList<String> newComponnetList(ArrayList<String> strings) {
-		String strs[] = new String[strings.size()];
-		strings.toArray(strs);
-		JList<String> jlist = new JList<String>(strs);
-		jlist.addMouseListener(this);
-		return jlist;
-	}
-
 	public void updateOptions(ArrayList<RCComponent> components) {
 		this.components = components;
 		setVisible(false);
@@ -79,45 +105,16 @@ class SearchPopupMenu extends JPopupMenu implements MouseListener {
 		add(list);
 		this.show(searchField, searchField.getX(), searchField.getY() + searchField.getHeight());
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		searchField.selectComponent();
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-
-	}
 }
 
 public class SearchTextField extends JTextField implements DocumentListener, KeyListener {
 	private static final long serialVersionUID = 1L;
-	private ArrayList<RCComponent> components;
+	private ArrayList<? extends RCComponent> components;
 	private SearchPopupMenu popmenu;
-	private final ComponentSlotPanel slotPanel;
-	private InfoModifier mod;
 
-	public SearchTextField(ComponentSlotPanel slotPanel, ArrayList<RCComponent> components, InfoModifier mod) {
+	public SearchTextField(ArrayList<? extends RCComponent> components) {
 		super("search", 20);
-		this.slotPanel = slotPanel;
 		this.components = components;
-		this.mod = mod;
 		setForeground(Color.GRAY);
 		popmenu = new SearchPopupMenu(this);
 		add(popmenu);
@@ -158,17 +155,6 @@ public class SearchTextField extends JTextField implements DocumentListener, Key
 		}
 	}
 
-	public void selectComponent() {
-		if (popmenu.isVisible()) {
-			slotPanel.addSlot(popmenu.getSelectedComponent());
-			slotPanel.repaint();
-			mod.updateInfo();
-			setText("search");
-			setForeground(Color.GRAY);
-			popmenu.restoreStatus();
-		}
-	}
-
 	@Override
 	public void keyTyped(KeyEvent e) {
 		if (getForeground() == Color.GRAY) {
@@ -203,6 +189,16 @@ public class SearchTextField extends JTextField implements DocumentListener, Key
 	@Override
 	public void removeUpdate(DocumentEvent e) {
 		updateSearch();
+	}
+
+	public void selectComponent() {
+		if (popmenu.isVisible()) {
+			RCComponent selected = popmenu.getSelectedComponent();
+			GuiController.controller.addComponent(selected, 1);
+			setText("search");
+			setForeground(Color.GRAY);
+			popmenu.restoreStatus();
+		}
 	}
 
 	private int textCompareMatchDegree(String componentName) {
