@@ -89,6 +89,9 @@ public class ItemSlot extends JPanel implements KeyListener, ActionListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		if (field.getText().length() > 4) {
+			field.setText(field.getText().substring(0, 4));
+		}
 		mod.updateInfo();
 	}
 
