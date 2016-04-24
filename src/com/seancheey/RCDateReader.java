@@ -22,8 +22,9 @@ public class RCDateReader extends BufferedReader {
 			compReader.close();
 			moveReader.close();
 			weaponReader.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			System.exit(0);
 		}
 	}
 
