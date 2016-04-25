@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -16,17 +17,17 @@ import com.seancheey.data.RCComponent;
 
 public class FunctionPanel extends JPanel {
 	private static final long serialVersionUID = -2442815361182961114L;
-	private JButton autoCubeButton;
+	private JButton autoCubeButton, clearButton;
 	private JTextArea outputArea;
 
 	public FunctionPanel() {
 		outputArea = new JTextArea(20, 0);
 		{
 			outputArea.setEditable(false);
-
-			autoCubeButton = new JButton("Cube Number");
+		}
+		autoCubeButton = new JButton("Cube Number");
+		{
 			autoCubeButton.addActionListener(new ActionListener() {
-
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					HashMap<RCComponent, Integer> info = GuiController.controller.getComponentsInfo();
@@ -37,6 +38,21 @@ public class FunctionPanel extends JPanel {
 					int remain = 1750 - getCPUSum() + cubeNum;
 					GuiController.controller.setComponentNumber(cube, remain);
 					;
+				}
+			});
+		}
+		clearButton = new JButton("Clear Components");
+		{
+			clearButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					ArrayList<RCComponent> list = new ArrayList<>();
+					for (RCComponent c : GuiController.controller.getComponentsInfo().keySet()) {
+						list.add(c);
+					}
+					for(RCComponent c:list){
+						GuiController.controller.removeComponent(c);
+					}
 				}
 			});
 		}
@@ -53,11 +69,14 @@ public class FunctionPanel extends JPanel {
 			c.gridheight = 1;
 			c.gridy = 6;
 			bagLayout.setConstraints(autoCubeButton, c);
+			c.gridy = 7;
+			bagLayout.setConstraints(clearButton, c);
 		}
 		setDisplayText("DisplayArea");
 		setLayout(bagLayout);
 		add(outputArea);
 		add(autoCubeButton);
+		add(clearButton);
 	}
 
 	private int getCPUSum() {
