@@ -2,6 +2,8 @@ package com.seancheey.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -14,10 +16,70 @@ import javax.swing.event.DocumentListener;
 import com.seancheey.GuiController;
 import com.seancheey.data.RCComponent;
 
-public class SearchTextField extends JTextField implements DocumentListener, KeyListener {
+public class SearchTextField extends JTextField {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<? extends RCComponent> components;
 	private SearchPopupMenu popmenu;
+	private DocumentListener documentListener = new DocumentListener() {
+
+		@Override
+		public void removeUpdate(DocumentEvent e) {
+			updateSearch();
+		}
+
+		@Override
+		public void insertUpdate(DocumentEvent e) {
+			updateSearch();
+		}
+
+		@Override
+		public void changedUpdate(DocumentEvent e) {
+			updateSearch();
+		}
+	};
+	private FocusListener focusListener = new FocusListener() {
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			restoreText();
+		}
+
+		@Override
+		public void focusGained(FocusEvent e) {
+			setText("");
+		}
+	};
+	private KeyListener keyListener = new KeyListener() {
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			if (getForeground() == Color.GRAY) {
+				setText("");
+				setForeground(Color.BLACK);
+			}
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+				if (popmenu.isVisible()) {
+					popmenu.selectNextItem();
+				}
+			} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+				if (popmenu.isVisible()) {
+					popmenu.selectPreviousItem();
+				}
+			} else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				selectComponent();
+			}
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+	};
 
 	public SearchTextField(ArrayList<? extends RCComponent> components) {
 		super("search", 20);
@@ -28,46 +90,9 @@ public class SearchTextField extends JTextField implements DocumentListener, Key
 		setComponentPopupMenu(popmenu);
 		setHorizontalAlignment(LEFT);
 		setMaximumSize(new Dimension(200, 20));
-		getDocument().addDocumentListener(this);
-		addKeyListener(this);
-	}
-
-	@Override
-	public void changedUpdate(DocumentEvent e) {
-		updateSearch();
-	}
-
-	@Override
-	public void insertUpdate(DocumentEvent e) {
-		updateSearch();
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			if (popmenu.isVisible()) {
-				popmenu.selectNextItem();
-			}
-		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
-			if (popmenu.isVisible()) {
-				popmenu.selectPreviousItem();
-			}
-		} else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			selectComponent();
-		}
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		if (getForeground() == Color.GRAY) {
-			setText("");
-			setForeground(Color.BLACK);
-		}
+		getDocument().addDocumentListener(documentListener);
+		addKeyListener(keyListener);
+		addFocusListener(focusListener);
 	}
 
 	private ArrayList<RCComponent> matchedComponents() {
@@ -93,19 +118,18 @@ public class SearchTextField extends JTextField implements DocumentListener, Key
 		return xcomponents;
 	}
 
-	@Override
-	public void removeUpdate(DocumentEvent e) {
-		updateSearch();
-	}
-
 	public void selectComponent() {
 		if (popmenu.isVisible()) {
 			RCComponent selected = popmenu.getSelectedComponent();
 			GuiController.controller.addComponent(selected, 1);
-			setText("search");
-			setForeground(Color.GRAY);
-			popmenu.restoreStatus();
+			restoreText();
 		}
+	}
+
+	public void restoreText() {
+		setText("search");
+		setForeground(Color.GRAY);
+		popmenu.restoreStatus();
 	}
 
 	private int textCompareMatchDegree(String componentName) {
@@ -122,6 +146,11 @@ public class SearchTextField extends JTextField implements DocumentListener, Key
 				return 0;
 		}
 		return rank;
+	}
+	
+	public void emptyText(){
+		setText("");
+		setForeground(Color.BLACK);
 	}
 
 	private void updateSearch() {
