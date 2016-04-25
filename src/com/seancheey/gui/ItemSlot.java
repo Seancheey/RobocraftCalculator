@@ -1,7 +1,6 @@
 package com.seancheey.gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -14,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import com.seancheey.GuiController;
 import com.seancheey.data.RCComponent;
@@ -27,12 +27,10 @@ public class ItemSlot extends JPanel {
 
 	public ItemSlot(RCComponent component) {
 		this.component = component;
-		label = new JLabel(component.name);
+		label = new JLabel(component.name, SwingConstants.CENTER);
 		deleteButton = new JButton("x");
 		{
 			deleteButton.setForeground(Color.GRAY);
-			deleteButton.setMinimumSize(new Dimension(50, 50));
-			deleteButton.setBorderPainted(false);
 			deleteButton.setBackground(Color.ORANGE);
 			deleteButton.addActionListener(new ActionListener() {
 
@@ -116,6 +114,7 @@ public class ItemSlot extends JPanel {
 		c.gridheight = 1;
 		c.weightx = 1;
 		c.weighty = 0;
+		c.fill = GridBagConstraints.HORIZONTAL;
 		layout.setConstraints(label, c);
 		c.gridx = 0;
 		c.gridy = 1;
