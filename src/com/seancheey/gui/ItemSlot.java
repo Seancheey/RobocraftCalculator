@@ -25,22 +25,24 @@ public class ItemSlot extends JPanel {
 	private JTextField field;
 	private JLabel label;
 
-	{
-		deleteButton.setBorderPainted(false);
-		deleteButton.setBackground(Color.ORANGE);
-		deleteButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				GuiController.controller.removeComponent(component);
-			}
-		});
-	}
-
 	public ItemSlot(RCComponent component) {
 		this.component = component;
 		label = new JLabel(component.name);
-		field = new JTextField("1", 3);
+		deleteButton = new JButton("x");
+		{
+			deleteButton.setForeground(Color.GRAY);
+			deleteButton.setMinimumSize(new Dimension(50, 50));
+			deleteButton.setBorderPainted(false);
+			deleteButton.setBackground(Color.ORANGE);
+			deleteButton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					GuiController.controller.removeComponent(component);
+				}
+			});
+		}
+		field = new JTextField("1", 4);
 		{
 			field.addKeyListener(new KeyListener() {
 
@@ -82,7 +84,6 @@ public class ItemSlot extends JPanel {
 		add(label);
 		add(field);
 		add(deleteButton);
-		setMinimumSize(new Dimension(100, 50));
 		setBagLayout();
 	}
 
@@ -108,23 +109,27 @@ public class ItemSlot extends JPanel {
 		if (getLayout() instanceof GridBagLayout)
 			return;
 		GridBagLayout layout = new GridBagLayout();
-		setLayout(layout);
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
-		c.gridwidth = 8;
+		c.gridwidth = 6;
 		c.gridheight = 1;
+		c.weightx = 1;
+		c.weighty = 0;
 		layout.setConstraints(label, c);
 		c.gridx = 0;
 		c.gridy = 1;
-		c.gridwidth = 7;
+		c.gridwidth = 5;
 		c.gridheight = 1;
+		c.weightx = 1;
 		layout.setConstraints(field, c);
-		c.gridx = 7;
+		c.gridx = 5;
 		c.gridy = 1;
 		c.gridwidth = 1;
 		c.gridheight = 1;
+		c.weightx = 0;
 		layout.setConstraints(deleteButton, c);
+		setLayout(layout);
 	}
 
 	public void setNumber(int a) {

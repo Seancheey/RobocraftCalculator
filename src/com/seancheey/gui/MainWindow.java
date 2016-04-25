@@ -12,7 +12,7 @@ import com.seancheey.GuiController;
 import com.seancheey.RCDateReader;
 
 public class MainWindow extends JFrame {
-	private final static Dimension DEFAULTSIZE = new Dimension(700, 400);
+	private final static Dimension DEFAULTSIZE = new Dimension(800, 400);
 	private static MainWindow self;
 	private static final long serialVersionUID = -7526688286751521433L;
 
