@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import com.seancheey.GuiController;
 import com.seancheey.data.RCComponent;
@@ -20,23 +18,6 @@ public class SearchTextField extends JTextField {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<? extends RCComponent> components;
 	private SearchPopupMenu popmenu;
-	private DocumentListener documentListener = new DocumentListener() {
-
-		@Override
-		public void removeUpdate(DocumentEvent e) {
-			updateSearch();
-		}
-
-		@Override
-		public void insertUpdate(DocumentEvent e) {
-			updateSearch();
-		}
-
-		@Override
-		public void changedUpdate(DocumentEvent e) {
-			updateSearch();
-		}
-	};
 	private FocusListener focusListener = new FocusListener() {
 
 		@Override
@@ -71,12 +52,13 @@ public class SearchTextField extends JTextField {
 				}
 			} else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 				selectComponent();
+			} else {
+				updateSearch();
 			}
 		}
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 	};
@@ -90,7 +72,6 @@ public class SearchTextField extends JTextField {
 		setComponentPopupMenu(popmenu);
 		setHorizontalAlignment(LEFT);
 		setMaximumSize(new Dimension(200, 20));
-		getDocument().addDocumentListener(documentListener);
 		addKeyListener(keyListener);
 		addFocusListener(focusListener);
 	}
@@ -123,13 +104,14 @@ public class SearchTextField extends JTextField {
 			RCComponent selected = popmenu.getSelectedComponent();
 			GuiController.controller.addComponent(selected, 1);
 			restoreText();
+			popmenu.restoreStatus();
 		}
 	}
 
 	public void restoreText() {
 		setText("search");
 		setForeground(Color.GRAY);
-		popmenu.restoreStatus();
+		popmenu.setVisible(false);
 	}
 
 	private int textCompareMatchDegree(String componentName) {
@@ -147,8 +129,8 @@ public class SearchTextField extends JTextField {
 		}
 		return rank;
 	}
-	
-	public void emptyText(){
+
+	public void emptyText() {
 		setText("");
 		setForeground(Color.BLACK);
 	}
