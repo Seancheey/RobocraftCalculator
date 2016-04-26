@@ -1,43 +1,23 @@
 package com.seancheey.gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import javax.swing.JTextField;
-
 import com.seancheey.GuiController;
 import com.seancheey.data.RCComponent;
 
-public class SearchTextField extends JTextField {
+public class SearchTextField extends HintTextField {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<? extends RCComponent> components;
 	private SearchPopupMenu popmenu;
-	private FocusListener focusListener = new FocusListener() {
-
-		@Override
-		public void focusLost(FocusEvent e) {
-			restoreText();
-		}
-
-		@Override
-		public void focusGained(FocusEvent e) {
-			setText("");
-		}
-	};
 	private KeyListener keyListener = new KeyListener() {
 
 		@Override
 		public void keyTyped(KeyEvent e) {
-			if (getForeground() == Color.GRAY) {
-				setText("");
-				setForeground(Color.BLACK);
-			}
+
 		}
 
 		@Override
@@ -68,12 +48,11 @@ public class SearchTextField extends JTextField {
 		this.components = components;
 		popmenu = new SearchPopupMenu(this);
 		add(popmenu);
-		setForeground(Color.GRAY);
+		setHintText("Search");
 		setComponentPopupMenu(popmenu);
 		setHorizontalAlignment(LEFT);
 		setMaximumSize(new Dimension(200, 20));
 		addKeyListener(keyListener);
-		addFocusListener(focusListener);
 	}
 
 	private ArrayList<RCComponent> matchedComponents() {
@@ -103,14 +82,12 @@ public class SearchTextField extends JTextField {
 		if (popmenu.isVisible()) {
 			RCComponent selected = popmenu.getSelectedComponent();
 			GuiController.controller.addComponent(selected, 1);
-			restoreText();
+			setPopmenuInvisible();
 			popmenu.close();
 		}
 	}
 
-	public void restoreText() {
-		setText("search");
-		setForeground(Color.GRAY);
+	public void setPopmenuInvisible() {
 		popmenu.setVisible(false);
 	}
 
@@ -133,11 +110,6 @@ public class SearchTextField extends JTextField {
 			}
 		}
 		return rank;
-	}
-
-	public void emptyText() {
-		setText("");
-		setForeground(Color.BLACK);
 	}
 
 	private void updateSearch() {
