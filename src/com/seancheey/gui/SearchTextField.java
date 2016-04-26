@@ -93,20 +93,24 @@ public class SearchTextField extends HintTextField {
 	}
 
 	private int textCompareMatchDegree(String componentName) {
-		char[] text = getText().toLowerCase().toCharArray(), lowName = componentName.toLowerCase().toCharArray();
 		int rank = 0;
-		if (text[0] == lowName[0]) {
+		String patternString = getText().toLowerCase(), matchString = componentName.toLowerCase();
+		if (matchString.contains(patternString)) {
+			rank += 200;
+		}
+		char[] pattern = patternString.toCharArray(), match = matchString.toCharArray();
+		if (pattern[0] == match[0]) {
 			rank += 100;
 		}
-		for (char c : text) {
-			boolean match = false;
-			for (char x : lowName) {
+		for (char c : pattern) {
+			boolean matched = false;
+			for (char x : match) {
 				if (c == x) {
 					rank += 1;
-					match = true;
+					matched = true;
 				}
 			}
-			if (!match) {
+			if (!matched) {
 				return 0;
 			}
 		}
