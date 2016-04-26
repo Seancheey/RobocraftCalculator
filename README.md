@@ -20,12 +20,6 @@ Currently the program support the following functions:
 
 ##Installation
 
-	git clone git@github.com:Seancheey/RobocraftCalculator.git [New directory]
+1. switch to release branch and click "Download ZIP" button
 
-	cd [New directory]
-
-	mkdir /bin
-
-	javac -d bin/ src/com/seancheey/*.java src/com/seancheey/data/*.java src/com/seancheey/gui/*.java
-
-	jar cvfm RCCalculator.jar MANIFEST.MF -C bin/ .
+2. Click the "RCCalculator.jar" in the downloaded folder to run the program
