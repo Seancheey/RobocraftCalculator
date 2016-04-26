@@ -1,5 +1,6 @@
 package com.seancheey.gui;
 
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -9,11 +10,17 @@ import javax.swing.JPopupMenu;
 
 import com.seancheey.data.RCComponent;
 
-public class SearchPopupMenu extends JPopupMenu implements MouseListener {
+public class SearchPopupMenu extends JPopupMenu {
 	private static final long serialVersionUID = 7217175080222631763L;
 	private ArrayList<? extends RCComponent> components = new ArrayList<>();
 	private JList<String> list = new JList<String>();
 	private SearchTextField searchField;
+	private MouseListener mouseListener = new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			searchField.selectComponent();
+		}
+	};
 
 	public SearchPopupMenu(SearchTextField searchField) {
 		this.searchField = searchField;
@@ -29,40 +36,15 @@ public class SearchPopupMenu extends JPopupMenu implements MouseListener {
 		return components.get(list.getSelectedIndex());
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		searchField.selectComponent();
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-
-	}
-
-	private JList<String> newComponnetList(ArrayList<String> strings) {
+	private JList<String> newComponentList(ArrayList<String> strings) {
 		String strs[] = new String[strings.size()];
 		strings.toArray(strs);
 		JList<String> jlist = new JList<String>(strs);
-		jlist.addMouseListener(this);
+		jlist.addMouseListener(mouseListener);
 		return jlist;
 	}
 
-	public void restoreStatus() {
+	public void close() {
 		list.removeAll();
 		components = new ArrayList<RCComponent>();
 		if (isVisible())
@@ -76,7 +58,7 @@ public class SearchPopupMenu extends JPopupMenu implements MouseListener {
 	}
 
 	public void selectPreviousItem() {
-		int next = list.getSelectedIndex() - 1;
+		int next = Math.max(list.getSelectedIndex() - 1, 0);
 		list.setSelectedIndex(next);
 		list.ensureIndexIsVisible(next);
 	}
@@ -92,7 +74,7 @@ public class SearchPopupMenu extends JPopupMenu implements MouseListener {
 		for (RCComponent c : components) {
 			namelist.add(c.name);
 		}
-		list = newComponnetList(namelist);
+		list = newComponentList(namelist);
 		add(list);
 		this.show(searchField, searchField.getX(), searchField.getY() + searchField.getHeight());
 	}

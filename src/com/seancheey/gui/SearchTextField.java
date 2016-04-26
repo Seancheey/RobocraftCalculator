@@ -104,7 +104,7 @@ public class SearchTextField extends JTextField {
 			RCComponent selected = popmenu.getSelectedComponent();
 			GuiController.controller.addComponent(selected, 1);
 			restoreText();
-			popmenu.restoreStatus();
+			popmenu.close();
 		}
 	}
 
@@ -115,17 +115,22 @@ public class SearchTextField extends JTextField {
 	}
 
 	private int textCompareMatchDegree(String componentName) {
-		String text = getText().toLowerCase();
-		String lowName = componentName.toLowerCase();
+		char[] text = getText().toLowerCase().toCharArray(), lowName = componentName.toLowerCase().toCharArray();
 		int rank = 0;
-		if (text.charAt(0) == lowName.charAt(0)) {
+		if (text[0] == lowName[0]) {
 			rank += 100;
 		}
-		for (int i = 0; i < text.length(); i++) {
-			if (lowName.contains(String.valueOf(text.charAt(i)))) {
-				rank += 1;
-			} else
+		for (char c : text) {
+			boolean match = false;
+			for (char x : lowName) {
+				if (c == x) {
+					rank += 1;
+					match = true;
+				}
+			}
+			if (!match) {
 				return 0;
+			}
 		}
 		return rank;
 	}
