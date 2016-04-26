@@ -2,6 +2,10 @@
 
 This Calculator is designed for Robocraft builders to calculate their bots datas easily.
 
+The program is written solely by Java.
+
+Please do not seperate the jar file and the res/ folder or the program could not read the data properly.
+
 Currently the program support the following functions:
 
 0. Configure the components and calculate the CPU,RR,Mass,HP,Sheild of a bot
