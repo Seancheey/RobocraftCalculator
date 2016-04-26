@@ -9,7 +9,7 @@ import com.seancheey.gui.ComponentSlotPanel;
 import com.seancheey.gui.FunctionPanel;
 import com.seancheey.gui.MainWindow;
 
-public class GuiController implements Controller {
+public class GuiController implements FunctionController {
 	public static GuiController controller;
 
 	public static GuiController getInstance(MainWindow window) {
@@ -107,5 +107,14 @@ public class GuiController implements Controller {
 		text.append("HealRate:\t" + healRate + "\n");
 		text.append("RR:\t" + rr + "\n");
 		funcPanel.setDisplayText(text.toString());
+	}
+
+	@Override
+	public int getCPUSum() {
+		int cpu = 0;
+		for (RCComponent c : components.keySet()) {
+			cpu += c.cpu * components.get(c);
+		}
+		return cpu;
 	}
 }
