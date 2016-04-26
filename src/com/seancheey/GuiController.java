@@ -22,8 +22,8 @@ public class GuiController implements FunctionController {
 	private HashMap<RCComponent, Integer> components;
 	private FunctionPanel funcPanel;
 	private ComponentSlotPanel weaponPanel, movementPanel, componentPanel;
-
 	private MainWindow window;
+	private int maxCPU = 1750;
 
 	private GuiController(MainWindow guiWindow) {
 		this.window = guiWindow;
@@ -116,5 +116,15 @@ public class GuiController implements FunctionController {
 			cpu += c.cpu * components.get(c);
 		}
 		return cpu;
+	}
+
+	@Override
+	public void setMaxCPU(int cpu) {
+		maxCPU = cpu;
+	}
+
+	@Override
+	public int getMaxCPU() {
+		return maxCPU;
 	}
 }

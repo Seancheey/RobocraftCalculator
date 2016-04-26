@@ -44,13 +44,14 @@ public class SearchTextField extends HintTextField {
 	};
 
 	public SearchTextField(ArrayList<? extends RCComponent> components) {
-		super("search", 20);
+		super(20);
 		this.components = components;
 		popmenu = new SearchPopupMenu(this);
 		add(popmenu);
 		setHintText("Search");
 		setComponentPopupMenu(popmenu);
 		setHorizontalAlignment(LEFT);
+		setAutoClearText(true);
 		setMaximumSize(new Dimension(200, 20));
 		addKeyListener(keyListener);
 	}

@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import com.seancheey.Controller;
 import com.seancheey.GuiController;
 import com.seancheey.data.RCComponent;
 
@@ -53,7 +52,7 @@ public class ItemSlot extends JPanel {
 				@Override
 				public void keyReleased(KeyEvent e) {
 					GuiController.controller.setComponentNumber(component, getNumber());
-					if (GuiController.controller.getCPUSum() > Controller.MAX_CPU) {
+					if (GuiController.controller.getCPUSum() > GuiController.controller.getMaxCPU()) {
 						field.setText("100%");
 						e.setKeyChar('%');
 					}
@@ -66,7 +65,7 @@ public class ItemSlot extends JPanel {
 								cpuSum += c.cpu * number;
 							}
 						}
-						int remain = 1750 - cpuSum;
+						int remain = GuiController.controller.getMaxCPU() - cpuSum;
 						double percent = getNumber() / 100.0;
 						int componentCount = (int) Math.floor(remain * percent / component.cpu);
 						GuiController.controller.setComponentNumber(component, componentCount);

@@ -11,12 +11,13 @@ public class HintTextField extends JTextField {
 	private static final long serialVersionUID = 5188430628216300062L;
 	private String hintText = "";
 	private Color hintColor = Color.GRAY, normalColor;
+	private boolean autoClearText = false;
 	private FocusListener hintFocusListener = new FocusListener() {
-
 		@Override
 		public void focusLost(FocusEvent e) {
-			setForeground(hintColor);
-			setText(hintText);
+			if (autoClearText || getText().length() == 0) {
+				becomeHint();
+			}
 		}
 
 		@Override
@@ -36,6 +37,14 @@ public class HintTextField extends JTextField {
 		hintTextInit();
 	}
 
+	public boolean isAutoClearText() {
+		return autoClearText;
+	}
+
+	public void setAutoClearText(boolean autoClearText) {
+		this.autoClearText = autoClearText;
+	}
+
 	public HintTextField(int columns) {
 		super(columns);
 		hintTextInit();
@@ -53,13 +62,13 @@ public class HintTextField extends JTextField {
 
 	private void hintTextInit() {
 		addFocusListener(hintFocusListener);
-		hintFocusListener.focusLost(null);
+		becomeHint();
 	}
 
 	public void setHintText(String hintText) {
 		this.hintText = hintText;
-		if(!hasFocus()){
-			setText(hintText);
+		if (!hasFocus()) {
+			becomeHint();
 		}
 	}
 
@@ -73,8 +82,13 @@ public class HintTextField extends JTextField {
 
 	public void setHintColor(Color hintColor) {
 		this.hintColor = hintColor;
-		if(!hasFocus()){
-			setForeground(hintColor);
+		if (!hasFocus()) {
+			becomeHint();
 		}
+	}
+
+	private void becomeHint() {
+		setForeground(hintColor);
+		setText(hintText);
 	}
 }

@@ -4,6 +4,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import com.seancheey.Controller;
 import com.seancheey.GuiController;
 import com.seancheey.RCDateReader;
 import com.seancheey.data.RCComponent;
@@ -19,11 +22,22 @@ public class FunctionPanel extends JPanel {
 	private static final long serialVersionUID = -2442815361182961114L;
 	private JButton autoCubeButton, clearButton;
 	private JTextArea outputArea;
+	private HintTextField maxCPUField;
 
 	public FunctionPanel() {
 		outputArea = new JTextArea(20, 0);
 		{
 			outputArea.setEditable(false);
+		}
+		maxCPUField = new HintTextField();
+		{
+			maxCPUField.setHintText("Max CPU");
+			maxCPUField.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyReleased(KeyEvent e) {
+					GuiController.controller.setMaxCPU(getInputCPU());
+				}
+			});
 		}
 		autoCubeButton = new JButton("Cube Number");
 		{
@@ -35,7 +49,7 @@ public class FunctionPanel extends JPanel {
 					int cubeNum = 0;
 					if (info.containsKey(cube))
 						cubeNum = info.get(cube);
-					int remain = 1750 - getCPUSum() + cubeNum;
+					int remain = GuiController.controller.getMaxCPU() - getCPUSum() + cubeNum;
 					GuiController.controller.setComponentNumber(cube, remain);
 					;
 				}
@@ -50,7 +64,7 @@ public class FunctionPanel extends JPanel {
 					for (RCComponent c : GuiController.controller.getComponentsInfo().keySet()) {
 						list.add(c);
 					}
-					for(RCComponent c:list){
+					for (RCComponent c : list) {
 						GuiController.controller.removeComponent(c);
 					}
 				}
@@ -62,11 +76,15 @@ public class FunctionPanel extends JPanel {
 			c.gridx = 0;
 			c.gridy = 0;
 			c.gridwidth = 1;
-			c.gridheight = 5;
+			c.gridheight = 4;
 			c.weightx = 0;
 			c.fill = GridBagConstraints.BOTH;
+			c.weighty = 1;
 			bagLayout.setConstraints(outputArea, c);
+			c.weighty = 0;
 			c.gridheight = 1;
+			c.gridy = 5;
+			bagLayout.setConstraints(maxCPUField, c);
 			c.gridy = 6;
 			bagLayout.setConstraints(autoCubeButton, c);
 			c.gridy = 7;
@@ -75,8 +93,22 @@ public class FunctionPanel extends JPanel {
 		setDisplayText("DisplayArea");
 		setLayout(bagLayout);
 		add(outputArea);
+		add(maxCPUField);
 		add(autoCubeButton);
 		add(clearButton);
+	}
+
+	public int getInputCPU() {
+		try {
+			return Integer.parseInt(maxCPUField.getText());
+		} catch (NumberFormatException e) {
+			maxCPUField.setText(String.valueOf(Controller.MAX_CPU));
+			return Controller.MAX_CPU;
+		}
+	}
+
+	public void setInputCPU(int cpu) {
+		maxCPUField.setText(String.valueOf(cpu));
 	}
 
 	private int getCPUSum() {
