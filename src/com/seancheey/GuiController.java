@@ -101,12 +101,33 @@ public class GuiController implements FunctionController {
 		healRate = hp / healSum;
 		StringBuffer text = new StringBuffer();
 		text.append("CPU:\t" + cpu + "\n");
-		text.append("HP:\t" + hp + "\n");
-		text.append("Mass:\t" + mass + "\n");
-		text.append("Sheild:\t" + sheild + "\n");
-		text.append("HealRate:\t" + healRate + "\n");
-		text.append("RR:\t" + rr + "\n");
+		text.append("HP:\t" + toKiloFormat(hp, 1) + "\n");
+		text.append("Mass:\t" + toKiloFormat(mass, 2) + "\n");
+		text.append("Sheild:\t" + toKiloFormat(sheild, 1)+ "\n");
+		text.append(String.format("HealRate:\t%.2f\n", healRate));
+		text.append("RR:\t" + toKiloFormat(rr, 1) + "\n");
 		funcPanel.setDisplayText(text.toString());
+	}
+
+	private static String toKiloFormat(double num, int precision) {
+		StringBuffer text = new StringBuffer();
+		int kform = (int) num / 1000;
+		if (kform > 0) {
+			text.append(String.valueOf(kform));
+			if (precision > 0) {
+				text.append(".");
+				int left = (int) (num - kform * 1000);
+				for (int i = 2; i > 2 - precision; i--) {
+					int index = left / (int) (Math.pow(10, i));
+					text.append(String.valueOf(index));
+					left = left - index * (int) (Math.pow(10, i));
+				}
+			}
+			text.append("k");
+		} else {
+			text.append(String.format("%." + precision + "f", num));
+		}
+		return text.toString();
 	}
 
 	@Override
