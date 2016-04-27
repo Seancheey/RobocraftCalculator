@@ -24,16 +24,14 @@ public class RCDateReader extends BufferedReader {
 			{
 				ArrayList<RCComponent> weapons = weaponReader.readAll();
 				WEAPONS = new ArrayList<>(weapons.size());
-				for (RCComponent c : weapons) {
+				for (RCComponent c : weapons)
 					WEAPONS.add(new RCWeapon(c));
-				}
 			}
 			{
 				ArrayList<RCComponent> movs = moveReader.readAll();
 				MOVEMENTS = new ArrayList<>(movs.size());
-				for (RCComponent c : movs) {
+				for (RCComponent c : movs)
 					MOVEMENTS.add(new RCMovement(c));
-				}
 			}
 			compReader.close();
 			moveReader.close();
@@ -45,28 +43,15 @@ public class RCDateReader extends BufferedReader {
 	}
 
 	private static ArrayList<String> params(String s) {
-		int index = -1;
-		int endindex = -1;
-		all: for (int i = s.length() - 1; i >= 0; i--) {
-			if (s.charAt(i) == '\t') {
-				endindex = i + 1;
-				for (int j = i; j >= 0; j--) {
-					if (s.charAt(j) != '\t') {
-						index = j + 1;
-						break all;
-					}
-				}
+		ArrayList<String> list = new ArrayList<String>();
+		String[] stringlist = s.split("\t");
+		for (String str : stringlist) {
+			if (str.length() != 0) {
+				list.add(str);
 			}
 		}
-		if (endindex == -1) {
-			ArrayList<String> list = new ArrayList<String>();
-			list.add(s);
-			return list;
-		} else {
-			ArrayList<String> list = params(s.substring(0, index));
-			list.add(s.substring(endindex));
-			return list;
-		}
+		System.out.println();
+		return list;
 	}
 
 	public RCDateReader(File file) throws IOException {
