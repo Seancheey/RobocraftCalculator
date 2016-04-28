@@ -83,8 +83,7 @@ public class RCDateReader extends BufferedReader {
 			int hp = Integer.parseInt(paramList.get(2));
 			int shield = Integer.parseInt(paramList.get(3));
 			double mass = Double.parseDouble(paramList.get(4));
-			double healRate = Double.parseDouble(paramList.get(5));
-			return new RCComponent(name, cpu, hp, shield, mass, healRate);
+			return new RCComponent(name, cpu, hp, shield, mass);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (IndexOutOfBoundsException i) {

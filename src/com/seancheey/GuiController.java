@@ -88,22 +88,19 @@ public class GuiController implements FunctionController {
 
 	private void updateInfo() {
 		int cpu = 0, hp = 0, sheild = 0;
-		float mass = 0, healRate, healSum = 0;
+		float mass = 0;
 		for (RCComponent c : components.keySet()) {
 			int number = components.get(c);
 			cpu += c.cpu * number;
 			mass += c.mass * number;
 			hp += c.hp * number;
 			sheild += c.shield * number;
-			healSum += c.hp / c.healRate * number;
 		}
-		healRate = hp / healSum;
 		StringBuffer text = new StringBuffer();
 		text.append("CPU:\t" + cpu + "\n");
 		text.append("HP:\t" + toKiloFormat(hp, 1) + "\n");
 		text.append("Mass:\t" + toKiloFormat(mass, 2) + "\n");
-		text.append("Sheild:\t" + toKiloFormat(sheild, 1)+ "\n");
-		text.append(String.format("HealRate:\t%.2f\n", healRate));
+		text.append("Sheild:\t" + toKiloFormat(sheild, 1) + "\n");
 		funcPanel.setDisplayText(text.toString());
 	}
 

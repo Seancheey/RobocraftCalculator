@@ -5,7 +5,7 @@ public class RCWeapon extends RCComponent {
 	public final double powerConsumption, singleRate, nominalRate;
 
 	public RCWeapon(RCComponent component) {
-		super(component.name, component.cpu, component.hp, component.shield, component.mass, component.healRate);
+		super(component.name, component.cpu, component.hp, component.shield, component.mass);
 		damage = 0;
 		nominalCount = 0;
 		powerConsumption = 0;
@@ -13,9 +13,9 @@ public class RCWeapon extends RCComponent {
 		nominalRate = 0;
 	}
 
-	public RCWeapon(String name, int cpu, int hp, int shield, double mass, double healRate, int damage,
-			int nominalCount, double powerConsumption, double singleRate, double nominalRate) {
-		super(name, cpu, hp, shield, mass, healRate);
+	public RCWeapon(String name, int cpu, int hp, int shield, double mass, int damage, int nominalCount,
+			double powerConsumption, double singleRate, double nominalRate) {
+		super(name, cpu, hp, shield, mass);
 		this.damage = damage;
 		this.nominalCount = nominalCount;
 		this.powerConsumption = powerConsumption;

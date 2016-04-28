@@ -1,49 +1,49 @@
-Steering Wheel Scout		21		4065	0		244		1
-Wheel Scout					20		4014	0		244		1
-Steering Wheel Discoverer	23		5455	0		333		1
-Wheel Discoverer			22		5410	0		333		1
-Steering Wheel Pathfinder	25		7259	0		422		1
-Wheel Pathfinder			24		7225	0		422		1
-Steering Wheel Stormer		27		9606	0		511		1
-Wheel Stormer				26		9590	0		511		1
-Steering Wheel Geoterrain	29		12633	0		600		1
-Wheel Geoterrain			28		12633	0		600		1
-Steering Wheel Monster		100		67677	0		2142.9	1
-Wheel Monster				100		67677	0		2142.9	1
-Tank Track Warthog			30		9151	0		7250	3
-Tank Track Bison			34		12707	0		11790	3
-Tank Track Rhino			38		17387	0		20360	3
-Tank Track Elephant			42		23543	0		28930	3
-Tank Track Mammoth			46		31583	0		37500	3
-Mech Leg Spartan			50		6815	19048	8000	3
-Mech Leg Centaur			62		10354	28939	13000	3
-Mech Leg Giant				74		15130	42286	21000	3
-Mech Leg Talos				86		21544	60211	29000	3
-Mech Leg Colossus			98		30003	89266	37000	3
-Mech Leg Titan				205		56495	168059	77398	3
-Insect Leg Worker			40		18768	0		15.6	2
-Insect Leg Soldier			44		25266	0		18		2
-Ski							25		7526	0		12.6	1
-Steering Ski				25		7526	0		12.6	1
-Hover Blade Squall			20		2007	0		6.3		1
-Hover Blade Thunder			22		2705	0		8.1		1
-Hover Blade Storm			24		3612	0		9.9		1
-Hover Blade Tempest			26		4795	0		11.7	1
-Hover Blade Tornado			28		6317	0		13.5	1
-Hover Blade Hurricane		100		33841	0		48.2	1
-Thruster Lynx				10		1558	0		4.2		1
-Thruster Panther			12		2291	0		5.4		1
-Thruster Leopard			14		3273	0		6.6		1
-Thruster Puma				16		4583	0		7.8		1
-Thruster Cheetah			18		6317	0		9.0		1
-Rotor Blade Recon			30		14426	0		13.9	3
-Rotor Blade Invader			33		19442	0		16.4	3
-Rotor Blade Assault			35		25266	0		18.9	3
-Wing Hawk					22		8487	0		8.1		2
-Wing Falcon					24		12961	0		9.9		2
-Wing Eagle					26		18246	0		11.7	2
-Wing Albatross				28		17774	0		13.5	2
-Rudder Hawk					19		3472	0		5.3		2
-Rudder Falcon				21		5015	0		6.4		2
-Rudder Eagle				23		8294	0		7.6		2
+Steering Wheel Scout		21		4065	0		244		
+Wheel Scout					20		4014	0		244		
+Steering Wheel Discoverer	23		5455	0		333		
+Wheel Discoverer			22		5410	0		333		
+Steering Wheel Pathfinder	25		7259	0		422		
+Wheel Pathfinder			24		7225	0		422		
+Steering Wheel Stormer		27		9606	0		511		
+Wheel Stormer				26		9590	0		511		
+Steering Wheel Geoterrain	29		12633	0		600		
+Wheel Geoterrain			28		12633	0		600		
+Steering Wheel Monster		100		67677	0		2142.9	
+Wheel Monster				100		67677	0		2142.9	
+Tank Track Warthog			30		9151	0		7250	
+Tank Track Bison			34		12707	0		11790	
+Tank Track Rhino			38		17387	0		20360	
+Tank Track Elephant			42		23543	0		28930	
+Tank Track Mammoth			46		31583	0		37500	
+Mech Leg Spartan			50		6815	19048	8000	
+Mech Leg Centaur			62		10354	28939	13000	
+Mech Leg Giant				74		15130	42286	21000	
+Mech Leg Talos				86		21544	60211	29000	
+Mech Leg Colossus			98		30003	89266	37000	
+Mech Leg Titan				205		56495	168059	77398	
+Insect Leg Worker			40		18768	0		15.6	
+Insect Leg Soldier			44		25266	0		18		
+Ski							25		7526	0		12.6	
+Steering Ski				25		7526	0		12.6	
+Hover Blade Squall			20		2007	0		6.3		
+Hover Blade Thunder			22		2705	0		8.1		
+Hover Blade Storm			24		3612	0		9.9		
+Hover Blade Tempest			26		4795	0		11.7	
+Hover Blade Tornado			28		6317	0		13.5	
+Hover Blade Hurricane		100		33841	0		48.2	
+Thruster Lynx				10		1558	0		4.2		
+Thruster Panther			12		2291	0		5.4		
+Thruster Leopard			14		3273	0		6.6		
+Thruster Puma				16		4583	0		7.8		
+Thruster Cheetah			18		6317	0		9.0		
+Rotor Blade Recon			30		14426	0		13.9	
+Rotor Blade Invader			33		19442	0		16.4	
+Rotor Blade Assault			35		25266	0		18.9	
+Wing Hawk					22		8487	0		8.1		
+Wing Falcon					24		12961	0		9.9		
+Wing Eagle					26		18246	0		11.7	
+Wing Albatross				28		17774	0		13.5	
+Rudder Hawk					19		3472	0		5.3		
+Rudder Falcon				21		5015	0		6.4		
+Rudder Eagle				23		8294	0		7.6		
 Rudder Albatross			25		10801	0		8.8		2
