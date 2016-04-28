@@ -97,10 +97,14 @@ public class GuiController implements FunctionController {
 			sheild += c.shield * number;
 		}
 		StringBuffer text = new StringBuffer();
-		text.append("CPU:\t" + cpu + "\n");
-		text.append("HP:\t" + toKiloFormat(hp, 1) + "\n");
-		text.append("Mass:\t" + toKiloFormat(mass, 2) + "\n");
-		text.append("Sheild:\t" + toKiloFormat(sheild, 1) + "\n");
+		if (cpu != 0)
+			text.append("CPU:\t" + cpu + "\n");
+		if (hp != 0)
+			text.append("HP:\t" + toKiloFormat(hp, 1) + "\n");
+		if (mass != 0)
+			text.append("Mass:\t" + toKiloFormat(mass, 2) + "\n");
+		if (sheild != 0)
+			text.append("Sheild:\t" + toKiloFormat(sheild, 1) + "\n");
 		funcPanel.setDisplayText(text.toString());
 	}
 
