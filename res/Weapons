@@ -1,31 +1,31 @@
 Proto-Seeker					100		36180	0	340		
-Front Laser Wasp (T1)			10		3148	0	8.4		
-Front Laser Hornet (T3)			14		5400	0	10.8	
-Front Laser Blaster (T5)		18		8499	0	13.2	
-Front Laser Vaporizer (T7)		22		12728	0	15.6	
-Front Laser Disintegrator(T9)	26		18423	0	18		
-Top Laser Wasp (T1)				10		3148	0	8.4		
-Top Laser Hornet (T3)			14		5400	0	10.8	
-Top Laser Blaster (T5)			18		8499	0	13.2	
-Top Laser Vaporizer (T7)		22		12728	0	15.6	
-Top Laser Disintegrator(T9)		26		18423	0	18		
-Laser Leviathan (Mega)			2501	31260	0	27		
-Plasma Pulser (T3)				14		3823	0	11.8	
-Plasma Disrupter (T3)			18		6022	0	15.1	
-Plasma Bombarder (T5)			22		9011	0	18.5	
-Plasma Ravager (T7)				26		13048	0	21.8	
-Plasma Devastator (T9)			30		18423	0	25.2	
-Plasma Goliathon (Mega)			300		31260	0	37.8	
-Rail Piercer (T3)				18		6022	0	14		
-Rail Penetrator (T5)			22		9011	0	17.2	
-Rail Decimator (T7)				26		13048	0	20.3	
-Rail Erazer (T9)				30		18423	0	23.4	
-Nano Binder (T5)				18		8499	0	16.5	
-Nano Mender (T7)				22		12728	0	19.5	
-Nano Constructor (T9)			26		19423	0	22.5	
+Front Laser Wasp (T1)			10		8865	0	8.4		
+Front Laser Hornet (T3)			14		12411	0	10.8	
+Front Laser Blaster (T5)		18		15957	0	13.2	
+Front Laser Vaporizer (T7)		22		19503	0	15.6	
+Front Laser Disintegrator(T9)	26		23049	0	18		
+Top Laser Wasp (T1)				10		8865	0	8.4		
+Top Laser Hornet (T3)			14		12411	0	10.8	
+Top Laser Blaster (T5)			18		15957	0	13.2	
+Top Laser Vaporizer (T7)		22		19503	0	15.6	
+Top Laser Disintegrator(T9)		26		23049	0	18		
+Laser Leviathan (Mega)			2501	65183	0	27		
+Plasma Pulser (T3)				14		12411	0	11.8	
+Plasma Disrupter (T3)			18		15957	0	15.1	
+Plasma Bombarder (T5)			22		19503	0	18.5	
+Plasma Ravager (T7)				26		23049	0	21.8	
+Plasma Devastator (T9)			30		26595	0	25.2	
+Plasma Goliathon (Mega)			300		78220	0	37.8	
+Rail Piercer (T3)				18		15957	0	14		
+Rail Penetrator (T5)			22		19503	0	17.2	
+Rail Decimator (T7)				26		23049	0	20.3	
+Rail Erazer (T9)				30		26595	0	23.4	
+Nano Binder (T5)				18		15957	0	16.5	
+Nano Mender (T7)				22		19503	0	19.5	
+Nano Constructor (T9)			26		23049	0	22.5	
 Aeroflak Cannon					300		108540	0	4500	
-Lock-on Missle Launcher			275		57310	0	1350	
+Lock-on Missle Launcher			275		71702	0	1350	
 Ion Distorter					245		88641	0	2250	
-Tesla Slicer (T5)				20		9443	0	16.4	
-Tesla Ripper (T7)				22		12728	0	17.6	
-Tesla Nova (T9)					24		17006	0	18.9	
+Tesla Slicer (T5)				20		14183	0	16.4	
+Tesla Ripper (T7)				22		17730	0	17.6	
+Tesla Nova (T9)					24		21276	0	18.9	
