@@ -23,7 +23,6 @@ public class RCDateReader extends BufferedReader {
 			COMPONENTS = compReader.readAllComponents();
 			WEAPONS = weaponReader.readAllWeapon();
 			MOVEMENTS = moveReader.readAllMovements();
-			System.out.println("read " + WEAPONS.size() + " weapons");
 			compReader.close();
 			moveReader.close();
 			weaponReader.close();
@@ -41,7 +40,6 @@ public class RCDateReader extends BufferedReader {
 				list.add(str);
 			}
 		}
-		System.out.println();
 		return list;
 	}
 

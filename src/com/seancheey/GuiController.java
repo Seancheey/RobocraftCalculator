@@ -94,7 +94,7 @@ public class GuiController extends AbstractFunctionController {
 		ArrayList<WeaponCombination> combinations = getWeaponCombinations();
 		if (combinations.size() > 0) {
 			for (WeaponCombination c : combinations) {
-				text.append("--" + c.getWeapon().name + "--\n");
+				text.append("--" + c.getWeapon().name + "\n");
 				text.append("Rate:\t" + String.format("%.2f", c.getFireRate()) + "\n");
 				text.append("DMD Rate:\t" + toKiloFormat(c.getDPS(), 2) + "\n");
 				text.append("Power Rate:\t" + String.format("%.2f", c.getPPS()) + "\n");
