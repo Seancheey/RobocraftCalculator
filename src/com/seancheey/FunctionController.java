@@ -1,5 +1,7 @@
 package com.seancheey;
 
+import java.util.ArrayList;
+
 public interface FunctionController extends Controller {
 	public int getCPUSum();
 
@@ -8,4 +10,6 @@ public interface FunctionController extends Controller {
 	public int getMaxCPU();
 	
 	public void updateInfo();
+	
+	public ArrayList<WeaponCombination> getWeaponCombinations();
 }

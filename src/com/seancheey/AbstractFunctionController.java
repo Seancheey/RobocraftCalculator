@@ -1,5 +1,6 @@
 package com.seancheey;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.seancheey.data.RCComponent;
@@ -102,6 +103,15 @@ public abstract class AbstractFunctionController implements FunctionController {
 	@Override
 	public void setMaxCPU(int cpu) {
 		this.maxCPU = cpu;
+	}
+
+	@Override
+	public ArrayList<WeaponCombination> getWeaponCombinations() {
+		ArrayList<WeaponCombination> combinations = new ArrayList<>();
+		for (RCWeapon weapon : weapons.keySet()) {
+			combinations.add(new WeaponCombination(weapon, weapons.get(weapon)));
+		}
+		return combinations;
 	}
 
 	@Override

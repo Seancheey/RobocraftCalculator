@@ -1,5 +1,7 @@
 package com.seancheey;
 
+import java.util.ArrayList;
+
 import com.seancheey.data.RCComponent;
 import com.seancheey.data.RCMovement;
 import com.seancheey.data.RCWeapon;
@@ -89,6 +91,15 @@ public class GuiController extends AbstractFunctionController {
 			text.append("Mass:\t" + toKiloFormat(getMass(), 2) + "\n");
 		if (getShield() != 0)
 			text.append("Sheild:\t" + toKiloFormat(getShield(), 1) + "\n");
+		ArrayList<WeaponCombination> combinations = getWeaponCombinations();
+		if (combinations.size() > 0) {
+			for (WeaponCombination c : combinations) {
+				text.append("--" + c.getWeapon().name + "--\n");
+				text.append("Rate:\t" +String.format("%.2f", c.getFireRate())+ "\n");
+				text.append("DPS:\t" + toKiloFormat(c.getDPS(), 2)+ "\n");
+				text.append("PPS:\t" + String.format("%.2f", c.getPPS()) + "\n");
+			}
+		}
 		funcPanel.setDisplayText(text.toString());
 	}
 

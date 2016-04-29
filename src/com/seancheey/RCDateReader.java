@@ -21,18 +21,9 @@ public class RCDateReader extends BufferedReader {
 					moveReader = new RCDateReader(new File("res/Movements")),
 					weaponReader = new RCDateReader(new File("res/Weapons"));
 			COMPONENTS = compReader.readAllComponents();
-			{
-				ArrayList<RCComponent> weapons = weaponReader.readAllComponents();
-				WEAPONS = new ArrayList<>(weapons.size());
-				for (RCComponent c : weapons)
-					WEAPONS.add(new RCWeapon(c));
-			}
-			{
-				ArrayList<RCComponent> movs = moveReader.readAllComponents();
-				MOVEMENTS = new ArrayList<>(movs.size());
-				for (RCComponent c : movs)
-					MOVEMENTS.add(new RCMovement(c));
-			}
+			WEAPONS = weaponReader.readAllWeapon();
+			MOVEMENTS = moveReader.readAllMovements();
+			System.out.println("read " + WEAPONS.size() + " weapons");
 			compReader.close();
 			moveReader.close();
 			weaponReader.close();
@@ -110,25 +101,33 @@ public class RCDateReader extends BufferedReader {
 	}
 
 	public RCMovement readMovement() {
+		String line = "";
 		try {
-			return new RCMovement(params(readLine()));
+			line = readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (IndexOutOfBoundsException i) {
-			return null;
 		}
-		return null;
+		try {
+			return new RCMovement(params(line));
+		} catch (IndexOutOfBoundsException i) {
+			System.out.println(line + " is not read properly");
+			return new RCMovement(new RCComponent(params(line)));
+		}
 	}
 
 	public RCWeapon readWeapon() {
+		String line = "";
 		try {
-			return new RCWeapon(params(readLine()));
+			line = readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (IndexOutOfBoundsException i) {
-			return null;
 		}
-		return null;
+		try {
+			return new RCWeapon(params(line));
+		} catch (IndexOutOfBoundsException i) {
+			System.out.println(line + " is not read properly");
+			return new RCWeapon(new RCComponent(params(line)));
+		}
 	}
 
 	public RCComponent readComponent() {
