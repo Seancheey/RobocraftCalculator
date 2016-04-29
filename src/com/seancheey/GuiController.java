@@ -1,7 +1,5 @@
 package com.seancheey;
 
-import java.util.HashMap;
-
 import com.seancheey.data.RCComponent;
 import com.seancheey.data.RCMovement;
 import com.seancheey.data.RCWeapon;
@@ -9,7 +7,7 @@ import com.seancheey.gui.ComponentSlotPanel;
 import com.seancheey.gui.FunctionPanel;
 import com.seancheey.gui.MainWindow;
 
-public class GuiController implements FunctionController {
+public class GuiController extends AbstractFunctionController {
 	public static GuiController controller;
 
 	public static GuiController getInstance(MainWindow window) {
@@ -19,24 +17,22 @@ public class GuiController implements FunctionController {
 		return controller;
 	}
 
-	private HashMap<RCComponent, Integer> components;
 	private FunctionPanel funcPanel;
 	private ComponentSlotPanel weaponPanel, movementPanel, componentPanel;
 	private MainWindow window;
-	private int maxCPU = 1750;
 
 	private GuiController(MainWindow guiWindow) {
+		super();
 		this.window = guiWindow;
 		this.weaponPanel = guiWindow.weaponPanel;
 		this.movementPanel = guiWindow.movementPanel;
 		this.componentPanel = guiWindow.componentPanel;
 		this.funcPanel = guiWindow.funcPanel;
-		components = new HashMap<>();
 	}
 
 	@Override
 	public void addComponent(RCComponent component, int number) {
-		components.put(component, number);
+		super.addComponent(component, number);
 		if (component instanceof RCWeapon) {
 			weaponPanel.addSlot(component, number);
 		} else if (component instanceof RCMovement) {
@@ -47,18 +43,13 @@ public class GuiController implements FunctionController {
 		updateInfo();
 	}
 
-	@Override
-	public HashMap<RCComponent, Integer> getComponentsInfo() {
-		return components;
-	}
-
 	public MainWindow getWindow() {
 		return window;
 	}
 
 	@Override
 	public void removeComponent(RCComponent component) {
-		components.remove(component);
+		super.removeComponent(component);
 		if (component instanceof RCWeapon) {
 			weaponPanel.removeSlot(component);
 		} else if (component instanceof RCMovement) {
@@ -71,7 +62,7 @@ public class GuiController implements FunctionController {
 
 	@Override
 	public void setComponentNumber(RCComponent component, Integer number) {
-		components.put(component, number);
+		super.setComponentNumber(component, number);
 		try {
 			if (component instanceof RCWeapon) {
 				weaponPanel.getSlot(component).setNumber(number);
@@ -86,25 +77,18 @@ public class GuiController implements FunctionController {
 		updateInfo();
 	}
 
-	private void updateInfo() {
-		int cpu = 0, hp = 0, sheild = 0;
-		float mass = 0;
-		for (RCComponent c : components.keySet()) {
-			int number = components.get(c);
-			cpu += c.cpu * number;
-			mass += c.mass * number;
-			hp += c.hp * number;
-			sheild += c.shield * number;
-		}
+	@Override
+	public void updateInfo() {
+		super.updateInfo();
 		StringBuffer text = new StringBuffer();
-		if (cpu != 0)
-			text.append("CPU:\t" + cpu + "\n");
-		if (hp != 0)
-			text.append("HP:\t" + toKiloFormat(hp, 1) + "\n");
-		if (mass != 0)
-			text.append("Mass:\t" + toKiloFormat(mass, 2) + "\n");
-		if (sheild != 0)
-			text.append("Sheild:\t" + toKiloFormat(sheild, 1) + "\n");
+		if (getCpu() != 0)
+			text.append("CPU:\t" + getCpu() + "\n");
+		if (getHp() != 0)
+			text.append("HP:\t" + toKiloFormat(getHp(), 1) + "\n");
+		if (getMass() != 0)
+			text.append("Mass:\t" + toKiloFormat(getMass(), 2) + "\n");
+		if (getShield() != 0)
+			text.append("Sheild:\t" + toKiloFormat(getShield(), 1) + "\n");
 		funcPanel.setDisplayText(text.toString());
 	}
 
@@ -127,24 +111,5 @@ public class GuiController implements FunctionController {
 			text.append(String.format("%." + precision + "f", num));
 		}
 		return text.toString();
-	}
-
-	@Override
-	public int getCPUSum() {
-		int cpu = 0;
-		for (RCComponent c : components.keySet()) {
-			cpu += c.cpu * components.get(c);
-		}
-		return cpu;
-	}
-
-	@Override
-	public void setMaxCPU(int cpu) {
-		maxCPU = cpu;
-	}
-
-	@Override
-	public int getMaxCPU() {
-		return maxCPU;
 	}
 }

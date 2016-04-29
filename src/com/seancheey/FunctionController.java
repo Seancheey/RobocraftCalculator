@@ -6,4 +6,6 @@ public interface FunctionController extends Controller {
 	public void setMaxCPU(int cpu);
 
 	public int getMaxCPU();
+	
+	public void updateInfo();
 }
