@@ -1,5 +1,7 @@
 package com.seancheey.data;
 
+import java.util.ArrayList;
+
 public class RCMovement extends RCComponent {
 	public final int maxspeed, carrymass;
 
@@ -9,8 +11,14 @@ public class RCMovement extends RCComponent {
 		carrymass = 0;
 	}
 
-	public RCMovement(String name, int cpu, int hp, int mass, int shield, int maxspeed, int carrymass) {
-		super(name, cpu, hp, mass, shield);
+	public RCMovement(ArrayList<String> paramList) {
+		super(paramList);
+		maxspeed = Integer.parseInt(paramList.get(5));
+		carrymass = Integer.parseInt(paramList.get(6));
+	}
+
+	public RCMovement(String name, int cpu, int hp, int shield, double mass, int maxspeed, int carrymass) {
+		super(name, cpu, hp, shield, mass);
 		this.maxspeed = maxspeed;
 		this.carrymass = carrymass;
 	}

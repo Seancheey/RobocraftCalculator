@@ -20,15 +20,15 @@ public class RCDateReader extends BufferedReader {
 			RCDateReader compReader = new RCDateReader(new File("res/Components")),
 					moveReader = new RCDateReader(new File("res/Movements")),
 					weaponReader = new RCDateReader(new File("res/Weapons"));
-			COMPONENTS = compReader.readAll();
+			COMPONENTS = compReader.readAllComponents();
 			{
-				ArrayList<RCComponent> weapons = weaponReader.readAll();
+				ArrayList<RCComponent> weapons = weaponReader.readAllComponents();
 				WEAPONS = new ArrayList<>(weapons.size());
 				for (RCComponent c : weapons)
 					WEAPONS.add(new RCWeapon(c));
 			}
 			{
-				ArrayList<RCComponent> movs = moveReader.readAll();
+				ArrayList<RCComponent> movs = moveReader.readAllComponents();
 				MOVEMENTS = new ArrayList<>(movs.size());
 				for (RCComponent c : movs)
 					MOVEMENTS.add(new RCMovement(c));
@@ -58,7 +58,7 @@ public class RCDateReader extends BufferedReader {
 		super(new FileReader(file));
 	}
 
-	public ArrayList<RCComponent> readAll() {
+	public ArrayList<RCComponent> readAllComponents() {
 		ArrayList<RCComponent> cs = new ArrayList<RCComponent>();
 		while (true) {
 			try {
@@ -75,15 +75,65 @@ public class RCDateReader extends BufferedReader {
 		return cs;
 	}
 
+	public ArrayList<RCMovement> readAllMovements() {
+		ArrayList<RCMovement> cs = new ArrayList<>();
+		while (true) {
+			try {
+				cs.add(readMovement());
+			} catch (Exception e) {
+				break;
+			}
+		}
+		try {
+			close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return cs;
+	}
+
+	public ArrayList<RCWeapon> readAllWeapon() {
+		ArrayList<RCWeapon> cs = new ArrayList<>();
+		while (true) {
+			try {
+				cs.add(readWeapon());
+			} catch (Exception e) {
+				break;
+			}
+		}
+		try {
+			close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return cs;
+	}
+
+	public RCMovement readMovement() {
+		try {
+			return new RCMovement(params(readLine()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (IndexOutOfBoundsException i) {
+			return null;
+		}
+		return null;
+	}
+
+	public RCWeapon readWeapon() {
+		try {
+			return new RCWeapon(params(readLine()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (IndexOutOfBoundsException i) {
+			return null;
+		}
+		return null;
+	}
+
 	public RCComponent readComponent() {
 		try {
-			ArrayList<String> paramList = params(readLine());
-			String name = paramList.get(0);
-			int cpu = Integer.parseInt(paramList.get(1));
-			int hp = Integer.parseInt(paramList.get(2));
-			int shield = Integer.parseInt(paramList.get(3));
-			double mass = Double.parseDouble(paramList.get(4));
-			return new RCComponent(name, cpu, hp, shield, mass);
+			return new RCComponent(params(readLine()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (IndexOutOfBoundsException i) {
