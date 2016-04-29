@@ -95,9 +95,10 @@ public class GuiController extends AbstractFunctionController {
 		if (combinations.size() > 0) {
 			for (WeaponCombination c : combinations) {
 				text.append("--" + c.getWeapon().name + "--\n");
-				text.append("Rate:\t" +String.format("%.2f", c.getFireRate())+ "\n");
-				text.append("DPS:\t" + toKiloFormat(c.getDPS(), 2)+ "\n");
-				text.append("PPS:\t" + String.format("%.2f", c.getPPS()) + "\n");
+				text.append("Rate:\t" + String.format("%.2f", c.getFireRate()) + "\n");
+				text.append("DMD Rate:\t" + toKiloFormat(c.getDPS(), 2) + "\n");
+				text.append("Power Rate:\t" + String.format("%.2f", c.getPPS()) + "\n");
+				text.append("DMG/Round:\t" + toKiloFormat(c.getDPS() / c.getPPS() * 100, 2) + "\n");
 			}
 		}
 		funcPanel.setDisplayText(text.toString());
