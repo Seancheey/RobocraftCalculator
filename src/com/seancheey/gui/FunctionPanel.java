@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import com.seancheey.Controller;
@@ -25,11 +26,18 @@ public class FunctionPanel extends JPanel {
 	private JButton autoCubeButton, clearButton;
 	private JTextArea outputArea;
 	private HintTextField maxCPUField;
+	private JScrollPane scrollPane;
 
 	public FunctionPanel() {
-		outputArea = new JTextArea(20, 0);
+		
+		outputArea = new JTextArea();
 		{
 			outputArea.setEditable(false);
+		}
+		scrollPane = new JScrollPane(outputArea);
+		{
+			scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+			scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		}
 		maxCPUField = new HintTextField();
 		{
@@ -95,10 +103,11 @@ public class FunctionPanel extends JPanel {
 			c.weightx = 0;
 			c.fill = GridBagConstraints.BOTH;
 			c.weighty = 1;
-			bagLayout.setConstraints(outputArea, c);
+			bagLayout.setConstraints(scrollPane, c);
+			c.gridx = 0;
+			c.gridy = 5;
 			c.weighty = 0;
 			c.gridheight = 1;
-			c.gridy = 5;
 			bagLayout.setConstraints(maxCPUField, c);
 			c.gridy = 6;
 			bagLayout.setConstraints(autoCubeButton, c);
@@ -107,10 +116,10 @@ public class FunctionPanel extends JPanel {
 		}
 		setDisplayText("DisplayArea");
 		setLayout(bagLayout);
-		add(outputArea);
 		add(maxCPUField);
 		add(autoCubeButton);
 		add(clearButton);
+		add(scrollPane);
 	}
 
 	public int getInputCPU() {
