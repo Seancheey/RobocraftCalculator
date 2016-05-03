@@ -5,16 +5,22 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.ListModel;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 
 import com.seancheey.data.RCComponent;
 
 public class SearchPopupMenu extends JPopupMenu {
 	private static final long serialVersionUID = 7217175080222631763L;
 	private ArrayList<? extends RCComponent> components = new ArrayList<>();
-	private JList<String> list = new JList<String>();
+	private JList<String> list;
 	private SearchTextField searchField;
+	private JScrollPane scroll;
 	private MouseListener mouseListener = new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -27,6 +33,16 @@ public class SearchPopupMenu extends JPopupMenu {
 		setPopupSize(200, 100);
 		setInvoker(searchField);
 		setFocusable(false);
+		list = new JList<>();
+		{
+			list.addMouseListener(mouseListener);
+		}
+		scroll = new JScrollPane(list);
+		{
+			scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+			scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		}
+		add(scroll);
 	}
 
 	public RCComponent getSelectedComponent() {
@@ -34,14 +50,6 @@ public class SearchPopupMenu extends JPopupMenu {
 		if (index == -1)
 			selectNextItem();
 		return components.get(list.getSelectedIndex());
-	}
-
-	private JList<String> newComponentList(ArrayList<String> strings) {
-		String strs[] = new String[strings.size()];
-		strings.toArray(strs);
-		JList<String> jlist = new JList<String>(strs);
-		jlist.addMouseListener(mouseListener);
-		return jlist;
 	}
 
 	public void close() {
@@ -65,17 +73,18 @@ public class SearchPopupMenu extends JPopupMenu {
 
 	public void updateOptions(ArrayList<RCComponent> components) {
 		this.components = components;
-		setVisible(false);
 		if (components.size() == 0) {
+			setVisible(false);
 			return;
 		}
-		removeAll();
-		ArrayList<String> namelist = new ArrayList<String>();
-		for (RCComponent c : components) {
-			namelist.add(c.name);
+		// set the list's model
+		{
+			DefaultListModel<String> defaultListModel = new DefaultListModel<>();
+			for (RCComponent c : components)
+				defaultListModel.addElement(c.name);
+			list.setModel(defaultListModel);
 		}
-		list = newComponentList(namelist);
-		add(list);
+
 		this.show(searchField, searchField.getX(), searchField.getY() + searchField.getHeight());
 	}
 }
