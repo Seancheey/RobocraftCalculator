@@ -2,6 +2,7 @@ package com.seancheey.gui;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -29,10 +30,11 @@ public class FunctionPanel extends JPanel {
 	private JScrollPane scrollPane;
 
 	public FunctionPanel() {
-		
+
 		outputArea = new JTextArea();
 		{
 			outputArea.setEditable(false);
+			outputArea.setText("Robot Statistics");
 		}
 		scrollPane = new JScrollPane(outputArea);
 		{
@@ -96,25 +98,25 @@ public class FunctionPanel extends JPanel {
 		GridBagLayout bagLayout = new GridBagLayout();
 		{
 			GridBagConstraints c = new GridBagConstraints();
+			c.fill = GridBagConstraints.BOTH;
 			c.gridx = 0;
 			c.gridy = 0;
 			c.gridwidth = 1;
 			c.gridheight = 4;
-			c.weightx = 0;
-			c.fill = GridBagConstraints.BOTH;
+			c.weightx = 1;
 			c.weighty = 1;
+			c.insets = new Insets(1, 5, 1, 5);
 			bagLayout.setConstraints(scrollPane, c);
-			c.gridx = 0;
 			c.gridy = 5;
 			c.weighty = 0;
 			c.gridheight = 1;
+			c.insets = new Insets(0, 0, 0, 0);
 			bagLayout.setConstraints(maxCPUField, c);
 			c.gridy = 6;
 			bagLayout.setConstraints(autoCubeButton, c);
 			c.gridy = 7;
 			bagLayout.setConstraints(clearButton, c);
 		}
-		setDisplayText("DisplayArea");
 		setLayout(bagLayout);
 		add(maxCPUField);
 		add(autoCubeButton);
