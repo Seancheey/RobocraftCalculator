@@ -44,8 +44,11 @@ public class MainWindow extends JFrame {
 		getContentPane().add(mainPanel);
 		mainPanel.setLayout(new GridLayout(1, 4));
 		weaponPanel = new ComponentSlotPanel(RCDateReader.WEAPONS);
+		weaponPanel.setHintText("Search Weapons");
 		movementPanel = new ComponentSlotPanel(RCDateReader.MOVEMENTS);
+		movementPanel.setHintText("Search Movements");
 		componentPanel = new ComponentSlotPanel(RCDateReader.COMPONENTS);
+		componentPanel.setHintText("Search Components");
 		funcPanel = new FunctionPanel();
 		add(weaponPanel);
 		add(movementPanel);

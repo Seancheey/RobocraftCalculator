@@ -33,7 +33,6 @@ public class ComponentSlotPanel extends JPanel {
 		slot.setNumber(number);
 		setVisible(false);
 		setVisible(true);
-		// TODO adjust the layout
 	}
 
 	public ItemSlot getSlot(RCComponent component) {
@@ -58,5 +57,9 @@ public class ComponentSlotPanel extends JPanel {
 				break all;
 			}
 		}
+	}
+
+	public void setHintText(String s) {
+		searchfield.setHintText(s);
 	}
 }
