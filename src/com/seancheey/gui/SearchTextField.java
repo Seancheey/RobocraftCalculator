@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import com.seancheey.GuiController;
+import com.seancheey.LanguageConverter;
 import com.seancheey.data.RCComponent;
 
 public class SearchTextField extends HintTextField {
@@ -59,7 +60,7 @@ public class SearchTextField extends HintTextField {
 	private ArrayList<RCComponent> matchedComponents() {
 		ArrayList<RCComponent> xcomponents = new ArrayList<RCComponent>();
 		for (RCComponent c : components) {
-			int rank = textCompareMatchDegree(c.name);
+			int rank = matchDegree(LanguageConverter.defaultCvt().convertString(c.name));
 			if (rank != 0) {
 				xcomponents.add(c);
 			}
@@ -67,8 +68,8 @@ public class SearchTextField extends HintTextField {
 		xcomponents.sort(new Comparator<RCComponent>() {
 			@Override
 			public int compare(RCComponent o1, RCComponent o2) {
-				int rank1 = textCompareMatchDegree(o1.name);
-				int rank2 = textCompareMatchDegree(o2.name);
+				int rank1 = matchDegree(LanguageConverter.defaultCvt().convertString(o1.name));
+				int rank2 = matchDegree(LanguageConverter.defaultCvt().convertString(o2.name));
 				if (rank1 > rank2)
 					return -1;
 				else if (rank2 > rank1)
@@ -92,7 +93,7 @@ public class SearchTextField extends HintTextField {
 		popmenu.setVisible(false);
 	}
 
-	private int textCompareMatchDegree(String componentName) {
+	private int matchDegree(String componentName) {
 		int rank = 0;
 		String patternString = getText().toLowerCase(), matchString = componentName.toLowerCase();
 		if (matchString.contains(patternString)) {
