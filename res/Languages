@@ -1,0 +1,137 @@
+English							中文
+
+Cube							方块
+Edge							斜块
+Corner							角块
+Inner							内块
+Edge Round						圆角块
+Corner Round					圆斜块
+Inner Round						圆内块
+Edge Slope						斜坡块
+Corner Slope					角坡块
+Inner Slope						内坡块
+Cone							圆锥块
+Pyramid							棱锥块
+Rod Short						短杆
+Rod Shaped						弯杆
+Rod Long						长杆
+Helium							氦罐
+Electrosheild					电镀1
+Electrosheild A					电镀2
+Electrosheild B					电镀3
+Electrosheild C					电镀4
+Electrosheild D					电镀5
+Electrosheild E					电镀6
+Electrosheild F					电镀7
+Electrosheild G					电镀8
+Electrosheild H					电镀9
+Electrosheild I					电镀10
+Electrosheild J					Mega电镀1
+Electrosheild K					Mega电镀2
+Power Booster					能量模块
+Disc Shield Module				护盾模块
+Blink Module					闪现模块
+Ghost Module					隐身模块
+Enemy Radar CloseSight			近距离雷达
+Enemy Radar FarSight			远距离雷达
+Enemy Radar OverWatch			超距离雷达
+Radar Receiver Listener			倾听接收器
+Radar Receiver Tracker			追踪接收器
+Radar Receiver Diviner			潜伏接收器
+Radar Jammer Disperser			消散干扰器
+Radar Jammer Scrambler			扰乱干扰器
+Radar Jammer Obstructor			阻碍干扰器
+Radar Jammer Blocker			阻隔干扰器
+Steering Wheel Scout			侦查转向轮
+Wheel Scout						侦查负重轮
+Steering Wheel Discoverer		发现转向轮
+Wheel Discoverer				发现负重轮
+Steering Wheel Pathfinder		寻路转向轮
+Wheel Pathfinder				寻路负重轮
+Steering Wheel Stormer			风暴转向轮
+Wheel Stormer					风暴负重轮
+Steering Wheel Geoterrain		大地转向轮
+Wheel Geoterrain				大地负重轮
+Steering Wheel Monster			巨兽转向轮
+Wheel Monster					巨兽负重轮
+Tank Track Warthog				犹猪履带
+Tank Track Bison				野牛履带
+Tank Track Rhino				犀牛履带
+Tank Track Elephant				大象履带
+Tank Track Mammoth				猛犸履带
+Mech Leg Spartan				斯巴达机械腿
+Mech Leg Centaur				人马机械腿
+Mech Leg Giant					巨人机械腿
+Mech Leg Talos					泰罗机械腿
+Mech Leg Colossus				巨兽机械腿
+Mech Leg Titan					泰坦机械腿
+Insect Leg Worker				工蚁蜘蛛腿
+Insect Leg Soldier				兵蚁蜘蛛腿
+Ski								雪橇
+Steering Ski					转向雪橇
+Hover Blade Squall				大风悬浮
+Hover Blade Thunder				闪电悬浮
+Hover Blade Storm				风暴悬浮
+Hover Blade Tempest				风雨悬浮
+Hover Blade Tornado				龙卷悬浮
+Hover Blade Hurricane			旋风悬浮
+Thruster Lynx					猞猁推进器
+Thruster Panther				黑豹推进器
+Thruster Leopard				花豹推进器
+Thruster Puma					狮子推进器
+Thruster Cheetah				猎豹推进器
+Rotor Blade Recon				侦查旋翼
+Rotor Blade Invader				侵略旋翼
+Rotor Blade Assault				强袭旋翼
+Wing Hawk						雏鹰机翼
+Wing Falcon						隼机翼
+Wing Eagle						雄鹰机翼
+Wing Albatross					信天翁机翼
+Rudder Hawk						雏鹰舵翼
+Rudder Falcon					隼舵翼
+Rudder Eagle					雄鹰舵翼
+Rudder Albatross				信天翁舵翼
+Proto-Seeker					PSK追踪弹
+Front Laser Wasp (T1)			蜜蜂SMG机枪
+Front Laser Hornet (T3)			黄蜂SMG机枪
+Front Laser Blaster (T5)		爆裂SMG机枪
+Front Laser Vaporizer (T7)		气化SMG机枪
+Front Laser Disintegrator(T9)	肢解SMG机枪
+Top Laser Wasp (T1)				蜜蜂SMG机枪
+Top Laser Hornet (T3)			黄蜂SMG机枪
+Top Laser Blaster (T5)			爆裂SMG机枪
+Top Laser Vaporizer (T7)		气化SMG机枪
+Top Laser Disintegrator(T9)		肢解SMG机枪
+Laser Leviathan (Mega)			MegaSMG机枪
+Plasma Pulser (T3)				冲击波榴弹
+Plasma Disrupter (T3)			阻碍者榴弹
+Plasma Bombarder (T5)			轰击者榴弹
+Plasma Ravager (T7)				毁坏者榴弹
+Plasma Devastator (T9)			毁灭者榴弹
+Plasma Goliathon (Mega)			Mega榴弹
+Rail Piercer (T3)				穿刺磁轨
+Rail Penetrator (T5)			穿透磁轨
+Rail Decimator (T7)				毁坏磁轨
+Rail Erazer (T9)				毁灭磁轨
+Nano Binder (T5)				结合修复枪
+Nano Mender (T7)				治愈修复枪
+Nano Constructor (T9)			建造修复枪
+Aeroflak Cannon					AA防空炮
+Lock-on Missle Launcher			LOML导弹
+Ion Distorter					IND霰弹
+Tesla Slicer (T5)				切碎电刀
+Tesla Ripper (T7)				断裂电刀
+Tesla Nova (T9)					新星电刀
+Cube Number						计算方块数
+Clear Components				清除部件
+Max CPU							最大CPU
+Search Weapons					搜索武器
+Search Movements				搜索移动方式
+Search Components				搜索部件
+Mass							质量
+HP								血量
+Rate							射速
+DMG Rate						伤害每秒
+Power Rate						能耗
+DMG/Round						伤害每轮
+Robocraft CPU Calculater		RC载具计算器

@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import com.seancheey.GuiController;
+import com.seancheey.LanguageConverter;
 import com.seancheey.data.RCComponent;
 
 public class ItemSlot extends JPanel {
@@ -27,7 +28,7 @@ public class ItemSlot extends JPanel {
 
 	public ItemSlot(RCComponent component) {
 		this.component = component;
-		label = new JLabel(component.name, SwingConstants.CENTER);
+		label = new JLabel(LanguageConverter.defaultCvt().convertString(component.name), SwingConstants.CENTER);
 		deleteButton = new JButton("x");
 		{
 			deleteButton.setForeground(Color.GRAY);

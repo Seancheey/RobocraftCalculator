@@ -19,6 +19,7 @@ import javax.swing.JTextArea;
 
 import com.seancheey.Controller;
 import com.seancheey.GuiController;
+import com.seancheey.LanguageConverter;
 import com.seancheey.RCDateReader;
 import com.seancheey.data.RCComponent;
 
@@ -43,7 +44,7 @@ public class FunctionPanel extends JPanel {
 		}
 		maxCPUField = new HintTextField();
 		{
-			maxCPUField.setHintText("Max CPU");
+			maxCPUField.setHintText(LanguageConverter.defaultCvt().convertString("Max CPU"));
 			maxCPUField.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyReleased(KeyEvent e) {
@@ -56,7 +57,7 @@ public class FunctionPanel extends JPanel {
 				public void focusLost(FocusEvent e) {
 					if (maxCPUField.getText().length() == 0) {
 						GuiController.controller.setMaxCPU(Controller.MAX_CPU);
-						maxCPUField.setHintText("Max CPU");
+						maxCPUField.setHintText(LanguageConverter.defaultCvt().convertString("Max CPU"));
 					}
 				}
 
@@ -65,7 +66,7 @@ public class FunctionPanel extends JPanel {
 				}
 			});
 		}
-		autoCubeButton = new JButton("Cube Number");
+		autoCubeButton = new JButton(LanguageConverter.defaultCvt().convertString("Cube Number"));
 		{
 			autoCubeButton.addActionListener(new ActionListener() {
 				@Override
@@ -80,7 +81,7 @@ public class FunctionPanel extends JPanel {
 				}
 			});
 		}
-		clearButton = new JButton("Clear Components");
+		clearButton = new JButton(LanguageConverter.defaultCvt().convertString("Clear Components"));
 		{
 			clearButton.addActionListener(new ActionListener() {
 				@Override

@@ -12,6 +12,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 
 import com.seancheey.GuiController;
+import com.seancheey.LanguageConverter;
 import com.seancheey.data.RCComponent;
 
 public class SearchPopupMenu extends JPopupMenu {
@@ -70,8 +71,8 @@ public class SearchPopupMenu extends JPopupMenu {
 		list.ensureIndexIsVisible(next);
 	}
 
-	public void setComponents(ArrayList<? extends RCComponent> components2) {
-		this.components = components2;
+	public void setComponents(ArrayList<? extends RCComponent> components) {
+		this.components = components;
 	}
 
 	public void display(boolean forceDisplay) {
@@ -83,7 +84,7 @@ public class SearchPopupMenu extends JPopupMenu {
 		{
 			DefaultListModel<String> defaultListModel = new DefaultListModel<>();
 			for (RCComponent c : components)
-				defaultListModel.addElement(c.name);
+				defaultListModel.addElement(LanguageConverter.defaultCvt().convertString(c.name));
 			list.setModel(defaultListModel);
 		}
 		this.show(getInvoker(), 0, getInvoker().getHeight());

@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import com.seancheey.GuiController;
+import com.seancheey.LanguageConverter;
 import com.seancheey.RCDateReader;
 
 public class MainWindow extends JFrame {
@@ -35,7 +36,7 @@ public class MainWindow extends JFrame {
 	public ComponentSlotPanel weaponPanel, movementPanel, componentPanel;
 
 	private MainWindow() {
-		setTitle("Robocraft CPU Calculater");
+		setTitle(LanguageConverter.defaultCvt().convertString("Robocraft CPU Calculater"));
 		setSize(DEFAULTSIZE);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -44,11 +45,11 @@ public class MainWindow extends JFrame {
 		getContentPane().add(mainPanel);
 		mainPanel.setLayout(new GridLayout(1, 4));
 		weaponPanel = new ComponentSlotPanel(RCDateReader.WEAPONS);
-		weaponPanel.setHintText("Search Weapons");
+		weaponPanel.setHintText(LanguageConverter.defaultCvt().convertString("Search Weapons"));
 		movementPanel = new ComponentSlotPanel(RCDateReader.MOVEMENTS);
-		movementPanel.setHintText("Search Movements");
+		movementPanel.setHintText(LanguageConverter.defaultCvt().convertString("Search Movements"));
 		componentPanel = new ComponentSlotPanel(RCDateReader.COMPONENTS);
-		componentPanel.setHintText("Search Components");
+		componentPanel.setHintText(LanguageConverter.defaultCvt().convertString("Search Components"));
 		funcPanel = new FunctionPanel();
 		add(weaponPanel);
 		add(movementPanel);

@@ -108,7 +108,7 @@ public class RCDateReader extends BufferedReader {
 		try {
 			return new RCMovement(params(line));
 		} catch (IndexOutOfBoundsException i) {
-			System.out.println(line + " is not read properly");
+			//System.out.println(line + " is not read properly");
 			return new RCMovement(new RCComponent(params(line)));
 		}
 	}

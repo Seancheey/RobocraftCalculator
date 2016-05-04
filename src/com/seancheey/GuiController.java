@@ -84,21 +84,27 @@ public class GuiController extends AbstractFunctionController {
 		super.updateInfo();
 		StringBuffer text = new StringBuffer();
 		if (getCpu() != 0)
-			text.append("CPU:\t" + getCpu() + "\n");
+			text.append(LanguageConverter.defaultCvt().convertString("CPU") + ":\t" + getCpu() + "\n");
 		if (getHp() != 0)
-			text.append("HP:\t" + toKiloFormat(getHp(), 1) + "\n");
+			text.append(LanguageConverter.defaultCvt().convertString("HP") + ":\t" + toKiloFormat(getHp(), 1) + "\n");
 		if (getMass() != 0)
-			text.append("Mass:\t" + toKiloFormat(getMass(), 2) + "\n");
+			text.append(
+					LanguageConverter.defaultCvt().convertString("Mass") + ":\t" + toKiloFormat(getMass(), 2) + "\n");
 		if (getShield() != 0)
-			text.append("Sheild:\t" + toKiloFormat(getShield(), 1) + "\n");
+			text.append(LanguageConverter.defaultCvt().convertString("Sheild") + ":\t" + toKiloFormat(getShield(), 1)
+					+ "\n");
 		ArrayList<WeaponCombination> combinations = getWeaponCombinations();
 		if (combinations.size() > 0) {
 			for (WeaponCombination c : combinations) {
-				text.append("--" + c.getWeapon().name + "\n");
-				text.append("Rate:\t" + String.format("%.2f", c.getFireRate()) + "\n");
-				text.append("DMD Rate:\t" + toKiloFormat(c.getDPS(), 2) + "\n");
-				text.append("Power Rate:\t" + String.format("%.2f", c.getPPS()) + "\n");
-				text.append("DMG/Round:\t" + toKiloFormat(c.getDPS() / c.getPPS() * 100, 2) + "\n");
+				text.append("--" + LanguageConverter.defaultCvt().convertString(c.getWeapon().name) + "\n");
+				text.append(LanguageConverter.defaultCvt().convertString("Rate") + ":\t"
+						+ String.format("%.2f", c.getFireRate()) + "\n");
+				text.append(LanguageConverter.defaultCvt().convertString("DMG Rate") + ":\t"
+						+ toKiloFormat(c.getDPS(), 2) + "\n");
+				text.append(LanguageConverter.defaultCvt().convertString("Power Rate") + ":\t"
+						+ String.format("%.2f", c.getPPS()) + "\n");
+				text.append(LanguageConverter.defaultCvt().convertString("DMG/Round") + ":\t"
+						+ toKiloFormat(c.getDPS() / c.getPPS() * 100, 2) + "\n");
 			}
 		}
 		funcPanel.setDisplayText(text.toString());
