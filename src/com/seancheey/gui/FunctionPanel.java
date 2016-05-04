@@ -1,5 +1,6 @@
 package com.seancheey.gui;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -80,6 +81,7 @@ public class FunctionPanel extends JPanel {
 					GuiController.controller.setComponentNumber(cube, remain);
 				}
 			});
+			autoCubeButton.setBackground(Color.WHITE);
 		}
 		clearButton = new JButton(LanguageConverter.defaultCvt().convertString("Clear Components"));
 		{
@@ -95,6 +97,7 @@ public class FunctionPanel extends JPanel {
 					}
 				}
 			});
+			clearButton.setBackground(Color.WHITE);
 		}
 		GridBagLayout bagLayout = new GridBagLayout();
 		{
