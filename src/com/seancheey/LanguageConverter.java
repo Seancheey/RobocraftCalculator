@@ -82,6 +82,14 @@ public class LanguageConverter {
 		}
 	}
 
+	public ArrayList<String> getLanguages() {
+		ArrayList<String> languageList = new ArrayList<>();
+		for (LanguageMap map : languages) {
+			languageList.add(map.getLanguage());
+		}
+		return languageList;
+	}
+
 	@Override
 	public String toString() {
 		return "LanguageConverter [languages=" + languages + ", selectedLanguage=" + selectedLanguage + "]";
