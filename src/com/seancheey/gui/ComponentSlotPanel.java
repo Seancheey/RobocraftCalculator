@@ -1,10 +1,14 @@
 package com.seancheey.gui;
 
 import java.awt.Color;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import com.seancheey.data.RCComponent;
@@ -13,13 +17,59 @@ public class ComponentSlotPanel extends JPanel {
 	private static final long serialVersionUID = -556229872806327399L;
 	private SearchTextField searchfield;
 	private ArrayList<ItemSlot> slots = new ArrayList<ItemSlot>();
+	private JPanel slotPanel;
+	private JButton listButton;
 
 	public ComponentSlotPanel(ArrayList<? extends RCComponent> components) {
 		super(new GridBagLayout());
-		searchfield = new SearchTextField(components);
-		setLayout(new GridLayout(8, 0));
-		add(searchfield);
 		setBackground(new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255)));
+
+		searchfield = new SearchTextField(components);
+		listButton = new JButton("▼");
+		{
+			listButton.setBorderPainted(false);
+			listButton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					SearchPopupMenu menu = new SearchPopupMenu(listButton);
+					menu.setComponents((ArrayList<? extends RCComponent>) components);
+					menu.display(true);
+				}
+			});
+		}
+		slotPanel = new JPanel(new GridLayout(6, 0));
+		{
+			slotPanel.setBackground(getBackground());
+		}
+		GridBagLayout gridlayout = new GridBagLayout();
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 4;
+		c.gridheight = 1;
+		c.weightx = 1;
+		c.weighty = 0;
+		gridlayout.setConstraints(searchfield, c);
+		c.gridx = 4;
+		c.gridy = 0;
+		c.gridwidth = 1;
+		c.gridheight = 1;
+		c.weightx = 0;
+		c.weighty = 0;
+		gridlayout.setConstraints(listButton, c);
+		c.gridx = 0;
+		c.gridy = 1;
+		c.gridwidth = 5;
+		c.gridheight = 6;
+		c.weightx = 1;
+		c.weighty = 1;
+		gridlayout.setConstraints(slotPanel, c);
+		setLayout(gridlayout);
+		add(searchfield);
+		add(listButton);
+		add(slotPanel);
 	}
 
 	public void addSlot(RCComponent component, int number) {
@@ -29,7 +79,7 @@ public class ComponentSlotPanel extends JPanel {
 		}
 		ItemSlot slot = new ItemSlot(component);
 		slots.add(slot);
-		add(slots.get(slots.size() - 1));
+		slotPanel.add(slots.get(slots.size() - 1));
 		slot.setNumber(number);
 		setVisible(false);
 		setVisible(true);
@@ -51,7 +101,7 @@ public class ComponentSlotPanel extends JPanel {
 		all: for (ItemSlot s : slots) {
 			if (s.getComponent() == component) {
 				slots.remove(s);
-				remove(s);
+				slotPanel.remove(s);
 				setVisible(false);
 				setVisible(true);
 				break all;

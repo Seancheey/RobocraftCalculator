@@ -6,29 +6,31 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 
+import com.seancheey.GuiController;
 import com.seancheey.data.RCComponent;
 
 public class SearchPopupMenu extends JPopupMenu {
 	private static final long serialVersionUID = 7217175080222631763L;
 	private ArrayList<? extends RCComponent> components = new ArrayList<>();
 	private JList<String> list;
-	private SearchTextField searchField;
 	private JScrollPane scroll;
 	private MouseListener mouseListener = new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			searchField.selectComponent();
+			RCComponent component = getSelectedComponent();
+			GuiController.controller.addComponent(component, 1);
+			close();
 		}
 	};
 
-	public SearchPopupMenu(SearchTextField searchField) {
-		this.searchField = searchField;
-		setPopupSize(200, 100);
-		setInvoker(searchField);
+	public SearchPopupMenu(JComponent invoker) {
+		setInvoker(invoker);
+		setPopupSize(200, 150);
 		setFocusable(false);
 		list = new JList<>();
 		{
@@ -51,7 +53,7 @@ public class SearchPopupMenu extends JPopupMenu {
 
 	public void close() {
 		list.removeAll();
-		components = new ArrayList<RCComponent>();
+		components.clear();
 		if (isVisible())
 			setVisible(false);
 	}
@@ -68,9 +70,12 @@ public class SearchPopupMenu extends JPopupMenu {
 		list.ensureIndexIsVisible(next);
 	}
 
-	public void updateOptions(ArrayList<RCComponent> components) {
-		this.components = components;
-		if (components.size() == 0) {
+	public void setComponents(ArrayList<? extends RCComponent> components2) {
+		this.components = components2;
+	}
+
+	public void display(boolean forceDisplay) {
+		if (components.size() == 0 && !forceDisplay) {
 			setVisible(false);
 			return;
 		}
@@ -81,7 +86,6 @@ public class SearchPopupMenu extends JPopupMenu {
 				defaultListModel.addElement(c.name);
 			list.setModel(defaultListModel);
 		}
-
-		this.show(searchField, searchField.getX(), searchField.getY() + searchField.getHeight());
+		this.show(getInvoker(), 0, getInvoker().getHeight());
 	}
 }

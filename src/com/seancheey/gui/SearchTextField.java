@@ -123,6 +123,7 @@ public class SearchTextField extends HintTextField {
 				popmenu.setVisible(false);
 			return;
 		}
-		popmenu.updateOptions(matchedComponents());
+		popmenu.setComponents(matchedComponents());
+		popmenu.display(false);
 	}
 }
