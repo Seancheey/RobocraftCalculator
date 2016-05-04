@@ -24,11 +24,6 @@ public class MainWindow extends JFrame {
 			return self;
 	}
 
-	public static void main(String args[]) {
-		MainWindow m = MainWindow.getInstance();
-		m.setVisible(true);
-	}
-
 	public FunctionPanel funcPanel;
 
 	private JPanel mainPanel = new JPanel();
