@@ -72,7 +72,11 @@ public class SearchPopupMenu extends JPopupMenu {
 	}
 
 	public void setComponents(ArrayList<? extends RCComponent> components) {
-		this.components = components;
+		ArrayList<RCComponent> cloned = new ArrayList<>();
+		for (RCComponent c : components) {
+			cloned.add(c);
+		}
+		this.components = cloned;
 	}
 
 	public void display(boolean forceDisplay) {
