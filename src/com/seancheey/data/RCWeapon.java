@@ -7,7 +7,7 @@ public class RCWeapon extends RCComponent {
 	public final double powerConsumption, singleRate, nominalRate;
 
 	public RCWeapon(RCComponent component) {
-		super(component.name, component.cpu, component.hp, component.shield, component.mass);
+		super(component.name, component.cpu, component.hp, component.shield, component.mass, component.price);
 		damage = 0;
 		nominalCount = 0;
 		powerConsumption = 0;
@@ -17,16 +17,16 @@ public class RCWeapon extends RCComponent {
 
 	public RCWeapon(ArrayList<String> paramList) {
 		super(paramList);
-		damage = Integer.parseInt(paramList.get(5));
-		nominalCount = Integer.parseInt(paramList.get(6));
-		powerConsumption = Double.parseDouble(paramList.get(7));
-		singleRate = Double.parseDouble(paramList.get(8));
-		nominalRate = Double.parseDouble(paramList.get(9));
+		damage = Integer.parseInt(paramList.get(6));
+		nominalCount = Integer.parseInt(paramList.get(7));
+		powerConsumption = Double.parseDouble(paramList.get(8));
+		singleRate = Double.parseDouble(paramList.get(9));
+		nominalRate = Double.parseDouble(paramList.get(10));
 	}
 
-	public RCWeapon(String name, int cpu, int hp, int shield, double mass, int damage, int nominalCount,
+	public RCWeapon(String name, int cpu, int hp, int shield, double mass, int price, int damage, int nominalCount,
 			double powerConsumption, double singleRate, double nominalRate) {
-		super(name, cpu, hp, shield, mass);
+		super(name, cpu, hp, shield, mass, price);
 		this.damage = damage;
 		this.nominalCount = nominalCount;
 		this.powerConsumption = powerConsumption;

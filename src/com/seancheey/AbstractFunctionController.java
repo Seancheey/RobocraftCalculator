@@ -12,7 +12,7 @@ public abstract class AbstractFunctionController implements FunctionController {
 	private int maxCPU = 1750;
 	protected HashMap<RCWeapon, Integer> weapons;
 	protected HashMap<RCMovement, Integer> movements;
-	private int cpu, shield, hp;
+	private int cpu, shield, hp, price;
 	private double mass;
 
 	public AbstractFunctionController() {
@@ -64,7 +64,7 @@ public abstract class AbstractFunctionController implements FunctionController {
 
 	@Override
 	public void updateInfo() {
-		int cpu = 0, hp = 0, shield = 0;
+		int cpu = 0, hp = 0, shield = 0, price = 0;
 		double mass = 0;
 		for (RCComponent c : components.keySet()) {
 			int number = components.get(c);
@@ -72,11 +72,17 @@ public abstract class AbstractFunctionController implements FunctionController {
 			mass += c.mass * number;
 			hp += c.hp * number;
 			shield += c.shield * number;
+			price += c.price * number;
 		}
 		this.cpu = cpu;
 		this.hp = hp;
 		this.shield = shield;
 		this.mass = mass;
+		this.price = price;
+	}
+
+	protected int getPrice() {
+		return price;
 	}
 
 	protected int getCpu() {
