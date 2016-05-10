@@ -3,8 +3,8 @@ package com.seancheey.gui;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
@@ -34,10 +34,16 @@ public class MainWindow extends JFrame {
 	private MainWindow() {
 		setTitle(LanguageConverter.defaultCvt().convertString("Robocraft Calculater"));
 		setSize(DEFAULTSIZE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("res/RCCalculator.png"));
+		ImageIcon icon = new ImageIcon(this.getClass().getResource("res/RCCalculator.png"));
+		System.out.println(icon.getIconWidth());
+
+		setIconImage(icon.getImage());
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+		try {
+			Class.forName("com.apple.eawt.Application", false, null);
+			com.apple.eawt.Application.getApplication().setDockIconImage(icon.getImage());
+		} catch (ClassNotFoundException exception) {}
 		mainPanel.setSize(DEFAULTSIZE);
 		getContentPane().add(mainPanel);
 		mainPanel.setLayout(new GridLayout(1, 4));
