@@ -32,12 +32,12 @@ public class MainWindow extends JFrame {
 	public ComponentSlotPanel weaponPanel, movementPanel, componentPanel;
 
 	private MainWindow() {
-		setTitle(LanguageConverter.defaultCvt().convertString("Robocraft CPU Calculater"));
+		setTitle(LanguageConverter.defaultCvt().convertString("Robocraft Calculater"));
 		setSize(DEFAULTSIZE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("res/RCCalculator.png"));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		
+
 		mainPanel.setSize(DEFAULTSIZE);
 		getContentPane().add(mainPanel);
 		mainPanel.setLayout(new GridLayout(1, 4));

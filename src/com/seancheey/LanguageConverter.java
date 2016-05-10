@@ -1,9 +1,9 @@
 package com.seancheey;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,10 +26,9 @@ public class LanguageConverter {
 		return ss;
 	}
 
-	private static LanguageConverter readConverterConfig(File file) throws IOException {
-		FileReader freader = new FileReader(file);
-		BufferedReader reader = new BufferedReader(freader);
-
+	private static LanguageConverter readConverterConfig(InputStream stream) throws IOException {
+		InputStreamReader ireader = new InputStreamReader(stream);
+		BufferedReader reader = new BufferedReader(ireader);
 		ArrayList<String> headers = getElements(reader.readLine());
 		ArrayList<LanguageMap> lan = new ArrayList<>();
 		{
@@ -49,7 +48,7 @@ public class LanguageConverter {
 			}
 		}
 		reader.close();
-		freader.close();
+		ireader.close();
 		LanguageConverter c = new LanguageConverter(lan);
 		return c;
 	}
@@ -57,7 +56,7 @@ public class LanguageConverter {
 	public static final LanguageConverter defaultCvt() {
 		if (defaultConverter == null)
 			try {
-				defaultConverter = readConverterConfig(new File("res/Languages"));
+				defaultConverter = readConverterConfig(LanguageConverter.class.getResourceAsStream("res/Languages"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

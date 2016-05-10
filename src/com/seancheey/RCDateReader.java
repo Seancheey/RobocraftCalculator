@@ -1,9 +1,9 @@
 package com.seancheey;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import com.seancheey.data.RCComponent;
@@ -17,9 +17,9 @@ public class RCDateReader extends BufferedReader {
 
 	static {
 		try {
-			RCDateReader compReader = new RCDateReader(new File("res/Components")),
-					moveReader = new RCDateReader(new File("res/Movements")),
-					weaponReader = new RCDateReader(new File("res/Weapons"));
+			RCDateReader compReader = new RCDateReader(RCDateReader.class.getResourceAsStream("res/Components")),
+					moveReader = new RCDateReader(RCDateReader.class.getResourceAsStream("res/Movements")),
+					weaponReader = new RCDateReader(RCDateReader.class.getResourceAsStream("res/Weapons"));
 			COMPONENTS = compReader.readAllComponents();
 			WEAPONS = weaponReader.readAllWeapon();
 			MOVEMENTS = moveReader.readAllMovements();
@@ -43,8 +43,8 @@ public class RCDateReader extends BufferedReader {
 		return list;
 	}
 
-	public RCDateReader(File file) throws IOException {
-		super(new FileReader(file));
+	public RCDateReader(InputStream stream) throws IOException {
+		super(new InputStreamReader(stream));
 	}
 
 	public ArrayList<RCComponent> readAllComponents() {
@@ -108,7 +108,7 @@ public class RCDateReader extends BufferedReader {
 		try {
 			return new RCMovement(params(line));
 		} catch (IndexOutOfBoundsException i) {
-			//System.out.println(line + " is not read properly");
+			// System.out.println(line + " is not read properly");
 			return new RCMovement(new RCComponent(params(line)));
 		}
 	}
