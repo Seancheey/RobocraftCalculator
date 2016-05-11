@@ -129,7 +129,8 @@ Search Weapons					搜索武器
 Search Movements				搜索移动方式
 Search Components				搜索部件
 Mass							质量
-Price							价格
+Forge Cost						价格
+Sell Price						售价
 HP								血量
 Rate							射速
 DMG Rate						伤害每秒

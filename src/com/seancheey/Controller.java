@@ -5,7 +5,6 @@ import java.util.HashMap;
 import com.seancheey.data.RCComponent;
 
 public interface Controller {
-	public static final int MAX_CPU = 1750;
 
 	public void addComponent(RCComponent component, int number);
 

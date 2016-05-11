@@ -18,9 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import com.seancheey.Controller;
 import com.seancheey.GuiController;
 import com.seancheey.LanguageConverter;
+import com.seancheey.RCConstants;
 import com.seancheey.RCDateReader;
 import com.seancheey.data.RCComponent;
 
@@ -57,7 +57,7 @@ public class FunctionPanel extends JPanel {
 				@Override
 				public void focusLost(FocusEvent e) {
 					if (maxCPUField.getText().length() == 0) {
-						GuiController.controller.setMaxCPU(Controller.MAX_CPU);
+						GuiController.controller.setMaxCPU(RCConstants.MAX_CPU);
 						maxCPUField.setHintText(LanguageConverter.defaultCvt().convertString("Max CPU"));
 					}
 				}
@@ -130,13 +130,13 @@ public class FunctionPanel extends JPanel {
 
 	public int getInputCPU() {
 		if (maxCPUField.getText().length() == 0) {
-			return Controller.MAX_CPU;
+			return RCConstants.MAX_CPU;
 		}
 		try {
 			return Integer.parseInt(maxCPUField.getText());
 		} catch (NumberFormatException e) {
-			maxCPUField.setText(String.valueOf(Controller.MAX_CPU));
-			return Controller.MAX_CPU;
+			maxCPUField.setText(String.valueOf(RCConstants.MAX_CPU));
+			return RCConstants.MAX_CPU;
 		}
 	}
 

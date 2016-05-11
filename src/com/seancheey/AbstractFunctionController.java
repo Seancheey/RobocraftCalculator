@@ -7,12 +7,12 @@ import com.seancheey.data.RCComponent;
 import com.seancheey.data.RCMovement;
 import com.seancheey.data.RCWeapon;
 
-public abstract class AbstractFunctionController implements FunctionController {
+public abstract class AbstractFunctionController implements Controller {
 	private HashMap<RCComponent, Integer> components;
 	private int maxCPU = 1750;
 	protected HashMap<RCWeapon, Integer> weapons;
 	protected HashMap<RCMovement, Integer> movements;
-	private int cpu, shield, hp, price;
+	private int cpu, shield, hp, price, sellprice;
 	private double mass;
 
 	public AbstractFunctionController() {
@@ -62,9 +62,8 @@ public abstract class AbstractFunctionController implements FunctionController {
 		updateInfo();
 	}
 
-	@Override
 	public void updateInfo() {
-		int cpu = 0, hp = 0, shield = 0, price = 0;
+		int cpu = 0, hp = 0, shield = 0, price = 0, sellprice = 0;
 		double mass = 0;
 		for (RCComponent c : components.keySet()) {
 			int number = components.get(c);
@@ -73,12 +72,14 @@ public abstract class AbstractFunctionController implements FunctionController {
 			hp += c.hp * number;
 			shield += c.shield * number;
 			price += c.price * number;
+			sellprice += c.cpu * RCConstants.getSellPrice(c.rarity) * number;
 		}
 		this.cpu = cpu;
 		this.hp = hp;
 		this.shield = shield;
 		this.mass = mass;
 		this.price = price;
+		this.sellprice = sellprice;
 	}
 
 	protected int getPrice() {
@@ -101,17 +102,18 @@ public abstract class AbstractFunctionController implements FunctionController {
 		return mass;
 	}
 
-	@Override
 	public int getCPUSum() {
 		return cpu;
 	}
 
-	@Override
 	public void setMaxCPU(int cpu) {
 		this.maxCPU = cpu;
 	}
 
-	@Override
+	protected int getSellprice() {
+		return sellprice;
+	}
+
 	public ArrayList<WeaponCombination> getWeaponCombinations() {
 		ArrayList<WeaponCombination> combinations = new ArrayList<>();
 		for (RCWeapon weapon : weapons.keySet()) {
@@ -120,7 +122,6 @@ public abstract class AbstractFunctionController implements FunctionController {
 		return combinations;
 	}
 
-	@Override
 	public int getMaxCPU() {
 		return maxCPU;
 	}

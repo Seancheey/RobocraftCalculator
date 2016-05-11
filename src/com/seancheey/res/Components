@@ -1,42 +1,42 @@
-Cube					1		1400	0		15		10
-Edge					1		1216	0		7.5		10
-Corner					1		1070	0		2.5		10
-Inner					1		1362	0		12.5	10
-Edge Round				1		1359	0		11.8	10
-Corner Round			1		1271	0		7.9		10
-Inner Round				1		1389	0		14.2	10
-Edge Slope				1		1112	0		3.2		10
-Corner Slope			1		896		0		0.8		10
-Inner Slope				1		1254	0		7.2		10
-Cone					1		1145	0		3.9		10
-Pyramid					1		1187	0		5		10
-Rod Short				3		4200	0		3		300
-Rod Shaped				3		4200	0		3		300
-Rod Long				5		7000	0		5		500
-Helium					6		2100	0		2.5		600
-Electrosheild			22		1400	42893	17.5	880
-Electrosheild A			24		1400	43695	19.3	960
-Electrosheild B			28		1400	44528	20.6	1120
-Electrosheild C			32		1400	45391	23.3	1280
-Electrosheild D			36		1400	46289	33		1440
-Electrosheild E			40		1400	47223	40.9	4000
-Electrosheild F			44		1400	48197	43.6	4400
-Electrosheild G			48		1400	49211	48.5	4800
-Electrosheild H			52		1400	50268	53.6	13000
-Electrosheild I			56		1400	51373	83		14000
-Electrosheild J			130		1960	92578	135		32500
-Electrosheild K			130		1960	92578	169		32500
-Power Booster			290		48720	0		200		14500
-Disc Shield Module		295		49560	0		165		14750
-Blink Module			285		47880	0		135		14250
-Ghost Module			305		51240	0		165		15250
-Enemy Radar CloseSight	10		8865	0		7.6		400
-Enemy Radar FarSight	15		13298	0		12.6	1500
-Enemy Radar OverWatch	20		17730	0		17.6	5000
-Radar Receiver Listener	26		23049	0		12.6	1040
-Radar Receiver Tracker	28		24822	0		15.1	2800
-Radar Receiver Diviner	30		26595	0		17.6	7500
-Radar Jammer Disperser	24		21276	0		10.1	960
-Radar Jammer Scrambler	26		23049	0		12.6	1040
-Radar Jammer Obstructor	28		24822	0		15.1	2800
-Radar Jammer Blocker	30		26595	0		17.6	7500
+Cube					1		1400	0		15		10		0
+Edge					1		1216	0		7.5		10		0
+Corner					1		1070	0		2.5		10		0
+Inner					1		1362	0		12.5	10		0
+Edge Round				1		1359	0		11.8	10		0
+Corner Round			1		1271	0		7.9		10		0
+Inner Round				1		1389	0		14.2	10		0
+Edge Slope				1		1112	0		3.2		10		0
+Corner Slope			1		896		0		0.8		10		0
+Inner Slope				1		1254	0		7.2		10		0
+Cone					1		1145	0		3.9		10		0
+Pyramid					1		1187	0		5		10		0
+Rod Short				3		4200	0		3		300		2
+Rod Shaped				3		4200	0		3		300		2
+Rod Long				5		7000	0		5		500		2
+Helium					6		2100	0		2.5		600		2
+Electrosheild			22		1400	42893	17.5	880		1
+Electrosheild A			24		1400	43695	19.3	960		1
+Electrosheild B			28		1400	44528	20.6	1120	1
+Electrosheild C			32		1400	45391	23.3	1280	1
+Electrosheild D			36		1400	46289	33		1440	1
+Electrosheild E			40		1400	47223	40.9	4000	2
+Electrosheild F			44		1400	48197	43.6	4400	2
+Electrosheild G			48		1400	49211	48.5	4800	2
+Electrosheild H			52		1400	50268	53.6	13000	3
+Electrosheild I			56		1400	51373	83		14000	3
+Electrosheild J			130		1960	92578	135		32500	3
+Electrosheild K			130		1960	92578	169		32500	3
+Power Booster			290		48720	0		200		14500	4
+Disc Shield Module		295		49560	0		165		14750	4
+Blink Module			285		47880	0		135		14250	4
+Ghost Module			305		51240	0		165		15250	4
+Enemy Radar CloseSight	10		8865	0		7.6		400		1
+Enemy Radar FarSight	15		13298	0		12.6	1500	2
+Enemy Radar OverWatch	20		17730	0		17.6	5000	3
+Radar Receiver Listener	26		23049	0		12.6	1040	1
+Radar Receiver Tracker	28		24822	0		15.1	2800	2
+Radar Receiver Diviner	30		26595	0		17.6	7500	3
+Radar Jammer Disperser	24		21276	0		10.1	960		1
+Radar Jammer Scrambler	26		23049	0		12.6	1040	1
+Radar Jammer Obstructor	28		24822	0		15.1	2800	2
+Radar Jammer Blocker	30		26595	0		17.6	7500	3

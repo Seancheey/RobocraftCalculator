@@ -1,49 +1,49 @@
-Steering Wheel Scout		21		20580	0		244		840
-Wheel Scout					20		19600	0		244		800
-Steering Wheel Discoverer	23		22540	0		333		920
-Wheel Discoverer			22		21560	0		333		880
-Steering Wheel Pathfinder	25		24500	0		422		2500
-Wheel Pathfinder			24		23520	0		422		2400
-Steering Wheel Stormer		27		26460	0		511		2700
-Wheel Stormer				26		25480	0		511		2600
-Steering Wheel Geoterrain	29		28420	0		600		7250
-Wheel Geoterrain			28		27440	0		600		7000
-Steering Wheel Monster		100		140000	0		2142.9	50000
-Wheel Monster				100		140000	0		2142.9	50000
-Tank Track Warthog			30		42000	0		7250	1200
-Tank Track Bison			34		47600	0		11790	1360
-Tank Track Rhino			38		53200	0		20360	3800
-Tank Track Elephant			42		58800	0		28930	4200
-Tank Track Mammoth			46		64400	0		37500	11500
-Mech Leg Spartan			50		17500	52500	8000	2000
-Mech Leg Centaur			62		21700	65100	13000	2480
-Mech Leg Giant				74		25900	77700	21000	7400
-Mech Leg Talos				86		31000	90300	29000	8600
-Mech Leg Colossus			98		34300	10290	37000	24500
-Mech Leg Titan				205		71750	215250	77398	102500
-Insect Leg Worker			40		39200	0		15.6	4000
-Insect Leg Soldier			44		43120	0		18		11000
-Ski							25		24500	0		12.6	2500
-Steering Ski				25		24500	0		12.6	2500
-Hover Blade Squall			20		9800	0		6.3		800
-Hover Blade Thunder			22		10780	0		8.1		880
-Hover Blade Storm			24		11760	0		9.9		2400
-Hover Blade Tempest			26		12740	0		11.7	2600
-Hover Blade Tornado			28		13720	0		13.5	7000
-Hover Blade Hurricane		100		98000	0		48.2	50000
-Thruster Lynx				10		1949	0		4.2		400
-Thruster Panther			12		2966	0		5.4		480
-Thruster Leopard			14		4095	0		6.6		1400
-Thruster Puma				16		5934	0		7.8		1600
-Thruster Cheetah			18		7903	0		9.0		4500
-Rotor Blade Recon			30		14426	0		13.9	1200
-Rotor Blade Invader			33		19442	0		16.4	3300
-Rotor Blade Assault			35		25266	0		18.9	8750
-Wing Hawk					22		8487	0		8.1		880
-Wing Falcon					24		12961	0		9.9		960
-Wing Eagle					26		18246	0		11.7	2600
-Wing Albatross				28		17774	0		13.5	7000
-Rudder Hawk					19		3472	0		5.3		760
-Rudder Falcon				21		5015	0		6.4		840
-Rudder Eagle				23		8294	0		7.6		2300
-Rudder Albatross			25		10801	0		8.8		6250
+Steering Wheel Scout		21		20580	0		244		840		1
+Wheel Scout					20		19600	0		244		800		1
+Steering Wheel Discoverer	23		22540	0		333		920		1
+Wheel Discoverer			22		21560	0		333		880		1
+Steering Wheel Pathfinder	25		24500	0		422		2500	2
+Wheel Pathfinder			24		23520	0		422		2400	2
+Steering Wheel Stormer		27		26460	0		511		2700	2
+Wheel Stormer				26		25480	0		511		2600	2
+Steering Wheel Geoterrain	29		28420	0		600		7250	3
+Wheel Geoterrain			28		27440	0		600		7000	3
+Steering Wheel Monster		100		140000	0		2142.9	50000	4
+Wheel Monster				100		140000	0		2142.9	50000	4
+Tank Track Warthog			30		42000	0		7250	1200	1
+Tank Track Bison			34		47600	0		11790	1360	1
+Tank Track Rhino			38		53200	0		20360	3800	2
+Tank Track Elephant			42		58800	0		28930	4200	2
+Tank Track Mammoth			46		64400	0		37500	11500	3
+Mech Leg Spartan			50		17500	52500	8000	2000	1
+Mech Leg Centaur			62		21700	65100	13000	2480	1
+Mech Leg Giant				74		25900	77700	21000	7400	2
+Mech Leg Talos				86		31000	90300	29000	8600	2
+Mech Leg Colossus			98		34300	10290	37000	24500	3
+Mech Leg Titan				205		71750	215250	77398	102500	4
+Insect Leg Worker			40		39200	0		15.6	4000	2
+Insect Leg Soldier			44		43120	0		18		11000	3
+Ski							25		24500	0		12.6	2500	2
+Steering Ski				25		24500	0		12.6	2500	2
+Hover Blade Squall			20		9800	0		6.3		800		1
+Hover Blade Thunder			22		10780	0		8.1		880		1
+Hover Blade Storm			24		11760	0		9.9		2400	2
+Hover Blade Tempest			26		12740	0		11.7	2600	2
+Hover Blade Tornado			28		13720	0		13.5	7000	3
+Hover Blade Hurricane		100		98000	0		48.2	50000	4
+Thruster Lynx				10		1949	0		4.2		400		1
+Thruster Panther			12		2966	0		5.4		480		1
+Thruster Leopard			14		4095	0		6.6		1400	2
+Thruster Puma				16		5934	0		7.8		1600	2
+Thruster Cheetah			18		7903	0		9.0		4500	3
+Rotor Blade Recon			30		14426	0		13.9	1200	1
+Rotor Blade Invader			33		19442	0		16.4	3300	2
+Rotor Blade Assault			35		25266	0		18.9	8750	3
+Wing Hawk					22		8487	0		8.1		880		1
+Wing Falcon					24		12961	0		9.9		960		1
+Wing Eagle					26		18246	0		11.7	2600	2
+Wing Albatross				28		17774	0		13.5	7000	3
+Rudder Hawk					19		3472	0		5.3		760		1
+Rudder Falcon				21		5015	0		6.4		840		1
+Rudder Eagle				23		8294	0		7.6		2300	2
+Rudder Albatross			25		10801	0		8.8		6250	3

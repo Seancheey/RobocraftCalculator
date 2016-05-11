@@ -94,7 +94,9 @@ public class GuiController extends AbstractFunctionController {
 			text.append(LanguageConverter.defaultCvt().convertString("Sheild") + ":\t" + toKiloFormat(getShield(), 1)
 					+ "\n");
 		if (getPrice() != 0)
-			text.append(LanguageConverter.defaultCvt().convertString("Price") + ":\t" + getPrice() + "\n");
+			text.append(LanguageConverter.defaultCvt().convertString("Forge Cost") + ":\t" + getPrice() + "\n");
+		if (getSellprice() != 0)
+			text.append(LanguageConverter.defaultCvt().convertString("Sell Price") + ":\t" + getSellprice() + "\n");
 		ArrayList<WeaponCombination> combinations = getWeaponCombinations();
 		if (combinations.size() > 0) {
 			for (WeaponCombination c : combinations) {

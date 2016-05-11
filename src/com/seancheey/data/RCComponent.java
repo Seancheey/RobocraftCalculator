@@ -3,11 +3,11 @@ package com.seancheey.data;
 import java.util.ArrayList;
 
 public class RCComponent {
-	public final int cpu, hp, shield, price;
+	public final int cpu, hp, shield, price, rarity;
 	public final double mass;
 	public final String name;
 
-	public RCComponent(String name, int cpu, int hp, int shield, double mass, int price) {
+	public RCComponent(String name, int cpu, int hp, int shield, double mass, int price, int rarity) {
 		super();
 		this.name = name;
 		this.cpu = cpu;
@@ -15,6 +15,7 @@ public class RCComponent {
 		this.shield = shield;
 		this.mass = mass;
 		this.price = price;
+		this.rarity = rarity;
 	}
 
 	public RCComponent(ArrayList<String> paramList) {
@@ -24,11 +25,13 @@ public class RCComponent {
 		shield = Integer.parseInt(paramList.get(3));
 		mass = Double.parseDouble(paramList.get(4));
 		price = Integer.parseInt(paramList.get(5));
+		rarity = Integer.parseInt(paramList.get(6));
 	}
 
 	@Override
 	public String toString() {
-		return "RCComponent [cpu=" + cpu + ", hp=" + hp + ", shield=" + shield + ", mass=" + mass + ", name=" + name
-				+ "]";
+		return "RCComponent [cpu=" + cpu + ", hp=" + hp + ", shield=" + shield + ", price=" + price + ", rarity="
+				+ rarity + ", mass=" + mass + ", name=" + name + "]";
 	}
+
 }
