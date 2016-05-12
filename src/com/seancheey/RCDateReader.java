@@ -108,7 +108,6 @@ public class RCDateReader extends BufferedReader {
 		try {
 			return new RCMovement(params(line));
 		} catch (IndexOutOfBoundsException i) {
-			// System.out.println(line + " is not read properly");
 			return new RCMovement(new RCComponent(params(line)));
 		}
 	}
@@ -120,11 +119,12 @@ public class RCDateReader extends BufferedReader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		ArrayList<String> paramList = params(line);
 		try {
-			return new RCWeapon(params(line));
-		} catch (IndexOutOfBoundsException i) {
-			System.out.println(line + " is not read properly");
-			return new RCWeapon(new RCComponent(params(line)));
+			return new RCWeapon(paramList);
+		} catch (Exception e) {
+			System.out.println(paramList + " is not read properly");
+			return null;
 		}
 	}
 
