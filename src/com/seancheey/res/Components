@@ -26,10 +26,10 @@ Electrosheild H			52		1400	50268	53.6	13000	3
 Electrosheild I			56		1400	51373	83		14000	3
 Electrosheild J			130		1960	92578	135		32500	3
 Electrosheild K			130		1960	92578	169		32500	3
-Power Booster			290		48720	0		200		14500	4
-Disc Shield Module		295		49560	0		165		14750	4
-Blink Module			285		47880	0		135		14250	4
-Ghost Module			305		51240	0		165		15250	4
+Power Booster			290		48720	0		200		145000	4
+Disc Shield Module		295		49560	0		165		147500	4
+Blink Module			285		47880	0		135		142500	4
+Ghost Module			305		51240	0		165		152500	4
 Enemy Radar CloseSight	10		8865	0		7.6		400		1
 Enemy Radar FarSight	15		13298	0		12.6	1500	2
 Enemy Radar OverWatch	20		17730	0		17.6	5000	3
