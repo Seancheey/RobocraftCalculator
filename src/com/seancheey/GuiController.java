@@ -79,8 +79,7 @@ public class GuiController extends AbstractFunctionController {
 		updateInfo();
 	}
 
-	@Override
-	public void updateInfo() {
+	public String getUpdateInfo() {
 		super.updateInfo();
 		StringBuffer text = new StringBuffer();
 		if (getCpu() != 0)
@@ -111,7 +110,12 @@ public class GuiController extends AbstractFunctionController {
 						+ toKiloFormat(c.getDPS() / c.getPPS() * 100, 2) + "\n");
 			}
 		}
-		funcPanel.setDisplayText(text.toString());
+		return text.toString();
+	}
+
+	@Override
+	public void updateInfo() {
+		funcPanel.setDisplayText(getUpdateInfo());
 	}
 
 	private static String toKiloFormat(double num, int precision) {

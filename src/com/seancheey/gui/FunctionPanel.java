@@ -26,7 +26,7 @@ import com.seancheey.data.RCComponent;
 
 public class FunctionPanel extends JPanel {
 	private static final long serialVersionUID = -2442815361182961114L;
-	private JButton autoCubeButton, clearButton;
+	private JButton autoCubeButton, clearButton, genDataButton;
 	private JTextArea outputArea;
 	private HintTextField maxCPUField;
 	private JScrollPane scrollPane;
@@ -64,6 +64,16 @@ public class FunctionPanel extends JPanel {
 
 				@Override
 				public void focusGained(FocusEvent e) {
+				}
+			});
+		}
+		genDataButton = new JButton(LanguageConverter.defaultCvt().convertString("Generate Image"));
+		{
+			genDataButton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					new ImageInfoRequestFrame();
 				}
 			});
 		}
@@ -117,12 +127,15 @@ public class FunctionPanel extends JPanel {
 			c.insets = new Insets(0, 0, 0, 0);
 			bagLayout.setConstraints(maxCPUField, c);
 			c.gridy = 6;
-			bagLayout.setConstraints(autoCubeButton, c);
+			bagLayout.setConstraints(genDataButton, c);
 			c.gridy = 7;
+			bagLayout.setConstraints(autoCubeButton, c);
+			c.gridy = 8;
 			bagLayout.setConstraints(clearButton, c);
 		}
 		setLayout(bagLayout);
 		add(maxCPUField);
+		add(genDataButton);
 		add(autoCubeButton);
 		add(clearButton);
 		add(scrollPane);
