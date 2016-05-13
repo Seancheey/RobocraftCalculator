@@ -22,13 +22,28 @@ public class DataImageGen {
 
 	public BufferedImage generate() {
 		graphics.setColor(Color.BLACK);
-		int y = 0, ydiff = 40;
-		String info = (botName.length() == 0 ? ("Name: " + botName) : (""))
-				+ (author.length() == 0 ? (" by " + author + "\n") : ("")) + GuiController.controller.getUpdateInfo();
-		String[] strs = info.split("\n");
-		for (String s : strs) {
-			graphics.drawString(s, 50, y);
-			y += ydiff;
+		graphics.setFont(new Font("serif",Font.PLAIN,18));
+		// draw strings
+		{
+			int y = 20, ydiff = 40;
+			String info = (botName.length() == 0 ? ("Name: " + botName) : (""))
+					+ (author.length() == 0 ? (" by " + author + "\n") : (""))
+					+ GuiController.controller.getUpdateInfo();
+			String[] strs = info.split("\n");
+			for (String s : strs) {
+				graphics.drawString(s, 50, y);
+				y += ydiff;
+			}
+		}
+		// draw graph
+		// TODO draw
+		{
+			//draw frame
+			int x = 400, y = 20, grid = 150;
+			graphics.drawRect(x, y, grid * 3, grid * 2);
+			graphics.drawLine(x, y + grid, x + grid * 3, y + grid);
+			graphics.drawLine(x + grid * 1, y, x + grid * 1, y + grid * 2);
+			graphics.drawLine(x + grid * 2, y, x + grid * 2, y + grid * 2);
 		}
 		return image;
 	}

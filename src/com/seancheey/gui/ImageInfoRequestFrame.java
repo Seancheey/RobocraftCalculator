@@ -2,10 +2,13 @@ package com.seancheey.gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -50,6 +53,13 @@ public class ImageInfoRequestFrame extends JFrame {
 							author = authField.getText(), filename = fileField.getText();
 					DataImageGen gen = new DataImageGen(name, author);
 					gen.generateAndSave(filename + "." + type, type);
+					Desktop d = Desktop.getDesktop();
+					try {
+						d.open(new File(filename + "." + type));
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					setVisible(false);
 				}
 			});
 			saveButton.setBackground(Color.WHITE);
