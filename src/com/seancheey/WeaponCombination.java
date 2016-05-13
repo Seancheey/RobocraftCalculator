@@ -7,7 +7,7 @@ public class WeaponCombination {
 	private int count = 0;
 	private RCWeapon weapon;
 	public static final int CLOSE = 20, MID = 65, FAR = 100;
-	private static final int closeRank = 5000, midRank = 3500, farRank = 1500;
+	private static final int closeRank = 5500, midRank = 3600, farRank = 1600;
 
 	public WeaponCombination(RCWeapon weapon, int number) {
 		this.weapon = weapon;
@@ -112,7 +112,7 @@ public class WeaponCombination {
 		}
 		score *= 100;
 		if (sky) {
-			score *= 1.1;
+			score *= 1.05;
 		}
 		if (score > 100) {
 			score = 100;
