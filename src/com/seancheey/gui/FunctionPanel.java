@@ -70,8 +70,8 @@ public class FunctionPanel extends JPanel {
 		}
 		genDataButton = new JButton(LanguageConverter.defaultCvt().convertString("Generate Image"));
 		{
+			genDataButton.setBackground(Color.WHITE);
 			genDataButton.addActionListener(new ActionListener() {
-
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					new ImageInfoRequestFrame();
