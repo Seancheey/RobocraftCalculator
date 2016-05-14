@@ -17,8 +17,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.seancheey.DataImageGen;
+import com.seancheey.GuiController;
 import com.seancheey.LanguageConverter;
+import com.seancheey.imagegen.ColorGridDIG;
 
 public class ImageInfoRequestFrame extends JFrame {
 	private static final long serialVersionUID = -5897217686567470362L;
@@ -51,7 +52,7 @@ public class ImageInfoRequestFrame extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					String type = fileTypeBox.getItemAt(fileTypeBox.getSelectedIndex()), name = nameField.getText(),
 							author = authField.getText(), filename = fileField.getText();
-					DataImageGen gen = new DataImageGen(name, author);
+					ColorGridDIG gen = new ColorGridDIG(author, name, GuiController.controller);
 					gen.generateAndSave(filename + "." + type, type);
 					Desktop d = Desktop.getDesktop();
 					try {

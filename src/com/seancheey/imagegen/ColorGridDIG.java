@@ -1,46 +1,28 @@
-package com.seancheey;
+package com.seancheey.imagegen;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import com.seancheey.AbstractFunctionController;
+import com.seancheey.LanguageConverter;
+import com.seancheey.WeaponCombination;
 import com.seancheey.data.RCComponent;
 import com.seancheey.data.RCWeapon;
 
-public class DataImageGen {
-	private String botName, author;
-	private BufferedImage image;
+public class ColorGridDIG extends DataImageGen {
 	private JPanel panel, infoPanel, scorePanel;
 	private ArrayList<JLabel> infoLabels;
 	private static final Dimension IMAGE_SIZE = new Dimension(800, 500);
 
-	public DataImageGen(String botName, String author) {
-		super();
-		this.botName = botName;
-		this.author = author;
-	}
-
-	private int[][] getScoreGrids() {
-		int[][] maxscores = new int[3][2];
-		for (WeaponCombination weaponc : GuiController.controller.getWeaponCombinations()) {
-			int[][] allscore = weaponc.getAllScores();
-			for (int x = 0; x < 3; x++) {
-				for (int y = 0; y < 2; y++) {
-					if (allscore[x][y] > maxscores[x][y])
-						maxscores[x][y] = allscore[x][y];
-				}
-			}
-		}
-		return maxscores;
+	public ColorGridDIG(String author, String botName, AbstractFunctionController controller) {
+		super(author, botName, controller);
 	}
 
 	private Color[][] getColorGrids() {
 		int[][] maxscores = getScoreGrids();
-		// to 255-based
 		int[][] colorscores = new int[3][2];
 		Color[][] colors = new Color[3][2];
 		for (int x = 0; x < 3; x++) {
@@ -67,17 +49,18 @@ public class DataImageGen {
 			buff.append(LanguageConverter.defaultCvt().convertString("Author") + ":" + author + "\n");
 		}
 		buff.append(LanguageConverter.defaultCvt().convertString("Configuration") + ":\n");
-		for (WeaponCombination c : GuiController.controller.getWeaponCombinations()) {
+		for (WeaponCombination c : controller.getWeaponCombinations()) {
 			buff.append(LanguageConverter.defaultCvt().convertString(c.getWeapon().name) + " x " + c.getCount() + "\n");
 		}
-		for (RCComponent c : GuiController.controller.getComponentsInfo().keySet()) {
+		for (RCComponent c : controller.getComponentsInfo().keySet()) {
 			if (!(c instanceof RCWeapon))
 				buff.append(LanguageConverter.defaultCvt().convertString(c.name) + " x "
-						+ GuiController.controller.getComponentsInfo().get(c) + "\n");
+						+ controller.getComponentsInfo().get(c) + "\n");
 		}
 		return buff.toString();
 	}
 
+	@Override
 	public BufferedImage generate() {
 		panel = new JPanel();
 		{
@@ -86,11 +69,11 @@ public class DataImageGen {
 		}
 		infoPanel = new JPanel();
 		{
-			infoPanel.setLayout(new GridLayout(10, 1));
+			String info = getInfos();
+			infoPanel.setLayout(new GridLayout(info.split("\n").length, 1));
 			infoPanel.setBackground(Color.WHITE);
 			infoLabels = new ArrayList<>();
 			{
-				String info = getInfos();
 				for (String s : info.split("\n")) {
 					JLabel label = new JLabel(s);
 					infoLabels.add(label);
@@ -152,11 +135,11 @@ public class DataImageGen {
 			c.ipadx = 100;
 			c.ipady = 100;
 			c.gridx = 1;
-			layout.setConstraints(colorPanels[0][0], c);
+			layout.setConstraints(colorPanels[0][1], c);
 			c.gridx = 2;
-			layout.setConstraints(colorPanels[1][0], c);
+			layout.setConstraints(colorPanels[1][1], c);
 			c.gridx = 3;
-			layout.setConstraints(colorPanels[2][0], c);
+			layout.setConstraints(colorPanels[2][1], c);
 
 			c.gridx = 0;
 			c.gridy = 3;
@@ -164,11 +147,11 @@ public class DataImageGen {
 			layout.setConstraints(landLabel, c);
 			c.ipadx = 100;
 			c.gridx = 1;
-			layout.setConstraints(colorPanels[0][1], c);
+			layout.setConstraints(colorPanels[0][0], c);
 			c.gridx = 2;
-			layout.setConstraints(colorPanels[1][1], c);
+			layout.setConstraints(colorPanels[1][0], c);
 			c.gridx = 3;
-			layout.setConstraints(colorPanels[2][1], c);
+			layout.setConstraints(colorPanels[2][0], c);
 			scorePanel.setLayout(layout);
 			scorePanel.add(scoreLabel);
 			scorePanel.add(closeLabel);
@@ -197,27 +180,17 @@ public class DataImageGen {
 		panel.setLayout(layout);
 		panel.add(infoPanel);
 		panel.add(scorePanel);
-		
+
 		JFrame f = new JFrame("test");
 		f.setSize(IMAGE_SIZE);
 		f.setLocationRelativeTo(null);
 		f.add(panel);
 		f.setVisible(true);
-		this.image = new BufferedImage(f.getWidth(), f.getHeight(), BufferedImage.TYPE_INT_RGB);
+		BufferedImage image = new BufferedImage(f.getWidth(), f.getHeight(), BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = image.createGraphics();
 		panel.paintAll(g);
 		g.dispose();
 		f.setVisible(false);
 		return image;
-	}
-
-	public void generateAndSave(String filename, String type) {
-		BufferedImage i = generate();
-		File output = new File(filename);
-		try {
-			ImageIO.write(i, type, output);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

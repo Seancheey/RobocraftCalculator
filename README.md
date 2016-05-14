@@ -26,6 +26,6 @@ Currently the program support the following functions:
 
 	mkdir /bin
 
-	javac -d bin/ src/com/seancheey/*.java src/com/seancheey/data/*.java src/com/seancheey/gui/*.java
+	javac -d bin/ src/com/seancheey/*.java src/com/seancheey/data/*.java src/com/seancheey/gui/*.java src/com/seancheey/imagegen/*.java
 
 	jar cvfm RCCalculator.jar MANIFEST.MF -C bin/ .
