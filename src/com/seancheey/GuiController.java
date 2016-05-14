@@ -107,7 +107,7 @@ public class GuiController extends AbstractFunctionController {
 				text.append(LanguageConverter.defaultCvt().convertString("Power Rate") + ":\t"
 						+ String.format("%.2f", c.getPPS()) + "\n");
 				text.append(LanguageConverter.defaultCvt().convertString("DMG/Round") + ":\t"
-						+ toKiloFormat(c.getDPS() / c.getPPS() * 100, 2) + "\n");
+						+ toKiloFormat(c.getDPR(), 2) + "\n");
 				text.append(LanguageConverter.defaultCvt().convertString("Score") + ":\t");
 				{
 					int[][] ranks = c.getAllScores();

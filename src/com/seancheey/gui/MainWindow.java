@@ -35,8 +35,6 @@ public class MainWindow extends JFrame {
 		setTitle(LanguageConverter.defaultCvt().convertString("Robocraft Calculater"));
 		setSize(DEFAULTSIZE);
 		ImageIcon icon = new ImageIcon(this.getClass().getResource("res/RCCalculator.png"));
-		System.out.println(icon.getIconWidth());
-
 		setIconImage(icon.getImage());
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

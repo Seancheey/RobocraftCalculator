@@ -4,10 +4,10 @@ import com.seancheey.data.RCWeapon;
 
 public class WeaponCombination {
 	private double fireRate = 0;
-	private int count = 0;
+	private int count = 0, maxenergy = 100;
 	private RCWeapon weapon;
 	public static final int CLOSE = 20, MID = 65, FAR = 100;
-	private static final int closeRank = 5500, midRank = 3600, farRank = 1600;
+	private static final int closeRank = 5500, midRank = 3400, farRank = 1600;
 
 	public WeaponCombination(RCWeapon weapon, int number) {
 		this.weapon = weapon;
@@ -32,6 +32,18 @@ public class WeaponCombination {
 
 	public double getPPS() {
 		return weapon.powerConsumption * fireRate;
+	}
+
+	public double getDPR() {
+		return getDPS() / getPPS() * maxenergy;
+	}
+
+	public int getMaxenergy() {
+		return maxenergy;
+	}
+
+	public void setMaxenergy(int maxenergy) {
+		this.maxenergy = maxenergy;
 	}
 
 	public double getFireRate() {
@@ -121,7 +133,7 @@ public class WeaponCombination {
 	}
 
 	private int getRankinRange(int a, int b) {
-		double DPR = getDPS() / getPPS() * 100, DPS = getDPS();
+		double DPR = getDPR(), DPS = getDPS();
 		if (DPR > 200000000) {
 			DPR = 1000000;
 		}
