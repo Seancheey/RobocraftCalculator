@@ -166,7 +166,7 @@ public class ColorGridDIG extends DataImageGen {
 				if (colorscores[x][y] < 127) {
 					c = new Color(colorscores[x][y] * 2, 255, 0);
 				} else {
-					c = new Color(255, 255 - colorscores[x][y], 0);
+					c = new Color(255, 255 - 2 * (colorscores[x][y] - 127), 0);
 				}
 				colors[x][y] = c;
 			}
