@@ -19,8 +19,29 @@ public class GuiController extends AbstractFunctionController {
 		return controller;
 	}
 
+	private static String toKiloFormat(double num, int precision) {
+		StringBuffer text = new StringBuffer();
+		int kform = (int) num / 1000;
+		if (kform > 0) {
+			text.append(String.valueOf(kform));
+			if (precision > 0) {
+				text.append(".");
+				int left = (int) (num - kform * 1000);
+				for (int i = 2; i > 2 - precision; i--) {
+					int index = left / (int) (Math.pow(10, i));
+					text.append(String.valueOf(index));
+					left = left - index * (int) (Math.pow(10, i));
+				}
+			}
+			text.append("k");
+		} else {
+			text.append(String.format("%." + precision + "f", num));
+		}
+		return text.toString();
+	}
 	private FunctionPanel funcPanel;
 	private ComponentSlotPanel weaponPanel, movementPanel, componentPanel;
+
 	private MainWindow window;
 
 	private GuiController(MainWindow guiWindow) {
@@ -41,40 +62,6 @@ public class GuiController extends AbstractFunctionController {
 			movementPanel.addSlot(component, number);
 		} else {
 			componentPanel.addSlot(component, number);
-		}
-		updateInfo();
-	}
-
-	public MainWindow getWindow() {
-		return window;
-	}
-
-	@Override
-	public void removeComponent(RCComponent component) {
-		super.removeComponent(component);
-		if (component instanceof RCWeapon) {
-			weaponPanel.removeSlot(component);
-		} else if (component instanceof RCMovement) {
-			movementPanel.removeSlot(component);
-		} else {
-			componentPanel.removeSlot(component);
-		}
-		updateInfo();
-	}
-
-	@Override
-	public void setComponentNumber(RCComponent component, Integer number) {
-		super.setComponentNumber(component, number);
-		try {
-			if (component instanceof RCWeapon) {
-				weaponPanel.getSlot(component).setNumber(number);
-			} else if (component instanceof RCMovement) {
-				movementPanel.getSlot(component).setNumber(number);
-			} else {
-				componentPanel.getSlot(component).setNumber(number);
-			}
-		} catch (NullPointerException e) {
-			addComponent(component, number);
 		}
 		updateInfo();
 	}
@@ -123,29 +110,42 @@ public class GuiController extends AbstractFunctionController {
 		return text.toString();
 	}
 
+	public MainWindow getWindow() {
+		return window;
+	}
+
+	@Override
+	public void removeComponent(RCComponent component) {
+		super.removeComponent(component);
+		if (component instanceof RCWeapon) {
+			weaponPanel.removeSlot(component);
+		} else if (component instanceof RCMovement) {
+			movementPanel.removeSlot(component);
+		} else {
+			componentPanel.removeSlot(component);
+		}
+		updateInfo();
+	}
+
+	@Override
+	public void setComponentNumber(RCComponent component, Integer number) {
+		super.setComponentNumber(component, number);
+		try {
+			if (component instanceof RCWeapon) {
+				weaponPanel.getSlot(component).setNumber(number);
+			} else if (component instanceof RCMovement) {
+				movementPanel.getSlot(component).setNumber(number);
+			} else {
+				componentPanel.getSlot(component).setNumber(number);
+			}
+		} catch (NullPointerException e) {
+			addComponent(component, number);
+		}
+		updateInfo();
+	}
+
 	@Override
 	public void updateInfo() {
 		funcPanel.setDisplayText(getUpdateInfo());
-	}
-
-	private static String toKiloFormat(double num, int precision) {
-		StringBuffer text = new StringBuffer();
-		int kform = (int) num / 1000;
-		if (kform > 0) {
-			text.append(String.valueOf(kform));
-			if (precision > 0) {
-				text.append(".");
-				int left = (int) (num - kform * 1000);
-				for (int i = 2; i > 2 - precision; i--) {
-					int index = left / (int) (Math.pow(10, i));
-					text.append(String.valueOf(index));
-					left = left - index * (int) (Math.pow(10, i));
-				}
-			}
-			text.append("k");
-		} else {
-			text.append(String.format("%." + precision + "f", num));
-		}
-		return text.toString();
 	}
 }

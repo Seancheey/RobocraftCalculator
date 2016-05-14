@@ -20,6 +20,18 @@ public abstract class DataImageGen {
 		this.controller = controller;
 	}
 
+	public abstract BufferedImage generate();
+
+	public void generateAndSave(String filename, String type) {
+		BufferedImage i = generate();
+		File output = new File(filename);
+		try {
+			ImageIO.write(i, type, output);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	protected int[][] getScoreGrids() {
 		int[][] maxscores = new int[3][2];
 		for (WeaponCombination weaponc : controller.getWeaponCombinations()) {
@@ -32,17 +44,5 @@ public abstract class DataImageGen {
 			}
 		}
 		return maxscores;
-	}
-
-	public abstract BufferedImage generate();
-
-	public void generateAndSave(String filename, String type) {
-		BufferedImage i = generate();
-		File output = new File(filename);
-		try {
-			ImageIO.write(i, type, output);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

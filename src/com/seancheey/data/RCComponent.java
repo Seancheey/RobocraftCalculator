@@ -7,6 +7,16 @@ public class RCComponent {
 	public final double mass;
 	public final String name;
 
+	public RCComponent(ArrayList<String> paramList) {
+		name = paramList.get(0);
+		cpu = Integer.parseInt(paramList.get(1));
+		hp = Integer.parseInt(paramList.get(2));
+		shield = Integer.parseInt(paramList.get(3));
+		mass = Double.parseDouble(paramList.get(4));
+		price = Integer.parseInt(paramList.get(5));
+		rarity = Integer.parseInt(paramList.get(6));
+	}
+
 	public RCComponent(String name, int cpu, int hp, int shield, double mass, int price, int rarity) {
 		super();
 		this.name = name;
@@ -16,16 +26,6 @@ public class RCComponent {
 		this.mass = mass;
 		this.price = price;
 		this.rarity = rarity;
-	}
-
-	public RCComponent(ArrayList<String> paramList) {
-		name = paramList.get(0);
-		cpu = Integer.parseInt(paramList.get(1));
-		hp = Integer.parseInt(paramList.get(2));
-		shield = Integer.parseInt(paramList.get(3));
-		mass = Double.parseDouble(paramList.get(4));
-		price = Integer.parseInt(paramList.get(5));
-		rarity = Integer.parseInt(paramList.get(6));
 	}
 
 	@Override

@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 
 import com.seancheey.GuiController;
 import com.seancheey.LanguageConverter;
@@ -40,8 +41,8 @@ public class FunctionPanel extends JPanel {
 		}
 		scrollPane = new JScrollPane(outputArea);
 		{
-			scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-			scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		}
 		maxCPUField = new HintTextField();
 		{
@@ -55,15 +56,15 @@ public class FunctionPanel extends JPanel {
 			maxCPUField.addFocusListener(new FocusListener() {
 
 				@Override
+				public void focusGained(FocusEvent e) {
+				}
+
+				@Override
 				public void focusLost(FocusEvent e) {
 					if (maxCPUField.getText().length() == 0) {
 						GuiController.controller.setMaxCPU(RCConstants.MAX_CPU);
 						maxCPUField.setHintText(LanguageConverter.defaultCvt().convertString("Max CPU"));
 					}
-				}
-
-				@Override
-				public void focusGained(FocusEvent e) {
 				}
 			});
 		}
@@ -141,6 +142,16 @@ public class FunctionPanel extends JPanel {
 		add(scrollPane);
 	}
 
+	private int getCPUSum() {
+		int cpu = 0;
+		HashMap<RCComponent, Integer> info = GuiController.controller.getComponentsInfo();
+		for (RCComponent c : info.keySet()) {
+			int number = info.get(c);
+			cpu += c.cpu * number;
+		}
+		return cpu;
+	}
+
 	public int getInputCPU() {
 		if (maxCPUField.getText().length() == 0) {
 			return RCConstants.MAX_CPU;
@@ -153,21 +164,11 @@ public class FunctionPanel extends JPanel {
 		}
 	}
 
-	public void setInputCPU(int cpu) {
-		maxCPUField.setText(String.valueOf(cpu));
-	}
-
-	private int getCPUSum() {
-		int cpu = 0;
-		HashMap<RCComponent, Integer> info = GuiController.controller.getComponentsInfo();
-		for (RCComponent c : info.keySet()) {
-			int number = info.get(c);
-			cpu += c.cpu * number;
-		}
-		return cpu;
-	}
-
 	public void setDisplayText(String s) {
 		outputArea.setText(s);
+	}
+
+	public void setInputCPU(int cpu) {
+		maxCPUField.setText(String.valueOf(cpu));
 	}
 }

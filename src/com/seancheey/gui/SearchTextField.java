@@ -17,7 +17,7 @@ public class SearchTextField extends HintTextField {
 	private KeyListener keyListener = new KeyListener() {
 
 		@Override
-		public void keyTyped(KeyEvent e) {
+		public void keyPressed(KeyEvent e) {
 
 		}
 
@@ -39,7 +39,7 @@ public class SearchTextField extends HintTextField {
 		}
 
 		@Override
-		public void keyPressed(KeyEvent e) {
+		public void keyTyped(KeyEvent e) {
 
 		}
 	};
@@ -55,6 +55,31 @@ public class SearchTextField extends HintTextField {
 		setAutoClearText(true);
 		setMaximumSize(new Dimension(200, 20));
 		addKeyListener(keyListener);
+	}
+
+	private int matchDegree(String componentName) {
+		int rank = 0;
+		String patternString = getText().toLowerCase(), matchString = componentName.toLowerCase();
+		if (matchString.contains(patternString)) {
+			rank += 200;
+		}
+		char[] pattern = patternString.toCharArray(), match = matchString.toCharArray();
+		if (pattern[0] == match[0]) {
+			rank += 100;
+		}
+		for (char c : pattern) {
+			boolean matched = false;
+			for (char x : match) {
+				if (c == x) {
+					rank += 1;
+					matched = true;
+				}
+			}
+			if (!matched) {
+				return 0;
+			}
+		}
+		return rank;
 	}
 
 	private ArrayList<RCComponent> matchedComponents() {
@@ -91,31 +116,6 @@ public class SearchTextField extends HintTextField {
 
 	public void setPopmenuInvisible() {
 		popmenu.setVisible(false);
-	}
-
-	private int matchDegree(String componentName) {
-		int rank = 0;
-		String patternString = getText().toLowerCase(), matchString = componentName.toLowerCase();
-		if (matchString.contains(patternString)) {
-			rank += 200;
-		}
-		char[] pattern = patternString.toCharArray(), match = matchString.toCharArray();
-		if (pattern[0] == match[0]) {
-			rank += 100;
-		}
-		for (char c : pattern) {
-			boolean matched = false;
-			for (char x : match) {
-				if (c == x) {
-					rank += 1;
-					matched = true;
-				}
-			}
-			if (!matched) {
-				return 0;
-			}
-		}
-		return rank;
 	}
 
 	private void updateSearch() {

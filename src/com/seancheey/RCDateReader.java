@@ -98,6 +98,17 @@ public class RCDateReader extends BufferedReader {
 		return cs;
 	}
 
+	public RCComponent readComponent() {
+		try {
+			return new RCComponent(params(readLine()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (IndexOutOfBoundsException i) {
+			return null;
+		}
+		return null;
+	}
+
 	public RCMovement readMovement() {
 		String line = "";
 		try {
@@ -126,16 +137,5 @@ public class RCDateReader extends BufferedReader {
 			System.out.println(paramList + " is not read properly");
 			return null;
 		}
-	}
-
-	public RCComponent readComponent() {
-		try {
-			return new RCComponent(params(readLine()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (IndexOutOfBoundsException i) {
-			return null;
-		}
-		return null;
 	}
 }

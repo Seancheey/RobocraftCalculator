@@ -8,15 +8,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LanguageConverter {
-	private ArrayList<LanguageMap> languages;
 	private static LanguageConverter defaultConverter;
-	private LanguageMap selectedLanguage;
-
-	private LanguageConverter(ArrayList<LanguageMap> languages) {
-		this.languages = languages;
-		selectedLanguage = languages.get(0);
+	public static final LanguageConverter defaultCvt() {
+		if (defaultConverter == null)
+			try {
+				defaultConverter = readConverterConfig(LanguageConverter.class.getResourceAsStream("res/Languages"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		return defaultConverter;
 	}
-
 	private static ArrayList<String> getElements(String string) {
 		ArrayList<String> ss = new ArrayList<>();
 		for (String s : string.split("\t"))
@@ -53,14 +54,13 @@ public class LanguageConverter {
 		return c;
 	}
 
-	public static final LanguageConverter defaultCvt() {
-		if (defaultConverter == null)
-			try {
-				defaultConverter = readConverterConfig(LanguageConverter.class.getResourceAsStream("res/Languages"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		return defaultConverter;
+	private ArrayList<LanguageMap> languages;
+
+	private LanguageMap selectedLanguage;
+
+	private LanguageConverter(ArrayList<LanguageMap> languages) {
+		this.languages = languages;
+		selectedLanguage = languages.get(0);
 	}
 
 	public String convertString(String s) {
@@ -72,6 +72,14 @@ public class LanguageConverter {
 		return s;
 	}
 
+	public ArrayList<String> getLanguages() {
+		ArrayList<String> languageList = new ArrayList<>();
+		for (LanguageMap map : languages) {
+			languageList.add(map.getLanguage());
+		}
+		return languageList;
+	}
+
 	public void setLanguage(String lan) {
 		for (LanguageMap l : languages) {
 			if (l.getLanguage().equals(lan)) {
@@ -79,14 +87,6 @@ public class LanguageConverter {
 				break;
 			}
 		}
-	}
-
-	public ArrayList<String> getLanguages() {
-		ArrayList<String> languageList = new ArrayList<>();
-		for (LanguageMap map : languages) {
-			languageList.add(map.getLanguage());
-		}
-		return languageList;
 	}
 
 	@Override

@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 import com.seancheey.GuiController;
 import com.seancheey.LanguageConverter;
@@ -33,7 +34,7 @@ public class ImageInfoRequestFrame extends JFrame {
 		super(LanguageConverter.defaultCvt().convertString("New Data Generator"));
 		setSize(500, 300);
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		mainPanel = new JPanel();
 		{
 			mainPanel.setBackground(Color.WHITE);

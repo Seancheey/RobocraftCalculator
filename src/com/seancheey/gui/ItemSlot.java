@@ -46,7 +46,7 @@ public class ItemSlot extends JPanel {
 			field.addKeyListener(new KeyListener() {
 
 				@Override
-				public void keyTyped(KeyEvent e) {
+				public void keyPressed(KeyEvent e) {
 
 				}
 
@@ -74,7 +74,7 @@ public class ItemSlot extends JPanel {
 				}
 
 				@Override
-				public void keyPressed(KeyEvent e) {
+				public void keyTyped(KeyEvent e) {
 
 				}
 			});

@@ -15,8 +15,13 @@ import com.seancheey.LanguageConverter;
 
 public class StartFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
+	public static void main(String args[]) {
+		StartFrame s = new StartFrame();
+		s.setVisible(true);
+	}
 	private JComboBox<String> languageBox;
 	private JButton confirmButton;
+
 	private JPanel panel;
 
 	private StartFrame() {
@@ -60,10 +65,5 @@ public class StartFrame extends JFrame {
 		setVisible(false);
 		MainWindow m = MainWindow.getInstance();
 		m.setVisible(true);
-	}
-
-	public static void main(String args[]) {
-		StartFrame s = new StartFrame();
-		s.setVisible(true);
 	}
 }

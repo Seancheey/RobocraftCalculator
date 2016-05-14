@@ -33,7 +33,7 @@ public class ComponentSlotPanel extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					SearchPopupMenu menu = new SearchPopupMenu(listButton);
-					menu.setComponents((ArrayList<? extends RCComponent>) components);
+					menu.setComponents(components);
 					menu.display(true);
 				}
 			});

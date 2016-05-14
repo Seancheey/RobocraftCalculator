@@ -38,14 +38,54 @@ public abstract class AbstractFunctionController implements Controller {
 		return components;
 	}
 
+	protected int getCpu() {
+		return cpu;
+	}
+
+	public int getCPUSum() {
+		return cpu;
+	}
+
+	protected int getHp() {
+		return hp;
+	}
+
+	protected double getMass() {
+		return mass;
+	}
+
+	public int getMaxCPU() {
+		return maxCPU;
+	}
+
+	protected int getPrice() {
+		return price;
+	}
+
+	protected int getSellprice() {
+		return sellprice;
+	}
+
+	protected int getShield() {
+		return shield;
+	}
+
+	public ArrayList<WeaponCombination> getWeaponCombinations() {
+		ArrayList<WeaponCombination> combinations = new ArrayList<>();
+		for (RCWeapon weapon : weapons.keySet()) {
+			combinations.add(new WeaponCombination(weapon, weapons.get(weapon)));
+		}
+		return combinations;
+	}
+
 	@Override
 	public void removeComponent(RCComponent component) {
 		components.remove(component);
 		if (component instanceof RCWeapon) {
-			weapons.remove((RCWeapon) component);
+			weapons.remove(component);
 		}
 		if (component instanceof RCMovement) {
-			movements.remove((RCMovement) component);
+			movements.remove(component);
 		}
 		updateInfo();
 	}
@@ -60,6 +100,10 @@ public abstract class AbstractFunctionController implements Controller {
 			movements.put((RCMovement) component, number);
 		}
 		updateInfo();
+	}
+
+	public void setMaxCPU(int cpu) {
+		this.maxCPU = cpu;
 	}
 
 	public void updateInfo() {
@@ -80,49 +124,5 @@ public abstract class AbstractFunctionController implements Controller {
 		this.mass = mass;
 		this.price = price;
 		this.sellprice = sellprice;
-	}
-
-	protected int getPrice() {
-		return price;
-	}
-
-	protected int getCpu() {
-		return cpu;
-	}
-
-	protected int getShield() {
-		return shield;
-	}
-
-	protected int getHp() {
-		return hp;
-	}
-
-	protected double getMass() {
-		return mass;
-	}
-
-	public int getCPUSum() {
-		return cpu;
-	}
-
-	public void setMaxCPU(int cpu) {
-		this.maxCPU = cpu;
-	}
-
-	protected int getSellprice() {
-		return sellprice;
-	}
-
-	public ArrayList<WeaponCombination> getWeaponCombinations() {
-		ArrayList<WeaponCombination> combinations = new ArrayList<>();
-		for (RCWeapon weapon : weapons.keySet()) {
-			combinations.add(new WeaponCombination(weapon, weapons.get(weapon)));
-		}
-		return combinations;
-	}
-
-	public int getMaxCPU() {
-		return maxCPU;
 	}
 }

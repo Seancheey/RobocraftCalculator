@@ -10,6 +10,7 @@ import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 import com.seancheey.GuiController;
 import com.seancheey.LanguageConverter;
@@ -39,17 +40,10 @@ public class SearchPopupMenu extends JPopupMenu {
 		}
 		scroll = new JScrollPane(list);
 		{
-			scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-			scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+			scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		}
 		add(scroll);
-	}
-
-	public RCComponent getSelectedComponent() {
-		int index = list.getSelectedIndex();
-		if (index == -1)
-			selectNextItem();
-		return components.get(list.getSelectedIndex());
 	}
 
 	public void close() {
@@ -57,6 +51,28 @@ public class SearchPopupMenu extends JPopupMenu {
 		components.clear();
 		if (isVisible())
 			setVisible(false);
+	}
+
+	public void display(boolean forceDisplay) {
+		if (components.size() == 0 && !forceDisplay) {
+			setVisible(false);
+			return;
+		}
+		// set the list's model
+		{
+			DefaultListModel<String> defaultListModel = new DefaultListModel<>();
+			for (RCComponent c : components)
+				defaultListModel.addElement(LanguageConverter.defaultCvt().convertString(c.name));
+			list.setModel(defaultListModel);
+		}
+		this.show(getInvoker(), 0, getInvoker().getHeight());
+	}
+
+	public RCComponent getSelectedComponent() {
+		int index = list.getSelectedIndex();
+		if (index == -1)
+			selectNextItem();
+		return components.get(list.getSelectedIndex());
 	}
 
 	public void selectNextItem() {
@@ -77,20 +93,5 @@ public class SearchPopupMenu extends JPopupMenu {
 			cloned.add(c);
 		}
 		this.components = cloned;
-	}
-
-	public void display(boolean forceDisplay) {
-		if (components.size() == 0 && !forceDisplay) {
-			setVisible(false);
-			return;
-		}
-		// set the list's model
-		{
-			DefaultListModel<String> defaultListModel = new DefaultListModel<>();
-			for (RCComponent c : components)
-				defaultListModel.addElement(LanguageConverter.defaultCvt().convertString(c.name));
-			list.setModel(defaultListModel);
-		}
-		this.show(getInvoker(), 0, getInvoker().getHeight());
 	}
 }

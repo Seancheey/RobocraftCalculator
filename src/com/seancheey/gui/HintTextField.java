@@ -14,16 +14,16 @@ public class HintTextField extends JTextField {
 	private boolean autoClearText = false;
 	private FocusListener hintFocusListener = new FocusListener() {
 		@Override
+		public void focusGained(FocusEvent e) {
+			setForeground(normalColor);
+			setText("");
+		}
+
+		@Override
 		public void focusLost(FocusEvent e) {
 			if (autoClearText || getText().length() == 0) {
 				becomeHint();
 			}
-		}
-
-		@Override
-		public void focusGained(FocusEvent e) {
-			setForeground(normalColor);
-			setText("");
 		}
 	};
 
@@ -37,21 +37,8 @@ public class HintTextField extends JTextField {
 		hintTextInit();
 	}
 
-	public boolean isAutoClearText() {
-		return autoClearText;
-	}
-
-	public void setAutoClearText(boolean autoClearText) {
-		this.autoClearText = autoClearText;
-	}
-
 	public HintTextField(int columns) {
 		super(columns);
-		hintTextInit();
-	}
-
-	public HintTextField(String text, int columns) {
-		super(text, columns);
 		hintTextInit();
 	}
 
@@ -60,24 +47,35 @@ public class HintTextField extends JTextField {
 		hintTextInit();
 	}
 
-	private void hintTextInit() {
-		addFocusListener(hintFocusListener);
-		becomeHint();
+	public HintTextField(String text, int columns) {
+		super(text, columns);
+		hintTextInit();
 	}
 
-	public void setHintText(String hintText) {
-		this.hintText = hintText;
-		if (!hasFocus()) {
-			becomeHint();
-		}
+	private void becomeHint() {
+		setForeground(hintColor);
+		setText(hintText);
+	}
+
+	public Color getHintColor() {
+		return hintColor;
 	}
 
 	public String getHintText() {
 		return hintText;
 	}
 
-	public Color getHintColor() {
-		return hintColor;
+	private void hintTextInit() {
+		addFocusListener(hintFocusListener);
+		becomeHint();
+	}
+
+	public boolean isAutoClearText() {
+		return autoClearText;
+	}
+
+	public void setAutoClearText(boolean autoClearText) {
+		this.autoClearText = autoClearText;
 	}
 
 	public void setHintColor(Color hintColor) {
@@ -87,8 +85,10 @@ public class HintTextField extends JTextField {
 		}
 	}
 
-	private void becomeHint() {
-		setForeground(hintColor);
-		setText(hintText);
+	public void setHintText(String hintText) {
+		this.hintText = hintText;
+		if (!hasFocus()) {
+			becomeHint();
+		}
 	}
 }
