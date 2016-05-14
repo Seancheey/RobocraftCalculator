@@ -36,7 +36,7 @@ public class FunctionPanel extends JPanel {
 		outputArea = new JTextArea();
 		{
 			outputArea.setEditable(false);
-			outputArea.setText("Robot Statistics");
+			outputArea.setText(LanguageConverter.defaultCvt().convertString("Robot Statistics"));
 		}
 		scrollPane = new JScrollPane(outputArea);
 		{
