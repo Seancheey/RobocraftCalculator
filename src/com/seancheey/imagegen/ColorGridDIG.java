@@ -1,7 +1,6 @@
 package com.seancheey.imagegen;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -14,15 +13,54 @@ import com.seancheey.data.RCWeapon;
 
 public class ColorGridDIG extends DataImageGen {
 	private static final Dimension IMAGE_SIZE = new Dimension(800, 500);
-	private JPanel panel, infoPanel, scorePanel;
+	private JPanel infoPanel, scorePanel;
 	private ArrayList<JLabel> infoLabels;
 
 	public ColorGridDIG(String author, String botName, AbstractFunctionController controller) {
 		super(author, botName, controller);
 	}
 
+	private Color[][] getColorGrids() {
+		int[][] maxscores = getScoreGrids();
+		int[][] colorscores = new int[3][2];
+		Color[][] colors = new Color[3][2];
+		for (int x = 0; x < 3; x++) {
+			for (int y = 0; y < 2; y++) {
+				colorscores[x][y] = (int) (maxscores[x][y] * 2.55);
+				Color c;
+				if (colorscores[x][y] < 127) {
+					c = new Color(colorscores[x][y] * 2, 255, 0);
+				} else {
+					c = new Color(255, 255 - 2 * (colorscores[x][y] - 127), 0);
+				}
+				colors[x][y] = c;
+			}
+		}
+		return colors;
+	}
+
+	private String getInfos() {
+		StringBuffer buff = new StringBuffer();
+		if (botName.length() != 0) {
+			buff.append(LanguageConverter.defaultCvt().convertString("Bot Name") + ":" + botName + "\n");
+		}
+		if (author.length() != 0) {
+			buff.append(LanguageConverter.defaultCvt().convertString("Author") + ":" + author + "\n");
+		}
+		buff.append(LanguageConverter.defaultCvt().convertString("Configuration") + ":\n");
+		for (WeaponCombination c : controller.getWeaponCombinations()) {
+			buff.append(LanguageConverter.defaultCvt().convertString(c.getWeapon().name) + " x " + c.getCount() + "\n");
+		}
+		for (RCComponent c : controller.getComponentsInfo().keySet()) {
+			if (!(c instanceof RCWeapon))
+				buff.append(LanguageConverter.defaultCvt().convertString(c.name) + " x "
+						+ controller.getComponentsInfo().get(c) + "\n");
+		}
+		return buff.toString();
+	}
+
 	@Override
-	public BufferedImage generate() {
+	protected JPanel initPanel() {
 		panel = new JPanel();
 		{
 			panel.setSize(IMAGE_SIZE);
@@ -141,56 +179,6 @@ public class ColorGridDIG extends DataImageGen {
 		panel.setLayout(layout);
 		panel.add(infoPanel);
 		panel.add(scorePanel);
-
-		JFrame f = new JFrame("test");
-		f.setSize(IMAGE_SIZE);
-		f.setLocationRelativeTo(null);
-		f.add(panel);
-		f.setVisible(true);
-		BufferedImage image = new BufferedImage(f.getWidth(), f.getHeight(), BufferedImage.TYPE_INT_RGB);
-		Graphics2D g = image.createGraphics();
-		panel.paintAll(g);
-		g.dispose();
-		f.setVisible(false);
-		return image;
-	}
-
-	private Color[][] getColorGrids() {
-		int[][] maxscores = getScoreGrids();
-		int[][] colorscores = new int[3][2];
-		Color[][] colors = new Color[3][2];
-		for (int x = 0; x < 3; x++) {
-			for (int y = 0; y < 2; y++) {
-				colorscores[x][y] = (int) (maxscores[x][y] * 2.55);
-				Color c;
-				if (colorscores[x][y] < 127) {
-					c = new Color(colorscores[x][y] * 2, 255, 0);
-				} else {
-					c = new Color(255, 255 - 2 * (colorscores[x][y] - 127), 0);
-				}
-				colors[x][y] = c;
-			}
-		}
-		return colors;
-	}
-
-	private String getInfos() {
-		StringBuffer buff = new StringBuffer();
-		if (botName.length() != 0) {
-			buff.append(LanguageConverter.defaultCvt().convertString("Bot Name") + ":" + botName + "\n");
-		}
-		if (author.length() != 0) {
-			buff.append(LanguageConverter.defaultCvt().convertString("Author") + ":" + author + "\n");
-		}
-		buff.append(LanguageConverter.defaultCvt().convertString("Configuration") + ":\n");
-		for (WeaponCombination c : controller.getWeaponCombinations()) {
-			buff.append(LanguageConverter.defaultCvt().convertString(c.getWeapon().name) + " x " + c.getCount() + "\n");
-		}
-		for (RCComponent c : controller.getComponentsInfo().keySet()) {
-			if (!(c instanceof RCWeapon))
-				buff.append(LanguageConverter.defaultCvt().convertString(c.name) + " x "
-						+ controller.getComponentsInfo().get(c) + "\n");
-		}
-		return buff.toString();
+		return panel;
 	}
 }

@@ -2,13 +2,11 @@ package com.seancheey.gui;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Desktop;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -53,14 +51,11 @@ public class ImageInfoRequestFrame extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					String type = fileTypeBox.getItemAt(fileTypeBox.getSelectedIndex()), name = nameField.getText(),
 							author = authField.getText(), filename = fileField.getText();
-					ColorGridDIG gen = new ColorGridDIG(author, name, GuiController.controller);
-					gen.generateAndSave(filename + "." + type, type);
-					Desktop d = Desktop.getDesktop();
-					try {
-						d.open(new File(filename + "." + type));
-					} catch (IOException e1) {
-						e1.printStackTrace();
+					if (filename.length() == 0) {
+						filename = String.valueOf(Calendar.getInstance().getTime());
 					}
+					ColorGridDIG gen = new ColorGridDIG(author, name, GuiController.controller);
+					new ImagePreviewFrame(filename, type, gen);
 					setVisible(false);
 				}
 			});
