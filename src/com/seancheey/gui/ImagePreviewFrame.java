@@ -36,11 +36,12 @@ public class ImagePreviewFrame extends JFrame {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						gen.generateAndSave(filename, type);
+						String fullname = filename + "." + type;
+						gen.generateAndSave(fullname, type);
 						setVisible(false);
 						Desktop d = Desktop.getDesktop();
 						try {
-							d.open(new File(filename));
+							d.open(new File(fullname));
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
