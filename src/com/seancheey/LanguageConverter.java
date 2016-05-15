@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 public class LanguageConverter {
 	private static LanguageConverter defaultConverter;
+
 	public static final LanguageConverter defaultCvt() {
 		if (defaultConverter == null)
 			try {
@@ -18,6 +19,7 @@ public class LanguageConverter {
 			}
 		return defaultConverter;
 	}
+
 	private static ArrayList<String> getElements(String string) {
 		ArrayList<String> ss = new ArrayList<>();
 		for (String s : string.split("\t"))

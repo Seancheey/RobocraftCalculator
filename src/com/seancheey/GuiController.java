@@ -39,6 +39,7 @@ public class GuiController extends AbstractFunctionController {
 		}
 		return text.toString();
 	}
+
 	private FunctionPanel funcPanel;
 	private ComponentSlotPanel weaponPanel, movementPanel, componentPanel;
 

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -15,10 +16,12 @@ import com.seancheey.LanguageConverter;
 
 public class StartFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
+
 	public static void main(String args[]) {
 		StartFrame s = new StartFrame();
 		s.setVisible(true);
 	}
+
 	private JComboBox<String> languageBox;
 	private JButton confirmButton;
 
@@ -29,6 +32,15 @@ public class StartFrame extends JFrame {
 		setSize(300, 150);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
+
+		ImageIcon icon = new ImageIcon(this.getClass().getResource("res/RCCalculator.png"));
+		setIconImage(icon.getImage());
+		try {
+			Class.forName("com.apple.eawt.Application", false, null);
+			com.apple.eawt.Application.getApplication().setDockIconImage(icon.getImage());
+		} catch (ClassNotFoundException exception) {
+		}
+
 		panel = new JPanel();
 		getContentPane().add(panel);
 		languageBox = new JComboBox<>();

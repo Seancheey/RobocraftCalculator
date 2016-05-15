@@ -27,35 +27,42 @@ public class MainWindow extends JFrame {
 
 	public FunctionPanel funcPanel;
 
-	private JPanel mainPanel = new JPanel();
+	private JPanel mainPanel;
 
 	public ComponentSlotPanel weaponPanel, movementPanel, componentPanel;
 
 	private MainWindow() {
 		setTitle(LanguageConverter.defaultCvt().convertString("Robocraft Calculater"));
 		setSize(DEFAULTSIZE);
-		ImageIcon icon = new ImageIcon(this.getClass().getResource("res/RCCalculator.png"));
-		setIconImage(icon.getImage());
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		try {
-			Class.forName("com.apple.eawt.Application", false, null);
-			com.apple.eawt.Application.getApplication().setDockIconImage(icon.getImage());
-		} catch (ClassNotFoundException exception) {}
-		mainPanel.setSize(DEFAULTSIZE);
-		getContentPane().add(mainPanel);
-		mainPanel.setLayout(new GridLayout(1, 4));
-		weaponPanel = new ComponentSlotPanel(RCDateReader.WEAPONS);
-		weaponPanel.setHintText(LanguageConverter.defaultCvt().convertString("Search Weapons"));
-		movementPanel = new ComponentSlotPanel(RCDateReader.MOVEMENTS);
-		movementPanel.setHintText(LanguageConverter.defaultCvt().convertString("Search Movements"));
-		componentPanel = new ComponentSlotPanel(RCDateReader.COMPONENTS);
-		componentPanel.setHintText(LanguageConverter.defaultCvt().convertString("Search Components"));
-		funcPanel = new FunctionPanel();
-		add(weaponPanel);
-		add(movementPanel);
-		add(componentPanel);
-		add(funcPanel);
+		ImageIcon icon = new ImageIcon(this.getClass().getResource("res/RCCalculator.png"));
+		setIconImage(icon.getImage());
+
+		mainPanel = new JPanel();
+		{
+			mainPanel.setSize(DEFAULTSIZE);
+			getContentPane().add(mainPanel);
+			mainPanel.setLayout(new GridLayout(1, 4));
+
+			weaponPanel = new ComponentSlotPanel(RCDateReader.WEAPONS);
+			{
+				weaponPanel.setHintText(LanguageConverter.defaultCvt().convertString("Search Weapons"));
+			}
+			movementPanel = new ComponentSlotPanel(RCDateReader.MOVEMENTS);
+			{
+				movementPanel.setHintText(LanguageConverter.defaultCvt().convertString("Search Movements"));
+			}
+			componentPanel = new ComponentSlotPanel(RCDateReader.COMPONENTS);
+			{
+				componentPanel.setHintText(LanguageConverter.defaultCvt().convertString("Search Components"));
+			}
+			funcPanel = new FunctionPanel();
+			add(weaponPanel);
+			add(movementPanel);
+			add(componentPanel);
+			add(funcPanel);
+		}
 		GuiController.getInstance(this);
 	}
 

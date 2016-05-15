@@ -109,6 +109,13 @@ public class ComponentSlotPanel extends JPanel {
 		}
 	}
 
+	@Override
+	public void setBackground(Color bg) {
+		super.setBackground(bg);
+		if (slotPanel != null)
+			slotPanel.setBackground(bg);
+	}
+
 	public void setHintText(String s) {
 		searchfield.setHintText(s);
 	}
