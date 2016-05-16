@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -39,14 +40,21 @@ public abstract class DataImageGen {
 		return image;
 	}
 
-	public void generateAndSave(String filename, String type) {
-		BufferedImage i = generate();
-		File output = new File(filename);
+	public File generateAndSave(String filename, String type) {
+		BufferedImage image = generate();
+		if (filename.length() == 0) {
+			filename = String.format("%d-%d-%d at %d.%d", Calendar.getInstance().get(Calendar.YEAR),
+					Calendar.getInstance().get(Calendar.MONTH) + 1, Calendar.getInstance().get(Calendar.DAY_OF_MONTH),
+					Calendar.getInstance().get(Calendar.HOUR), Calendar.getInstance().get(Calendar.MINUTE));
+		}
+		String fullname = filename + "." + type;
+		File output = new File(fullname);
 		try {
-			ImageIO.write(i, type, output);
+			ImageIO.write(image, type, output);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return output;
 	}
 
 	public JPanel getPanel() {

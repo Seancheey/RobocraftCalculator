@@ -6,7 +6,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -51,9 +50,6 @@ public class ImageInfoRequestFrame extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					String type = fileTypeBox.getItemAt(fileTypeBox.getSelectedIndex()), name = nameField.getText(),
 							author = authField.getText(), filename = fileField.getText();
-					if (filename.length() == 0) {
-						filename = String.valueOf(Calendar.getInstance().getTime());
-					}
 					ColorGridDIG gen = new ColorGridDIG(author, name, GuiController.controller);
 					new ImagePreviewFrame(filename, type, gen);
 					setVisible(false);
