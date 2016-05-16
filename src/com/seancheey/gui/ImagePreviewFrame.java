@@ -1,5 +1,6 @@
 package com.seancheey.gui;
 
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -33,7 +34,6 @@ public class ImagePreviewFrame extends JFrame {
 			genButton = new JButton(LanguageConverter.defaultCvt().convertString("Generate"));
 			{
 				genButton.addActionListener(new ActionListener() {
-
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						File file = gen.generateAndSave(filename, type);
@@ -46,6 +46,7 @@ public class ImagePreviewFrame extends JFrame {
 						}
 					}
 				});
+				genButton.setBackground(Color.WHITE);
 			}
 			JPanel imagePanel = this.gen.getPanel();
 			GridBagLayout layout = new GridBagLayout();
