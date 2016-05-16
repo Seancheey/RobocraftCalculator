@@ -1,6 +1,8 @@
 package com.seancheey.gui;
 
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -29,7 +31,7 @@ public class StartFrame extends JFrame {
 
 	private StartFrame() {
 		super("Select Language");
-		setSize(300, 150);
+		setSize(250, 100);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 
@@ -56,6 +58,7 @@ public class StartFrame extends JFrame {
 						selectLanguage();
 				}
 			});
+			languageBox.setAlignmentX(0.5f);
 		}
 		confirmButton = new JButton("confirm");
 		{
@@ -67,6 +70,17 @@ public class StartFrame extends JFrame {
 			});
 			confirmButton.setBackground(Color.WHITE);
 		}
+		GridBagLayout layout = new GridBagLayout();
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.CENTER;
+		c.weightx = 1;
+		c.gridx = 0;
+		c.gridy = 0;
+		layout.setConstraints(languageBox, c);
+		c.gridy = 1;
+		layout.setConstraints(confirmButton, c);
+		panel.setLayout(layout);
 		panel.add(languageBox);
 		panel.add(confirmButton);
 		confirmButton.requestFocus();
