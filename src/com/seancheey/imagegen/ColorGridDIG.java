@@ -34,6 +34,7 @@ public class ColorGridDIG extends DataImageGen {
 					c = new Color(255, 255 - 2 * (colorscores[x][y] - 127), 0);
 				}
 				colors[x][y] = c;
+
 			}
 		}
 		return colors;
@@ -85,13 +86,26 @@ public class ColorGridDIG extends DataImageGen {
 		scorePanel = new JPanel();
 		{
 			scorePanel.setBackground(Color.WHITE);
-			JLabel scoreLabel, closeLabel, midLabel, farLabel, landLabel, skyLabel;
-			scoreLabel = new JLabel(LanguageConverter.defaultCvt().convertString("Score"));
-			closeLabel = new JLabel(LanguageConverter.defaultCvt().convertString("Close"));
-			midLabel = new JLabel(LanguageConverter.defaultCvt().convertString("Middle"));
-			farLabel = new JLabel(LanguageConverter.defaultCvt().convertString("Far"));
+			JLabel[] upLabels = new JLabel[4];
+			JLabel landLabel, skyLabel;
+			upLabels[0] = new JLabel(LanguageConverter.defaultCvt().convertString("Score"));
+			upLabels[1] = new JLabel(LanguageConverter.defaultCvt().convertString("Close"));
+			upLabels[2] = new JLabel(LanguageConverter.defaultCvt().convertString("Middle"));
+			upLabels[3] = new JLabel(LanguageConverter.defaultCvt().convertString("Far"));
+			{
+				for (int x = 0; x < upLabels.length; x++) {
+					upLabels[x].setHorizontalAlignment(SwingConstants.CENTER);
+					upLabels[x].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				}
+			}
 			landLabel = new JLabel(LanguageConverter.defaultCvt().convertString("To Land"));
+			{
+				landLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			}
 			skyLabel = new JLabel(LanguageConverter.defaultCvt().convertString("To Sky"));
+			{
+				skyLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			}
 			int[][] scores = getScoreGrids();
 			Color[][] colors = getColorGrids();
 			JPanel[][] colorPanels = new JPanel[3][2];
@@ -100,6 +114,7 @@ public class ColorGridDIG extends DataImageGen {
 					colorPanels[x][y] = new JPanel();
 					colorPanels[x][y].setBackground(colors[x][y]);
 					colorPanels[x][y].setLayout(new GridLayout(1, 1));
+					colorPanels[x][y].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 					JLabel score = new JLabel(String.valueOf(scores[x][y]));
 					score.setHorizontalAlignment(SwingConstants.CENTER);
 					colorPanels[x][y].add(score);
@@ -107,23 +122,12 @@ public class ColorGridDIG extends DataImageGen {
 			}
 
 			GridBagLayout layout = new GridBagLayout();
-			GridBagConstraints c = new GridBagConstraints();
-			c.fill = GridBagConstraints.BOTH;
-			c.weightx = 1;
-			c.weighty = 0;
-			c.insets = new Insets(1, 1, 1, 1);
-
-			c.gridx = 0;
-			c.gridy = 0;
-			c.gridwidth = 1;
-			c.gridheight = 1;
-			layout.setConstraints(scoreLabel, c);
-			c.gridx = 1;
-			layout.setConstraints(closeLabel, c);
-			c.gridx = 2;
-			layout.setConstraints(midLabel, c);
-			c.gridx = 3;
-			layout.setConstraints(farLabel, c);
+			GridBagConstraints c = new GridBagConstraints(0, 0, 1, 1, 1, 0, GridBagConstraints.CENTER,
+					GridBagConstraints.BOTH, new Insets(0, 1, 1, 0), 0, 0);
+			for (int x = 0; x < upLabels.length; x++) {
+				c.gridx = x;
+				layout.setConstraints(upLabels[x], c);
+			}
 
 			c.gridx = 0;
 			c.gridy = 1;
@@ -133,29 +137,26 @@ public class ColorGridDIG extends DataImageGen {
 			layout.setConstraints(skyLabel, c);
 			c.ipadx = 100;
 			c.ipady = 100;
-			c.gridx = 1;
-			layout.setConstraints(colorPanels[0][1], c);
-			c.gridx = 2;
-			layout.setConstraints(colorPanels[1][1], c);
-			c.gridx = 3;
-			layout.setConstraints(colorPanels[2][1], c);
+			for (int x = 0; x < 3; x++) {
+				c.gridx = x + 1;
+				layout.setConstraints(colorPanels[x][1], c);
+			}
 
 			c.gridx = 0;
 			c.gridy = 3;
 			c.ipadx = 0;
 			layout.setConstraints(landLabel, c);
 			c.ipadx = 100;
-			c.gridx = 1;
-			layout.setConstraints(colorPanels[0][0], c);
-			c.gridx = 2;
-			layout.setConstraints(colorPanels[1][0], c);
-			c.gridx = 3;
-			layout.setConstraints(colorPanels[2][0], c);
+			for (int x = 0; x < 3; x++) {
+				c.gridx = x + 1;
+				layout.setConstraints(colorPanels[x][0], c);
+			}
+
 			scorePanel.setLayout(layout);
-			scorePanel.add(scoreLabel);
-			scorePanel.add(closeLabel);
-			scorePanel.add(midLabel);
-			scorePanel.add(farLabel);
+			scorePanel.add(upLabels[0]);
+			scorePanel.add(upLabels[1]);
+			scorePanel.add(upLabels[2]);
+			scorePanel.add(upLabels[3]);
 			scorePanel.add(skyLabel);
 			scorePanel.add(landLabel);
 			for (int x = 0; x < 3; x++) {
@@ -165,13 +166,8 @@ public class ColorGridDIG extends DataImageGen {
 			}
 		}
 		GridBagLayout layout = new GridBagLayout();
-		GridBagConstraints c = new GridBagConstraints();
-		c.fill = GridBagConstraints.BOTH;
-		c.gridx = 0;
-		c.gridy = 0;
-		c.insets = new Insets(0, 50, 0, 50);
-		c.gridwidth = 1;
-		c.gridheight = 1;
+		GridBagConstraints c = new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 50, 0, 50), 0, 0);
 		layout.setConstraints(infoPanel, c);
 		c.gridx = 1;
 		c.gridwidth = 2;
