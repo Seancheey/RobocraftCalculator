@@ -88,7 +88,7 @@ public class GuiController extends AbstractFunctionController {
 		ArrayList<WeaponCombination> combinations = getWeaponCombinations();
 		if (combinations.size() > 0) {
 			for (WeaponCombination c : combinations) {
-				text.append(c.getCount() + "x " + (c.getWeapon().name) + NL); //$NON-NLS-1$ //$NON-NLS-2$
+				text.append(c.getCount() + "x " + (Messages.getComponentString(c.getWeapon().name)) + NL); //$NON-NLS-1$ //$NON-NLS-2$
 				text.append((Messages.getString("rcgui.fire_rate")) + TAB //$NON-NLS-1$ //$NON-NLS-2$
 						+ String.format("%.2f", c.getFireRate()) + NL); //$NON-NLS-1$ //$NON-NLS-2$
 				text.append((Messages.getString("rcgui.damage_rate")) + TAB //$NON-NLS-1$ //$NON-NLS-2$
