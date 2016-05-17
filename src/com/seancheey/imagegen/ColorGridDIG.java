@@ -42,7 +42,6 @@ public class ColorGridDIG extends DataImageGen {
 					c = new Color(255, 255 - 2 * (colorscores[x][y] - 127), 0);
 				}
 				colors[x][y] = c;
-
 			}
 		}
 		return colors;
@@ -62,7 +61,7 @@ public class ColorGridDIG extends DataImageGen {
 		}
 		for (RCComponent c : controller.getComponentsInfo().keySet()) {
 			if (!(c instanceof RCWeapon))
-				buff.append((c.name) + " x "
+				buff.append(Messages.getComponentString(c.name) + " x "
 						+ controller.getComponentsInfo().get(c) + "\n");
 		}
 		return buff.toString();

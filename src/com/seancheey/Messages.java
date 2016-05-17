@@ -23,6 +23,11 @@ public class Messages {
 		}
 	}
 
+	public static String getComponentString(String key) {
+		key = key.replace(' ', '_');
+		return getString(key);
+	}
+
 	public static void setLocale(Locale local) {
 		locale = local;
 		RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME, locale);

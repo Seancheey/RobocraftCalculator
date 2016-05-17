@@ -1,6 +1,7 @@
 package com.seancheey.gui;
 
 import java.awt.Dimension;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -14,13 +15,7 @@ public class SearchTextField extends HintTextField {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<? extends RCComponent> components;
 	private SearchPopupMenu popmenu;
-	private KeyListener keyListener = new KeyListener() {
-
-		@Override
-		public void keyPressed(KeyEvent e) {
-
-		}
-
+	private KeyListener keyListener = new KeyAdapter() {
 		@Override
 		public void keyReleased(KeyEvent e) {
 			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -36,11 +31,6 @@ public class SearchTextField extends HintTextField {
 			} else {
 				updateSearch();
 			}
-		}
-
-		@Override
-		public void keyTyped(KeyEvent e) {
-
 		}
 	};
 
@@ -85,7 +75,7 @@ public class SearchTextField extends HintTextField {
 	private ArrayList<RCComponent> matchedComponents() {
 		ArrayList<RCComponent> xcomponents = new ArrayList<RCComponent>();
 		for (RCComponent c : components) {
-			int rank = matchDegree((c.name));
+			int rank = matchDegree(Messages.getComponentString(c.name));
 			if (rank != 0) {
 				xcomponents.add(c);
 			}
@@ -93,8 +83,8 @@ public class SearchTextField extends HintTextField {
 		xcomponents.sort(new Comparator<RCComponent>() {
 			@Override
 			public int compare(RCComponent o1, RCComponent o2) {
-				int rank1 = matchDegree((o1.name));
-				int rank2 = matchDegree((o2.name));
+				int rank1 = matchDegree(Messages.getComponentString(o1.name));
+				int rank2 = matchDegree(Messages.getComponentString(o2.name));
 				if (rank1 > rank2)
 					return -1;
 				else if (rank2 > rank1)
