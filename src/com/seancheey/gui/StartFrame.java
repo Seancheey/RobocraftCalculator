@@ -30,7 +30,7 @@ public class StartFrame extends JFrame {
 	private JPanel panel;
 
 	private StartFrame() {
-		super(Messages.getString("StartFrame.0")); //$NON-NLS-1$
+		super("Select Language");
 		setSize(250, 100);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -59,7 +59,7 @@ public class StartFrame extends JFrame {
 			});
 			languageBox.setAlignmentX(0.5f);
 		}
-		confirmButton = new JButton(Messages.getString("StartFrame.3")); //$NON-NLS-1$
+		confirmButton = new JButton("Confirm");
 		{
 			confirmButton.addActionListener(new ActionListener() {
 				@Override
