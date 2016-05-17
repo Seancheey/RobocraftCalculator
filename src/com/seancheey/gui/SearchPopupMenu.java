@@ -13,7 +13,6 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import com.seancheey.GuiController;
-import com.seancheey.LanguageConverter;
 import com.seancheey.data.RCComponent;
 
 public class SearchPopupMenu extends JPopupMenu {
@@ -62,7 +61,7 @@ public class SearchPopupMenu extends JPopupMenu {
 		{
 			DefaultListModel<String> defaultListModel = new DefaultListModel<>();
 			for (RCComponent c : components)
-				defaultListModel.addElement(LanguageConverter.defaultCvt().convertString(c.name));
+				defaultListModel.addElement((c.name));
 			list.setModel(defaultListModel);
 		}
 		this.show(getInvoker(), 0, getInvoker().getHeight());

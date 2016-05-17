@@ -14,7 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.seancheey.LanguageConverter;
+import com.seancheey.Messages;
 
 public class StartFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -30,7 +30,7 @@ public class StartFrame extends JFrame {
 	private JPanel panel;
 
 	private StartFrame() {
-		super("Select Language");
+		super(Messages.getString("StartFrame.0")); //$NON-NLS-1$
 		setSize(250, 100);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -47,9 +47,8 @@ public class StartFrame extends JFrame {
 		getContentPane().add(panel);
 		languageBox = new JComboBox<>();
 		{
-			for (String lan : LanguageConverter.defaultCvt().getLanguages()) {
-				languageBox.addItem(lan);
-			}
+			languageBox.addItem("English");
+			languageBox.addItem("中文");
 			languageBox.addKeyListener(new KeyAdapter() {
 
 				@Override
@@ -60,7 +59,7 @@ public class StartFrame extends JFrame {
 			});
 			languageBox.setAlignmentX(0.5f);
 		}
-		confirmButton = new JButton("confirm");
+		confirmButton = new JButton(Messages.getString("StartFrame.3")); //$NON-NLS-1$
 		{
 			confirmButton.addActionListener(new ActionListener() {
 				@Override
@@ -87,7 +86,15 @@ public class StartFrame extends JFrame {
 	}
 
 	private void selectLanguage() {
-		LanguageConverter.defaultCvt().setLanguage(languageBox.getItemAt(languageBox.getSelectedIndex()));
+		String lan = languageBox.getItemAt(languageBox.getSelectedIndex());
+		switch (lan) {
+		case "中文":
+			Messages.setLocale(Messages.zh_CN);
+			break;
+		case "English":
+			Messages.setLocale(Messages.en_US);
+			break;
+		}
 		setVisible(false);
 		MainWindow m = MainWindow.getInstance();
 		m.setVisible(true);

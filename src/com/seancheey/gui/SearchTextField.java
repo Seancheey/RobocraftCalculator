@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import com.seancheey.GuiController;
-import com.seancheey.LanguageConverter;
+import com.seancheey.Messages;
 import com.seancheey.data.RCComponent;
 
 public class SearchTextField extends HintTextField {
@@ -49,7 +49,7 @@ public class SearchTextField extends HintTextField {
 		this.components = components;
 		popmenu = new SearchPopupMenu(this);
 		add(popmenu);
-		setHintText("Search");
+		setHintText(Messages.getString("SearchTextField.0")); //$NON-NLS-1$
 		setComponentPopupMenu(popmenu);
 		setHorizontalAlignment(LEFT);
 		setAutoClearText(true);
@@ -85,7 +85,7 @@ public class SearchTextField extends HintTextField {
 	private ArrayList<RCComponent> matchedComponents() {
 		ArrayList<RCComponent> xcomponents = new ArrayList<RCComponent>();
 		for (RCComponent c : components) {
-			int rank = matchDegree(LanguageConverter.defaultCvt().convertString(c.name));
+			int rank = matchDegree((c.name));
 			if (rank != 0) {
 				xcomponents.add(c);
 			}
@@ -93,8 +93,8 @@ public class SearchTextField extends HintTextField {
 		xcomponents.sort(new Comparator<RCComponent>() {
 			@Override
 			public int compare(RCComponent o1, RCComponent o2) {
-				int rank1 = matchDegree(LanguageConverter.defaultCvt().convertString(o1.name));
-				int rank2 = matchDegree(LanguageConverter.defaultCvt().convertString(o2.name));
+				int rank1 = matchDegree((o1.name));
+				int rank2 = matchDegree((o2.name));
 				if (rank1 > rank2)
 					return -1;
 				else if (rank2 > rank1)

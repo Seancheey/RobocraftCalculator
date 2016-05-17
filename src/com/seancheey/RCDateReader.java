@@ -17,9 +17,9 @@ public class RCDateReader extends BufferedReader {
 
 	static {
 		try {
-			RCDateReader compReader = new RCDateReader(RCDateReader.class.getResourceAsStream("res/Components")),
-					moveReader = new RCDateReader(RCDateReader.class.getResourceAsStream("res/Movements")),
-					weaponReader = new RCDateReader(RCDateReader.class.getResourceAsStream("res/Weapons"));
+			RCDateReader compReader = new RCDateReader(RCDateReader.class.getResourceAsStream("res/Components")), //$NON-NLS-1$
+					moveReader = new RCDateReader(RCDateReader.class.getResourceAsStream("res/Movements")), //$NON-NLS-1$
+					weaponReader = new RCDateReader(RCDateReader.class.getResourceAsStream("res/Weapons")); //$NON-NLS-1$
 			COMPONENTS = compReader.readAllComponents();
 			WEAPONS = weaponReader.readAllWeapon();
 			MOVEMENTS = moveReader.readAllMovements();
@@ -34,7 +34,7 @@ public class RCDateReader extends BufferedReader {
 
 	private static ArrayList<String> params(String s) {
 		ArrayList<String> list = new ArrayList<String>();
-		String[] stringlist = s.split("\t");
+		String[] stringlist = s.split("\t"); //$NON-NLS-1$
 		for (String str : stringlist) {
 			if (str.length() != 0) {
 				list.add(str);
@@ -110,7 +110,7 @@ public class RCDateReader extends BufferedReader {
 	}
 
 	public RCMovement readMovement() {
-		String line = "";
+		String line = ""; //$NON-NLS-1$
 		try {
 			line = readLine();
 		} catch (IOException e) {
@@ -124,7 +124,7 @@ public class RCDateReader extends BufferedReader {
 	}
 
 	public RCWeapon readWeapon() {
-		String line = "";
+		String line = ""; //$NON-NLS-1$
 		try {
 			line = readLine();
 		} catch (IOException e) {
@@ -134,7 +134,7 @@ public class RCDateReader extends BufferedReader {
 		try {
 			return new RCWeapon(paramList);
 		} catch (Exception e) {
-			System.out.println(paramList + " is not read properly");
+			System.out.println(paramList + " is not read properly"); //$NON-NLS-1$
 			return null;
 		}
 	}

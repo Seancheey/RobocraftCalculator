@@ -1,12 +1,20 @@
 package com.seancheey.imagegen;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import com.seancheey.AbstractFunctionController;
-import com.seancheey.LanguageConverter;
+import com.seancheey.Messages;
 import com.seancheey.WeaponCombination;
 import com.seancheey.data.RCComponent;
 import com.seancheey.data.RCWeapon;
@@ -43,18 +51,18 @@ public class ColorGridDIG extends DataImageGen {
 	private String getInfos() {
 		StringBuffer buff = new StringBuffer();
 		if (botName.length() != 0) {
-			buff.append(LanguageConverter.defaultCvt().convertString("Bot Name") + ":" + botName + "\n");
+			buff.append((Messages.getString("ColorGridDIG.0")) + ":" + botName + "\n"); //$NON-NLS-1$
 		}
 		if (author.length() != 0) {
-			buff.append(LanguageConverter.defaultCvt().convertString("Author") + ":" + author + "\n");
+			buff.append((Messages.getString("ColorGridDIG.3")) + ":" + author + "\n"); //$NON-NLS-1$
 		}
-		buff.append(LanguageConverter.defaultCvt().convertString("Configuration") + ":\n");
+		buff.append((Messages.getString("ColorGridDIG.6")) + ":\n"); //$NON-NLS-1$
 		for (WeaponCombination c : controller.getWeaponCombinations()) {
-			buff.append(LanguageConverter.defaultCvt().convertString(c.getWeapon().name) + " x " + c.getCount() + "\n");
+			buff.append((c.getWeapon().name) + " x " + c.getCount() + "\n");
 		}
 		for (RCComponent c : controller.getComponentsInfo().keySet()) {
 			if (!(c instanceof RCWeapon))
-				buff.append(LanguageConverter.defaultCvt().convertString(c.name) + " x "
+				buff.append((c.name) + " x "
 						+ controller.getComponentsInfo().get(c) + "\n");
 		}
 		return buff.toString();
@@ -88,21 +96,21 @@ public class ColorGridDIG extends DataImageGen {
 			scorePanel.setBackground(Color.WHITE);
 			JLabel[] upLabels = new JLabel[4];
 			JLabel landLabel, skyLabel;
-			upLabels[0] = new JLabel(LanguageConverter.defaultCvt().convertString("Score"));
-			upLabels[1] = new JLabel(LanguageConverter.defaultCvt().convertString("Close"));
-			upLabels[2] = new JLabel(LanguageConverter.defaultCvt().convertString("Middle"));
-			upLabels[3] = new JLabel(LanguageConverter.defaultCvt().convertString("Far"));
+			upLabels[0] = new JLabel((Messages.getString("ColorGridDIG.14"))); //$NON-NLS-1$
+			upLabels[1] = new JLabel((Messages.getString("ColorGridDIG.15"))); //$NON-NLS-1$
+			upLabels[2] = new JLabel((Messages.getString("ColorGridDIG.16"))); //$NON-NLS-1$
+			upLabels[3] = new JLabel((Messages.getString("ColorGridDIG.17"))); //$NON-NLS-1$
 			{
 				for (int x = 0; x < upLabels.length; x++) {
 					upLabels[x].setHorizontalAlignment(SwingConstants.CENTER);
 					upLabels[x].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				}
 			}
-			landLabel = new JLabel(LanguageConverter.defaultCvt().convertString("To Land"));
+			landLabel = new JLabel((Messages.getString("ColorGridDIG.18"))); //$NON-NLS-1$
 			{
 				landLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			}
-			skyLabel = new JLabel(LanguageConverter.defaultCvt().convertString("To Sky"));
+			skyLabel = new JLabel((Messages.getString("ColorGridDIG.19"))); //$NON-NLS-1$
 			{
 				skyLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			}

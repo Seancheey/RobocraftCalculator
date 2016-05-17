@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import com.seancheey.GuiController;
-import com.seancheey.LanguageConverter;
+import com.seancheey.Messages;
 import com.seancheey.RCDateReader;
 
 public class MainWindow extends JFrame {
@@ -32,11 +32,11 @@ public class MainWindow extends JFrame {
 	public ComponentSlotPanel weaponPanel, movementPanel, componentPanel;
 
 	private MainWindow() {
-		setTitle(LanguageConverter.defaultCvt().convertString("Robocraft Calculater"));
+		setTitle((Messages.getString("MainWindow.0"))); //$NON-NLS-1$
 		setSize(DEFAULTSIZE);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		ImageIcon icon = new ImageIcon(this.getClass().getResource("res/RCCalculator.png"));
+		ImageIcon icon = new ImageIcon(this.getClass().getResource("res/RCCalculator.png")); //$NON-NLS-1$
 		setIconImage(icon.getImage());
 
 		mainPanel = new JPanel();
@@ -47,15 +47,15 @@ public class MainWindow extends JFrame {
 
 			weaponPanel = new ComponentSlotPanel(RCDateReader.WEAPONS);
 			{
-				weaponPanel.setHintText(LanguageConverter.defaultCvt().convertString("Search Weapons"));
+				weaponPanel.setHintText((Messages.getString("MainWindow.2"))); //$NON-NLS-1$
 			}
 			movementPanel = new ComponentSlotPanel(RCDateReader.MOVEMENTS);
 			{
-				movementPanel.setHintText(LanguageConverter.defaultCvt().convertString("Search Movements"));
+				movementPanel.setHintText((Messages.getString("MainWindow.3"))); //$NON-NLS-1$
 			}
 			componentPanel = new ComponentSlotPanel(RCDateReader.COMPONENTS);
 			{
-				componentPanel.setHintText(LanguageConverter.defaultCvt().convertString("Search Components"));
+				componentPanel.setHintText((Messages.getString("MainWindow.4"))); //$NON-NLS-1$
 			}
 			funcPanel = new FunctionPanel();
 			add(weaponPanel);
