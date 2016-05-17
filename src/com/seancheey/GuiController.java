@@ -87,7 +87,8 @@ public class GuiController extends AbstractFunctionController {
 		ArrayList<WeaponCombination> combinations = getWeaponCombinations();
 		if (combinations.size() > 0) {
 			for (WeaponCombination c : combinations) {
-				text.append("--" + LanguageConverter.defaultCvt().convertString(c.getWeapon().name) + "\n");
+				text.append(
+						c.getCount() + "x " + LanguageConverter.defaultCvt().convertString(c.getWeapon().name) + "\n");
 				text.append(LanguageConverter.defaultCvt().convertString("Rate") + ":\t"
 						+ String.format("%.2f", c.getFireRate()) + "\n");
 				text.append(LanguageConverter.defaultCvt().convertString("DMG Rate") + ":\t"
@@ -96,16 +97,6 @@ public class GuiController extends AbstractFunctionController {
 						+ String.format("%.2f", c.getPPS()) + "\n");
 				text.append(LanguageConverter.defaultCvt().convertString("DMG/Round") + ":\t"
 						+ toKiloFormat(c.getDPR(), 2) + "\n");
-				text.append(LanguageConverter.defaultCvt().convertString("Score") + ":\t");
-				{
-					int[][] ranks = c.getAllScores();
-					for (int[] ranka : ranks) {
-						for (int rankb : ranka) {
-							text.append(rankb + ",");
-						}
-					}
-				}
-				text.append("\n");
 			}
 		}
 		return text.toString();
