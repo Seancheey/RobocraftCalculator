@@ -39,7 +39,7 @@ public class SearchTextField extends HintTextField {
 		this.components = components;
 		popmenu = new SearchPopupMenu(this);
 		add(popmenu);
-		setHintText(Messages.getString("SearchTextField.0")); //$NON-NLS-1$
+		setHintText(Messages.getString("rcgui.search")); //$NON-NLS-1$
 		setComponentPopupMenu(popmenu);
 		setHorizontalAlignment(LEFT);
 		setAutoClearText(true);

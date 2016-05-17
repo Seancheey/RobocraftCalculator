@@ -35,10 +35,10 @@ public class StartFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 
-		ImageIcon icon = new ImageIcon(this.getClass().getResource("res/RCCalculator.png"));
+		ImageIcon icon = new ImageIcon(this.getClass().getResource("res/RCCalculator.png")); //$NON-NLS-1$
 		setIconImage(icon.getImage());
 		try {
-			Class.forName("com.apple.eawt.Application", false, null);
+			Class.forName("com.apple.eawt.Application", false, null); //$NON-NLS-1$
 			com.apple.eawt.Application.getApplication().setDockIconImage(icon.getImage());
 		} catch (ClassNotFoundException exception) {
 		}
@@ -47,8 +47,8 @@ public class StartFrame extends JFrame {
 		getContentPane().add(panel);
 		languageBox = new JComboBox<>();
 		{
-			languageBox.addItem("English");
-			languageBox.addItem("中文");
+			languageBox.addItem("English"); //$NON-NLS-1$
+			languageBox.addItem("中文"); //$NON-NLS-1$
 			languageBox.addKeyListener(new KeyAdapter() {
 
 				@Override
@@ -88,10 +88,10 @@ public class StartFrame extends JFrame {
 	private void selectLanguage() {
 		String lan = languageBox.getItemAt(languageBox.getSelectedIndex());
 		switch (lan) {
-		case "中文":
+		case "中文": //$NON-NLS-1$
 			Messages.setLocale(Messages.zh_CN);
 			break;
-		case "English":
+		case "English": //$NON-NLS-1$
 			Messages.setLocale(Messages.en_US);
 			break;
 		}

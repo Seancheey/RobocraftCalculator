@@ -50,19 +50,19 @@ public class ColorGridDIG extends DataImageGen {
 	private String getInfos() {
 		StringBuffer buff = new StringBuffer();
 		if (botName.length() != 0) {
-			buff.append((Messages.getString("ColorGridDIG.0")) + ":" + botName + "\n"); //$NON-NLS-1$
+			buff.append((Messages.getString("rcgui.bot_name")) + ":" + botName + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		if (author.length() != 0) {
-			buff.append((Messages.getString("ColorGridDIG.3")) + ":" + author + "\n"); //$NON-NLS-1$
+			buff.append((Messages.getString("rcgui.author")) + ":" + author + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
-		buff.append((Messages.getString("ColorGridDIG.6")) + ":\n"); //$NON-NLS-1$
+		buff.append((Messages.getString("rcgui.configuration")) + ":\n"); //$NON-NLS-1$ //$NON-NLS-2$
 		for (WeaponCombination c : controller.getWeaponCombinations()) {
-			buff.append((c.getWeapon().name) + " x " + c.getCount() + "\n");
+			buff.append((c.getWeapon().name) + " x " + c.getCount() + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		for (RCComponent c : controller.getComponentsInfo().keySet()) {
 			if (!(c instanceof RCWeapon))
-				buff.append(Messages.getComponentString(c.name) + " x "
-						+ controller.getComponentsInfo().get(c) + "\n");
+				buff.append(Messages.getComponentString(c.name) + " x " //$NON-NLS-1$
+						+ controller.getComponentsInfo().get(c) + "\n"); //$NON-NLS-1$
 		}
 		return buff.toString();
 	}
@@ -77,11 +77,11 @@ public class ColorGridDIG extends DataImageGen {
 		infoPanel = new JPanel();
 		{
 			String info = getInfos();
-			infoPanel.setLayout(new GridLayout(info.split("\n").length, 1));
+			infoPanel.setLayout(new GridLayout(info.split("\n").length, 1)); //$NON-NLS-1$
 			infoPanel.setBackground(Color.WHITE);
 			infoLabels = new ArrayList<>();
 			{
-				for (String s : info.split("\n")) {
+				for (String s : info.split("\n")) { //$NON-NLS-1$
 					JLabel label = new JLabel(s);
 					infoLabels.add(label);
 				}
@@ -95,21 +95,21 @@ public class ColorGridDIG extends DataImageGen {
 			scorePanel.setBackground(Color.WHITE);
 			JLabel[] upLabels = new JLabel[4];
 			JLabel landLabel, skyLabel;
-			upLabels[0] = new JLabel((Messages.getString("ColorGridDIG.14"))); //$NON-NLS-1$
-			upLabels[1] = new JLabel((Messages.getString("ColorGridDIG.15"))); //$NON-NLS-1$
-			upLabels[2] = new JLabel((Messages.getString("ColorGridDIG.16"))); //$NON-NLS-1$
-			upLabels[3] = new JLabel((Messages.getString("ColorGridDIG.17"))); //$NON-NLS-1$
+			upLabels[0] = new JLabel((Messages.getString("rcgui.score"))); //$NON-NLS-1$
+			upLabels[1] = new JLabel((Messages.getString("rcgui.close"))); //$NON-NLS-1$
+			upLabels[2] = new JLabel((Messages.getString("rcgui.middle"))); //$NON-NLS-1$
+			upLabels[3] = new JLabel((Messages.getString("rcgui.far"))); //$NON-NLS-1$
 			{
 				for (int x = 0; x < upLabels.length; x++) {
 					upLabels[x].setHorizontalAlignment(SwingConstants.CENTER);
 					upLabels[x].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				}
 			}
-			landLabel = new JLabel((Messages.getString("ColorGridDIG.18"))); //$NON-NLS-1$
+			landLabel = new JLabel((Messages.getString("rcgui.to_land"))); //$NON-NLS-1$
 			{
 				landLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			}
-			skyLabel = new JLabel((Messages.getString("ColorGridDIG.19"))); //$NON-NLS-1$
+			skyLabel = new JLabel((Messages.getString("rcgui.to_sky"))); //$NON-NLS-1$
 			{
 				skyLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			}
