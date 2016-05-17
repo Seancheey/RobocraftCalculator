@@ -36,6 +36,7 @@ public class MainWindow extends JFrame {
 		setSize(DEFAULTSIZE);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setMinimumSize(new Dimension(400, 200));
 		ImageIcon icon = new ImageIcon(this.getClass().getResource("res/RCCalculator.png")); //$NON-NLS-1$
 		setIconImage(icon.getImage());
 
