@@ -12,6 +12,8 @@ import com.seancheey.gui.MainWindow;
 public class GuiController extends AbstractFunctionController {
 	public static GuiController controller;
 
+	private static final String TAB = ":\t", NL = "\n";
+
 	public static GuiController getInstance(MainWindow window) {
 		if (controller == null) {
 			controller = new GuiController(window);
@@ -71,30 +73,30 @@ public class GuiController extends AbstractFunctionController {
 		super.updateInfo();
 		StringBuffer text = new StringBuffer();
 		if (getCpu() != 0)
-			text.append((Messages.getString("GuiController.4")) + ":\t" + getCpu() + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			text.append((Messages.getString("rcgui.cpu")) + TAB + getCpu() + NL); //$NON-NLS-1$ //$NON-NLS-2$
 		if (getHp() != 0)
-			text.append((Messages.getString("GuiController.7")) + ":\t" + toKiloFormat(getHp(), 1) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			text.append((Messages.getString("rcgui.hp")) + TAB + toKiloFormat(getHp(), 1) + NL); //$NON-NLS-1$ //$NON-NLS-2$
 		if (getMass() != 0)
-			text.append((Messages.getString("GuiController.10")) + ":\t" + toKiloFormat(getMass(), 2) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			text.append((Messages.getString("rcgui.mass")) + TAB + toKiloFormat(getMass(), 2) + NL); //$NON-NLS-1$ //$NON-NLS-2$
 		if (getShield() != 0)
-			text.append((Messages.getString("GuiController.13")) + ":\t" + toKiloFormat(getShield(), 1) //$NON-NLS-1$ //$NON-NLS-2$
-					+ "\n"); //$NON-NLS-1$
+			text.append((Messages.getString("rcgui.shield")) + TAB + toKiloFormat(getShield(), 1) //$NON-NLS-1$ //$NON-NLS-2$
+					+ NL); // $NON-NLS-1$
 		if (getPrice() != 0)
-			text.append((Messages.getString("GuiController.16")) + ":\t" + getPrice() + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			text.append((Messages.getString("rcgui.forge_cost")) + TAB + getPrice() + NL); //$NON-NLS-1$ //$NON-NLS-2$
 		if (getSellprice() != 0)
-			text.append((Messages.getString("GuiController.19")) + ":\t" + getSellprice() + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			text.append((Messages.getString("rcgui.sell_price")) + TAB + getSellprice() + NL); //$NON-NLS-1$ //$NON-NLS-2$
 		ArrayList<WeaponCombination> combinations = getWeaponCombinations();
 		if (combinations.size() > 0) {
 			for (WeaponCombination c : combinations) {
-				text.append(c.getCount() + "x " + (c.getWeapon().name) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
-				text.append((Messages.getString("GuiController.24")) + ":\t" //$NON-NLS-1$ //$NON-NLS-2$
-						+ String.format("%.2f", c.getFireRate()) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
-				text.append((Messages.getString("GuiController.28")) + ":\t" //$NON-NLS-1$ //$NON-NLS-2$
-						+ toKiloFormat(c.getDPS(), 2) + "\n"); //$NON-NLS-1$
-				text.append(("Power Rate") + ":\t" //$NON-NLS-1$ //$NON-NLS-2$
-						+ String.format("%.2f", c.getPPS()) + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
-				text.append((Messages.getString("GuiController.35")) + ":\t" //$NON-NLS-1$ //$NON-NLS-2$
-						+ toKiloFormat(c.getDPR(), 2) + "\n"); //$NON-NLS-1$
+				text.append(c.getCount() + "x " + (c.getWeapon().name) + NL); //$NON-NLS-1$ //$NON-NLS-2$
+				text.append((Messages.getString("rcgui.fire_rate")) + TAB //$NON-NLS-1$ //$NON-NLS-2$
+						+ String.format("%.2f", c.getFireRate()) + NL); //$NON-NLS-1$ //$NON-NLS-2$
+				text.append((Messages.getString("rcgui.damage_rate")) + TAB //$NON-NLS-1$ //$NON-NLS-2$
+						+ toKiloFormat(c.getDPS(), 2) + NL); // $NON-NLS-1$
+				text.append((Messages.getString("rcgui.power_rate")) + TAB //$NON-NLS-1$ //$NON-NLS-2$
+						+ String.format("%.2f", c.getPPS()) + NL); //$NON-NLS-1$ //$NON-NLS-2$
+				text.append((Messages.getString("rcgui.damage_per_round")) + TAB //$NON-NLS-1$ //$NON-NLS-2$
+						+ toKiloFormat(c.getDPR(), 2) + NL); // $NON-NLS-1$
 			}
 		}
 		return text.toString();

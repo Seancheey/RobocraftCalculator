@@ -37,7 +37,7 @@ public class FunctionPanel extends JPanel {
 		outputArea = new JTextArea();
 		{
 			outputArea.setEditable(false);
-			outputArea.setText((Messages.getString("FunctionPanel.0"))); //$NON-NLS-1$
+			outputArea.setText((Messages.getString("rcgui.stat"))); //$NON-NLS-1$
 		}
 		scrollPane = new JScrollPane(outputArea);
 		{
@@ -46,7 +46,7 @@ public class FunctionPanel extends JPanel {
 		}
 		maxCPUField = new HintTextField();
 		{
-			maxCPUField.setHintText((Messages.getString("FunctionPanel.1"))); //$NON-NLS-1$
+			maxCPUField.setHintText((Messages.getString("rcgui.max_cpu"))); //$NON-NLS-1$
 			maxCPUField.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyReleased(KeyEvent e) {
@@ -63,12 +63,12 @@ public class FunctionPanel extends JPanel {
 				public void focusLost(FocusEvent e) {
 					if (maxCPUField.getText().length() == 0) {
 						GuiController.controller.setMaxCPU(RCConstants.MAX_CPU);
-						maxCPUField.setHintText((Messages.getString("FunctionPanel.2"))); //$NON-NLS-1$
+						maxCPUField.setHintText((Messages.getString("rcgui.max_cpu"))); //$NON-NLS-1$
 					}
 				}
 			});
 		}
-		genDataButton = new JButton((Messages.getString("FunctionPanel.3"))); //$NON-NLS-1$
+		genDataButton = new JButton((Messages.getString("rcgui.generate_image"))); //$NON-NLS-1$
 		{
 			genDataButton.setBackground(Color.WHITE);
 			genDataButton.addActionListener(new ActionListener() {
@@ -78,7 +78,7 @@ public class FunctionPanel extends JPanel {
 				}
 			});
 		}
-		autoCubeButton = new JButton((Messages.getString("FunctionPanel.4"))); //$NON-NLS-1$
+		autoCubeButton = new JButton((Messages.getString("rcgui.calculate_cube_num"))); //$NON-NLS-1$
 		{
 			autoCubeButton.addActionListener(new ActionListener() {
 				@Override
@@ -94,7 +94,7 @@ public class FunctionPanel extends JPanel {
 			});
 			autoCubeButton.setBackground(Color.WHITE);
 		}
-		clearButton = new JButton((Messages.getString("FunctionPanel.5"))); //$NON-NLS-1$
+		clearButton = new JButton((Messages.getString("rcgui.clear_components"))); //$NON-NLS-1$
 		{
 			clearButton.addActionListener(new ActionListener() {
 				@Override

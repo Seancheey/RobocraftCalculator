@@ -28,7 +28,7 @@ public class ImageInfoRequestFrame extends JFrame {
 	private JButton saveButton;
 
 	public ImageInfoRequestFrame() {
-		super((Messages.getString("ImageInfoRequestFrame.0"))); //$NON-NLS-1$
+		super((Messages.getString("rcgui.new_data_generator"))); //$NON-NLS-1$
 		setSize(500, 300);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -36,14 +36,14 @@ public class ImageInfoRequestFrame extends JFrame {
 		{
 			mainPanel.setBackground(Color.WHITE);
 		}
-		nameLabel = new JLabel((Messages.getString("ImageInfoRequestFrame.1"))); //$NON-NLS-1$
-		authLabel = new JLabel((Messages.getString("ImageInfoRequestFrame.2"))); //$NON-NLS-1$
-		fileLabel = new JLabel((Messages.getString("ImageInfoRequestFrame.3"))); //$NON-NLS-1$
+		nameLabel = new JLabel((Messages.getString("rcgui.bot_name"))); //$NON-NLS-1$
+		authLabel = new JLabel((Messages.getString("rcgui.author"))); //$NON-NLS-1$
+		fileLabel = new JLabel((Messages.getString("rcgui.file_name"))); //$NON-NLS-1$
 		nameField = new JTextField(5);
 		authField = new JTextField(5);
 		fileField = new JTextField(5);
-		fileTypeBox = new JComboBox<>(new String[] { "png", "jpg", "gif" });
-		saveButton = new JButton((Messages.getString("ImageInfoRequestFrame.7"))); //$NON-NLS-1$
+		fileTypeBox = new JComboBox<>(new String[] { "png", "jpg", "gif" }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		saveButton = new JButton((Messages.getString("rcgui.save"))); //$NON-NLS-1$
 		{
 			saveButton.addActionListener(new ActionListener() {
 				@Override

@@ -23,7 +23,7 @@ public class ImagePreviewFrame extends JFrame {
 	private JPanel panel;
 
 	public ImagePreviewFrame(String filename, String type, DataImageGen gen) {
-		super((Messages.getString("ImagePreviewFrame.0"))); //$NON-NLS-1$
+		super((Messages.getString("rcgui.image_preview"))); //$NON-NLS-1$
 		this.gen = gen;
 		setSize(gen.getPanel().getSize());
 		setLocationRelativeTo(null);
@@ -31,7 +31,7 @@ public class ImagePreviewFrame extends JFrame {
 		panel = new JPanel();
 		{
 			getContentPane().add(panel);
-			genButton = new JButton((Messages.getString("ImagePreviewFrame.1"))); //$NON-NLS-1$
+			genButton = new JButton((Messages.getString("rcgui.generate"))); //$NON-NLS-1$
 			{
 				genButton.addActionListener(new ActionListener() {
 					@Override
@@ -48,7 +48,7 @@ public class ImagePreviewFrame extends JFrame {
 				});
 				genButton.setBackground(Color.WHITE);
 			}
-			cancelButton = new JButton((Messages.getString("ImagePreviewFrame.2"))); //$NON-NLS-1$
+			cancelButton = new JButton((Messages.getString("rcgui.cancel"))); //$NON-NLS-1$
 			{
 				cancelButton.addActionListener(new ActionListener() {
 					@Override
