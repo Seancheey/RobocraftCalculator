@@ -37,7 +37,7 @@ public class SearchTextField extends HintTextField {
 	public SearchTextField(ArrayList<? extends RCComponent> components) {
 		super(20);
 		this.components = components;
-		popmenu = new SearchPopupMenu(this);
+		popmenu = new SearchPopupMenu(false);
 		add(popmenu);
 		setHintText(Messages.getString("rcgui.search")); //$NON-NLS-1$
 		setComponentPopupMenu(popmenu);
@@ -99,13 +99,8 @@ public class SearchTextField extends HintTextField {
 		if (popmenu.isVisible()) {
 			RCComponent selected = popmenu.getSelectedComponent();
 			GuiController.controller.addComponent(selected, 1);
-			setPopmenuInvisible();
-			popmenu.close();
+			popmenu.setVisible(false);
 		}
-	}
-
-	public void setPopmenuInvisible() {
-		popmenu.setVisible(false);
 	}
 
 	private void updateSearch() {
@@ -115,6 +110,6 @@ public class SearchTextField extends HintTextField {
 			return;
 		}
 		popmenu.setComponents(matchedComponents());
-		popmenu.display(false);
+		popmenu.show(this, 0, getHeight());
 	}
 }

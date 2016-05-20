@@ -11,6 +11,11 @@ public class Messages {
 	private static ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 	private static Locale locale = en_US;
 
+	public static String getComponentString(String key) {
+		key = key.replace(' ', '_');
+		return getString(key);
+	}
+
 	public static Locale getLocale() {
 		return locale;
 	}
@@ -21,11 +26,6 @@ public class Messages {
 		} catch (MissingResourceException e) {
 			return '!' + key + '!';
 		}
-	}
-
-	public static String getComponentString(String key) {
-		key = key.replace(' ', '_');
-		return getString(key);
 	}
 
 	public static void setLocale(Locale local) {

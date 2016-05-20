@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -27,14 +27,22 @@ public class ComponentSlotPanel extends JPanel {
 		searchfield = new SearchTextField(components);
 		listButton = new JButton("▼");
 		{
-			listButton.setBorderPainted(false);
-			listButton.addActionListener(new ActionListener() {
 
+			listButton.setBorderPainted(false);
+			SearchPopupMenu menu = new SearchPopupMenu(true);
+			listButton.setComponentPopupMenu(menu);
+			listButton.addMouseListener(new MouseAdapter() {
 				@Override
-				public void actionPerformed(ActionEvent e) {
-					SearchPopupMenu menu = new SearchPopupMenu(listButton);
-					menu.setComponents(components);
-					menu.display(true);
+				public void mouseReleased(MouseEvent e) {
+					SearchPopupMenu menu = (SearchPopupMenu) listButton.getComponentPopupMenu();
+					if (!menu.hasContent()) {
+						menu.setComponents(components);
+						menu.show(listButton, 0, listButton.getHeight());
+						menu.setVisible(true);
+					} else {
+						menu.setVisible(false);
+						menu.clearContent();
+					}
 				}
 			});
 		}

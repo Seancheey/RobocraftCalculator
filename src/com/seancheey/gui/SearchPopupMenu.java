@@ -1,12 +1,11 @@
 package com.seancheey.gui;
 
+import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -21,22 +20,23 @@ public class SearchPopupMenu extends JPopupMenu {
 	private ArrayList<? extends RCComponent> components = new ArrayList<>();
 	private JList<String> list;
 	private JScrollPane scroll;
-	private MouseListener mouseListener = new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			RCComponent component = getSelectedComponent();
-			GuiController.controller.addComponent(component, 1);
-			close();
-		}
-	};
+	private boolean forceDisplay = false;
 
-	public SearchPopupMenu(JComponent invoker) {
-		setInvoker(invoker);
+	public SearchPopupMenu(boolean forceDisplay) {
 		setPopupSize(200, 150);
 		setFocusable(false);
+		this.forceDisplay = forceDisplay;
 		list = new JList<>();
 		{
-			list.addMouseListener(mouseListener);
+			list.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					RCComponent component = getSelectedComponent();
+					GuiController.controller.addComponent(component, 1);
+					setVisible(false);
+					clearContent();
+				}
+			});
 		}
 		scroll = new JScrollPane(list);
 		{
@@ -46,26 +46,9 @@ public class SearchPopupMenu extends JPopupMenu {
 		add(scroll);
 	}
 
-	public void close() {
-		list.removeAll();
+	public void clearContent() {
 		components.clear();
-		if (isVisible())
-			setVisible(false);
-	}
-
-	public void display(boolean forceDisplay) {
-		if (components.size() == 0 && !forceDisplay) {
-			setVisible(false);
-			return;
-		}
-		// set the list's model
-		{
-			DefaultListModel<String> defaultListModel = new DefaultListModel<>();
-			for (RCComponent c : components)
-				defaultListModel.addElement(Messages.getComponentString(c.name));
-			list.setModel(defaultListModel);
-		}
-		this.show(getInvoker(), 0, getInvoker().getHeight());
+		updateList();
 	}
 
 	public RCComponent getSelectedComponent() {
@@ -73,6 +56,17 @@ public class SearchPopupMenu extends JPopupMenu {
 		if (index == -1)
 			selectNextItem();
 		return components.get(list.getSelectedIndex());
+	}
+
+	public boolean hasContent() {
+		if (components.size() == 0)
+			return false;
+		else
+			return true;
+	}
+
+	public boolean isForceDisplay() {
+		return forceDisplay;
 	}
 
 	public void selectNextItem() {
@@ -93,5 +87,25 @@ public class SearchPopupMenu extends JPopupMenu {
 			cloned.add(c);
 		}
 		this.components = cloned;
+		updateList();
+	}
+
+	public void setForceDisplay(boolean forceDisplay) {
+		this.forceDisplay = forceDisplay;
+	}
+
+	@Override
+	public void show(Component invoker, int x, int y) {
+		if (components.size() != 0 || forceDisplay)
+			super.show(invoker, x, y);
+		else
+			setVisible(false);
+	}
+
+	private void updateList() {
+		DefaultListModel<String> defaultListModel = new DefaultListModel<>();
+		for (RCComponent c : components)
+			defaultListModel.addElement(Messages.getComponentString(c.name));
+		list.setModel(defaultListModel);
 	}
 }
