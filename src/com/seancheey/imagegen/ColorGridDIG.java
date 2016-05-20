@@ -57,7 +57,7 @@ public class ColorGridDIG extends DataImageGen {
 		}
 		buff.append((Messages.getString("rcgui.configuration")) + ":\n"); //$NON-NLS-1$ //$NON-NLS-2$
 		for (WeaponCombination c : controller.getWeaponCombinations()) {
-			buff.append((c.getWeapon().name) + " x " + c.getCount() + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			buff.append(Messages.getComponentString((c.getWeapon().name)) + " x " + c.getCount() + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		for (RCComponent c : controller.getComponentsInfo().keySet()) {
 			if (!(c instanceof RCWeapon))
