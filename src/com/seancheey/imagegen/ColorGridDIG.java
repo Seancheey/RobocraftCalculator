@@ -22,14 +22,13 @@ import com.seancheey.data.RCWeapon;
 public class ColorGridDIG extends DataImageGen {
 	private static final Dimension IMAGE_SIZE = new Dimension(800, 500);
 	private JPanel infoPanel, scorePanel;
-	private ArrayList<JLabel> infoLabels;
 
 	public ColorGridDIG(String author, String botName, AbstractFunctionController controller) {
 		super(author, botName, controller);
 	}
 
 	private Color[][] getColorGrids() {
-		int[][] maxscores = getScoreGrids();
+		int[][] maxscores = getWeaponScoreGrids();
 		int[][] colorscores = new int[3][2];
 		Color[][] colors = new Color[3][2];
 		for (int x = 0; x < 3; x++) {
@@ -49,20 +48,20 @@ public class ColorGridDIG extends DataImageGen {
 
 	private String getInfos() {
 		StringBuffer buff = new StringBuffer();
-		if (botName.length() != 0) {
-			buff.append((Messages.getString("rcgui.bot_name")) + ":" + botName + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		if (getBotName().length() != 0) {
+			buff.append((Messages.getString("rcgui.bot_name")) + ":" + getBotName() + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
-		if (author.length() != 0) {
-			buff.append((Messages.getString("rcgui.author")) + ":" + author + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		if (getAuthor().length() != 0) {
+			buff.append((Messages.getString("rcgui.getAuthor()")) + ":" + getAuthor() + "\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		buff.append((Messages.getString("rcgui.configuration")) + ":\n"); //$NON-NLS-1$ //$NON-NLS-2$
-		for (WeaponCombination c : controller.getWeaponCombinations()) {
+		for (WeaponCombination c : getController().getWeaponCombinations()) {
 			buff.append(Messages.getComponentString((c.getWeapon().name)) + " x " + c.getCount() + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		for (RCComponent c : controller.getComponentsInfo().keySet()) {
+		for (RCComponent c : getController().getComponentsInfo().keySet()) {
 			if (!(c instanceof RCWeapon))
 				buff.append(Messages.getComponentString(c.name) + " x " //$NON-NLS-1$
-						+ controller.getComponentsInfo().get(c) + "\n"); //$NON-NLS-1$
+						+ getController().getComponentsInfo().get(c) + "\n"); //$NON-NLS-1$
 		}
 		return buff.toString();
 	}
@@ -76,14 +75,15 @@ public class ColorGridDIG extends DataImageGen {
 		}
 		infoPanel = new JPanel();
 		{
-			String info = getInfos();
-			infoPanel.setLayout(new GridLayout(info.split("\n").length, 1)); //$NON-NLS-1$
+			String[] infos = getInfos().split("\n");
+			infoPanel.setLayout(new GridLayout(infos.length, 1)); // $NON-NLS-1$
 			infoPanel.setBackground(Color.WHITE);
-			infoLabels = new ArrayList<>();
+			ArrayList<JLabel> infoLabels = new ArrayList<>();
 			{
-				for (String s : info.split("\n")) { //$NON-NLS-1$
+				for (String s : infos) { // $NON-NLS-1$
 					JLabel label = new JLabel(s);
 					infoLabels.add(label);
+					label.setVerticalAlignment(SwingConstants.TOP);
 				}
 			}
 			for (JLabel l : infoLabels) {
@@ -113,7 +113,7 @@ public class ColorGridDIG extends DataImageGen {
 			{
 				skyLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			}
-			int[][] scores = getScoreGrids();
+			int[][] scores = getWeaponScoreGrids();
 			Color[][] colors = getColorGrids();
 			JPanel[][] colorPanels = new JPanel[3][2];
 			for (int x = 0; x < 3; x++) {
@@ -174,7 +174,7 @@ public class ColorGridDIG extends DataImageGen {
 		}
 		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.CENTER,
-				GridBagConstraints.BOTH, new Insets(0, 50, 0, 50), 0, 0);
+				GridBagConstraints.BOTH, new Insets(0, 40, 0, 40), 0, 0);
 		layout.setConstraints(infoPanel, c);
 		c.gridx = 1;
 		c.gridwidth = 2;

@@ -73,29 +73,29 @@ public class GuiController extends AbstractFunctionController {
 		super.updateInfo();
 		StringBuffer text = new StringBuffer();
 		if (getCpu() != 0)
-			text.append((Messages.getString("rcgui.cpu")) + TAB + getCpu() + NL); //$NON-NLS-1$ //$NON-NLS-2$
+			text.append((Messages.getString("rcgui.cpu")) + TAB + getCpu() + NL); //$NON-NLS-1$ 
 		if (getHp() != 0)
-			text.append((Messages.getString("rcgui.hp")) + TAB + toKiloFormat(getHp(), 1) + NL); //$NON-NLS-1$ //$NON-NLS-2$
+			text.append((Messages.getString("rcgui.hp")) + TAB + toKiloFormat(getHp(), 1) + NL); //$NON-NLS-1$ 
 		if (getMass() != 0)
-			text.append((Messages.getString("rcgui.mass")) + TAB + toKiloFormat(getMass(), 2) + NL); //$NON-NLS-1$ //$NON-NLS-2$
+			text.append((Messages.getString("rcgui.mass")) + TAB + toKiloFormat(getMass(), 2) + NL); //$NON-NLS-1$ 
 		if (getShield() != 0)
-			text.append((Messages.getString("rcgui.shield")) + TAB + toKiloFormat(getShield(), 1) //$NON-NLS-1$ //$NON-NLS-2$
+			text.append((Messages.getString("rcgui.shield")) + TAB + toKiloFormat(getShield(), 1) //$NON-NLS-1$ 
 					+ NL); // $NON-NLS-1$
 		if (getPrice() != 0)
-			text.append((Messages.getString("rcgui.forge_cost")) + TAB + getPrice() + NL); //$NON-NLS-1$ //$NON-NLS-2$
+			text.append((Messages.getString("rcgui.forge_cost")) + TAB + getPrice() + NL); //$NON-NLS-1$ 
 		if (getSellprice() != 0)
-			text.append((Messages.getString("rcgui.sell_price")) + TAB + getSellprice() + NL); //$NON-NLS-1$ //$NON-NLS-2$
+			text.append((Messages.getString("rcgui.sell_price")) + TAB + getSellprice() + NL); //$NON-NLS-1$ 
 		ArrayList<WeaponCombination> combinations = getWeaponCombinations();
 		if (combinations.size() > 0) {
 			for (WeaponCombination c : combinations) {
-				text.append(c.getCount() + "x " + (Messages.getComponentString(c.getWeapon().name)) + NL); //$NON-NLS-1$ //$NON-NLS-2$
-				text.append((Messages.getString("rcgui.fire_rate")) + TAB //$NON-NLS-1$ //$NON-NLS-2$
-						+ String.format("%.2f", c.getFireRate()) + NL); //$NON-NLS-1$ //$NON-NLS-2$
-				text.append((Messages.getString("rcgui.damage_rate")) + TAB //$NON-NLS-1$ //$NON-NLS-2$
+				text.append(c.getCount() + "x " + (Messages.getComponentString(c.getWeapon().name)) + NL); //$NON-NLS-1$ 
+				text.append((Messages.getString("rcgui.fire_rate")) + TAB //$NON-NLS-1$ 
+						+ String.format("%.2f", c.getFireRate()) + NL); //$NON-NLS-1$ 
+				text.append((Messages.getString("rcgui.damage_rate")) + TAB //$NON-NLS-1$ 
 						+ toKiloFormat(c.getDPS(), 2) + NL); // $NON-NLS-1$
-				text.append((Messages.getString("rcgui.power_rate")) + TAB //$NON-NLS-1$ //$NON-NLS-2$
-						+ String.format("%.2f", c.getPPS()) + NL); //$NON-NLS-1$ //$NON-NLS-2$
-				text.append((Messages.getString("rcgui.damage_per_round")) + TAB //$NON-NLS-1$ //$NON-NLS-2$
+				text.append((Messages.getString("rcgui.power_rate")) + TAB //$NON-NLS-1$ 
+						+ String.format("%.2f", c.getPPS()) + NL); //$NON-NLS-1$ 
+				text.append((Messages.getString("rcgui.damage_per_round")) + TAB //$NON-NLS-1$ 
 						+ toKiloFormat(c.getDPR(), 2) + NL); // $NON-NLS-1$
 			}
 		}

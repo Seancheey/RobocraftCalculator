@@ -14,8 +14,8 @@ import com.seancheey.AbstractFunctionController;
 import com.seancheey.WeaponCombination;
 
 public abstract class DataImageGen {
-	protected String author, botName;
-	protected AbstractFunctionController controller;
+	private String author, botName;
+	private AbstractFunctionController controller;
 	protected JPanel panel;
 
 	public DataImageGen(String author, String botName, AbstractFunctionController controller) {
@@ -57,11 +57,23 @@ public abstract class DataImageGen {
 		return output;
 	}
 
+	public String getAuthor() {
+		return author;
+	}
+
+	public String getBotName() {
+		return botName;
+	}
+
+	public AbstractFunctionController getController() {
+		return controller;
+	}
+
 	public JPanel getPanel() {
 		return panel;
 	}
 
-	protected int[][] getScoreGrids() {
+	protected int[][] getWeaponScoreGrids() {
 		int[][] maxscores = new int[3][2];
 		for (WeaponCombination weaponc : controller.getWeaponCombinations()) {
 			int[][] allscore = weaponc.getAllScores();
@@ -76,4 +88,12 @@ public abstract class DataImageGen {
 	}
 
 	protected abstract JPanel initPanel();
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public void setBotName(String botName) {
+		this.botName = botName;
+	}
 }
