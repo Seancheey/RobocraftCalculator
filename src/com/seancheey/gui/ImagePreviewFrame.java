@@ -28,7 +28,7 @@ public class ImagePreviewFrame extends JFrame {
 	public ImagePreviewFrame(String filename, String type, DataImageGen gen) {
 		super((Messages.getString("rcgui.image_preview"))); //$NON-NLS-1$
 		this.generator = gen;
-		setSize(gen.getPanel().getSize());
+		setSize(generator.getPanel().getSize());
 		setLocationRelativeTo(null);
 
 		panel = new JPanel();
@@ -56,7 +56,7 @@ public class ImagePreviewFrame extends JFrame {
 				genButton.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						File file = gen.generateAndSave(filename, type);
+						File file = generator.generateAndSave(filename, type);
 						setVisible(false);
 						Desktop d = Desktop.getDesktop();
 						try {
@@ -78,7 +78,7 @@ public class ImagePreviewFrame extends JFrame {
 				});
 				cancelButton.setBackground(Color.WHITE);
 			}
-			imagePanel = gen.getPanel();
+			imagePanel = generator.getPanel();
 			layout = new GridBagLayout();
 			setImagePanel(imagePanel);
 			GridBagConstraints c = new GridBagConstraints();
